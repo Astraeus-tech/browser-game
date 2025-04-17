@@ -1,4 +1,3 @@
-// src/lib/rng.ts
 import seedrandom from 'seedrandom';
 import type { GameState } from './types';
 

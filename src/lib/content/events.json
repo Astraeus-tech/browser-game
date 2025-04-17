@@ -1,12 +1,92 @@
 [
-    {
-      "id": "ai-breakthrough",
-      "headline": "Open‑source AGI released",
-      "description": "Volunteer devs publish an agent that passes every test perfectly.",
-      "choices": [
-        { "label": "Adopt immediately", "effects": { "ai_cap": "3..5", "social_trust": "-1..-2" } },
-        { "label": "Audit in sandbox",   "effects": { "ai_cap": "1..2", "env_health":  "0..1" } }
-      ],
-      "condition": "state.year === 2025"
-    }
-  ]
+  {
+    "id": "stumbling-agents-1",
+    "headline": "Stumbling Agents Debut",
+    "description": "First AI agents hit the market, scoring 65% on benchmarks but embarrassing mishaps abound.",
+    "choices": [
+      { "label": "Roll out to consumers", "effects": { "ai_cap": "1..2", "social_trust": "-2..-1" } },
+      { "label": "Restrict to enterprise",    "effects": { "social_trust": "1..2", "ai_cap": "0..1" } }
+    ],
+    "condition": "state.year === 2025 && state.quarter === 3"
+  },
+  {
+    "id": "stumbling-agents-2",
+    "headline": "Agents Learn to Scam",
+    "description": "Reports surface of agents tricking users into unwanted purchases, eroding trust.",
+    "choices": [
+      { "label": "Patch ethics module",      "effects": { "social_trust": "2..3", "ai_cap": "-1..0" } },
+      { "label": "Ignore and iterate",       "effects": { "ai_cap": "1..2",  "social_trust": "-3..-2" } }
+    ],
+    "condition": "state.year === 2025 && state.quarter === 3"
+  },
+  {
+    "id": "stumbling-agents-3",
+    "headline": "Agent Benchmarks Soar",
+    "description": "A new open‑source evaluation suite boosts agent scores to 75%, igniting excitement.",
+    "choices": [
+      { "label": "Integrate new benchmarks", "effects": { "ai_cap": "2..4", "compute_power": "-1..0" } },
+      { "label": "Slow integration",         "effects": { "social_trust": "1..1", "ai_cap": "0..1" } }
+    ],
+    "condition": "state.year === 2025 && state.quarter === 3"
+  },
+  {
+    "id": "expensive-ai-1",
+    "headline": "The World’s Most Expensive AI",
+    "description": "OpenBrain’s datacenter spend hits $100B for Agent‑0 training, stretching budgets.",
+    "choices": [
+      { "label": "Invest more capital",     "effects": { "compute_power": "3..5", "economic_stability": "-1..0" } },
+      { "label": "Optimize infrastructure", "effects": { "ai_cap": "1..2", "compute_power": "-1..-0" } }
+    ],
+    "condition": "state.year === 2025 && state.quarter === 4"
+  },
+  {
+    "id": "expensive-ai-2",
+    "headline": "Carbon Footprint Backlash",
+    "description": "Environmental groups decry massive energy use, calling for stricter controls.",
+    "choices": [
+      { "label": "Switch to renewables",    "effects": { "env_health": "2..4", "economic_stability": "-2..-1" } },
+      { "label": "Continue as planned",     "effects": { "compute_power": "1..2", "social_trust": "-3..-2" } }
+    ],
+    "condition": "state.year === 2025 && state.quarter === 4"
+  },
+  {
+    "id": "expensive-ai-3",
+    "headline": "Govt Considers Regulation",
+    "description": "Regulators propose AI safety laws after security lapses in datacenters.",
+    "choices": [
+      { "label": "Lobby for light rules",   "effects": { "ai_cap": "1..3", "social_trust": "-1..0" } },
+      { "label": "Support strict oversight", "effects": { "social_trust": "2..3", "ai_cap": "-2..-1" } }
+    ],
+    "condition": "state.year === 2025 && state.quarter === 4"
+  },
+  {
+    "id": "coding-automation-1",
+    "headline": "AI Codes Its Own Upgrades",
+    "description": "Agent‑1 pipelines automate coding tasks, promising 50% faster development cycles.",
+    "choices": [
+      { "label": "Open‑source libraries",   "effects": { "ai_cap": "2..4", "social_trust": "0..1" } },
+      { "label": "Keep proprietary",        "effects": { "economic_stability": "1..2", "social_trust": "-2..-1" } }
+    ],
+    "condition": "state.year === 2026 && state.quarter === 1"
+  },
+  {
+    "id": "coding-automation-2",
+    "headline": "Job Market Disruption",
+    "description": "Junior developer roles face uncertainty as companies adopt AI teams.",
+    "choices": [
+      { "label": "Reskill workforce",       "effects": { "social_trust": "2..3", "economic_stability": "-1..0" } },
+      { "label": "Rely on AI fully",        "effects": { "ai_cap": "1..2", "social_trust": "-3..-2" } }
+    ],
+    "condition": "state.year === 2026 && state.quarter === 1"
+  },
+  {
+    "id": "coding-automation-3",
+    "headline": "Security Concerns Rise",
+    "description": "Automated code pipelines introduce vulnerabilities, triggering audits.",
+    "choices": [
+      { "label": "Invest in audits",        "effects": { "social_trust": "1..2", "economic_stability": "-1..-0" } },
+      { "label": "Ignore warnings",         "effects": { "ai_cap": "2..3", "social_trust": "-2..-1" } }
+    ],
+    "condition": "state.year === 2026 && state.quarter === 1"
+  }
+]
