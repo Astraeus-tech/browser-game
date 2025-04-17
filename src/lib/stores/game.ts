@@ -4,7 +4,7 @@ import { writable } from 'svelte/store';
 import type { GameState } from '../types';
 
 export const defaultState: GameState = {
-  year: 2024,
+  year: 2025,
   resources: {
     ai_cap: 0,
     social_trust: 50,

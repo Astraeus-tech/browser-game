@@ -1,0 +1,12 @@
+[
+    {
+      "id": "ai-breakthrough",
+      "headline": "Open‑source AGI released",
+      "description": "Volunteer devs publish an agent that passes every test perfectly.",
+      "choices": [
+        { "label": "Adopt immediately", "effects": { "ai_cap": "3..5", "social_trust": "-1..-2" } },
+        { "label": "Audit in sandbox",   "effects": { "ai_cap": "1..2", "env_health":  "0..1" } }
+      ],
+      "condition": "state.year === 2025"
+    }
+  ]
