@@ -1,4 +1,9 @@
-export type Meters = 'ai_cap' | 'social_trust' | 'env_health' | 'economic_stability';
+export type Meters =
+  | 'ai_cap'
+  | 'social_trust'
+  | 'env_health'
+  | 'economic_stability';
+
 export type Resources = Record<Meters, number>;
 
 export interface Choice {
@@ -11,12 +16,12 @@ export interface Event {
   headline: string;
   description: string;
   choices: Choice[];
-  condition?: string;
+  condition?: string;        // a JS expression you’ll eval against state
 }
 
 export interface GameState {
   year: number;
   resources: Resources;
   log: string[];
-  seed: number;
+  seed: number;              // for RNG
 }
