@@ -1,19 +1,33 @@
 import { browser } from '$app/environment';
 import { writable } from 'svelte/store';
-import type { GameState } from '../types';
+import type { GameState, MeterGroup, Meters, MeterRanges } from '../types';
+import meterRanges from '$lib/content/meters.json';
+
+function randInt(min: number, max: number) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function initMeters(ranges: MeterRanges): Meters {
+  const out = {} as Meters;
+  for (const groupKey in ranges) {
+    const group = groupKey as MeterGroup;
+    const metersForGroup = ranges[group];
+    out[group] = {} as Record<string, number>;
+    for (const meterKey in metersForGroup) {
+      const range = metersForGroup[meterKey];
+      out[group][meterKey] = randInt(range.min, range.max);
+    }
+  }
+  return out;
+}
 
 export const defaultState: GameState = {
   year: 2025,
   quarter: 3,
-  resources: {
-    ai_cap: 0,
-    social_trust: 50,
-    env_health: 50,
-    economic_stability: 50,
-    compute_power: 0
-  },
+  meters: initMeters(meterRanges as MeterRanges),
   log: [],
-  seed: Date.now()
+  seed: Date.now(),
+  gameOver: 'playing'
 };
 
 function createGameStore() {

@@ -1,15 +1,32 @@
-export type Meters =
-  | 'ai_cap'
-  | 'social_trust'
-  | 'env_health'
-  | 'economic_stability'
-  | 'compute_power';
+export type MeterGroup = 'company' | 'environment' | 'ai_capability';
 
-export type Resources = Record<Meters, number>;
+/** A numeric range for initializing meters */
+export interface Range {
+  min: number;
+  max: number;
+}
+
+/** Specification of all meter ranges for initialization */
+export type MeterRanges = Record<
+  MeterGroup,
+  Record<string, Range>
+>;
+
+/** All in‐game meters, organized by group */
+export type Meters = Record<
+  MeterGroup,
+  Record<string, number>
+>;
 
 export interface Choice {
   label: string;
-  effects: Partial<Record<Meters, string>>; // e.g. "1..3"
+  /** effects on each meter group/key, expressed as "min..max" */
+  effects: Partial<
+    Record<
+      MeterGroup,
+      Record<string, string>
+    >
+  >;
 }
 
 export interface Event {
@@ -17,13 +34,25 @@ export interface Event {
   headline: string;
   description: string;
   choices: Choice[];
-  condition?: string; // JS expression evaluated against state
+  year: number;
+  quarter: number;
 }
 
 export interface GameState {
   year: number;
-  quarter: number;       // current quarter 1–4
-  resources: Resources;
+  quarter: number;
+  /** current meter values */
+  meters: Meters;
   log: string[];
-  seed: number;          // for deterministic RNG
+  seed: number;
+  gameOver: 'playing' | Ending | null;
 }
+export type Ending = {
+  id: string;
+  type: 'win' | 'loss' | 'draw';
+  rank?: 'S' | 'A' | 'B';
+  title: string;
+  description: string;
+  conditions?: Record<string, { gte?: number; gt?: number; lte?: number; lt?: number; eq?: number }>;
+  conditions_any?: Record<string, { gte?: number; gt?: number; lte?: number; lt?: number; eq?: number }>[];
+};

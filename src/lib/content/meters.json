@@ -1,0 +1,25 @@
+{
+    "company": {
+      "credits": { "min": 30, "max": 70 },
+      "revenue": { "min": 30, "max": 70 },
+      "valuation": { "min": 30, "max": 70 },
+      "approval": { "min": 40, "max": 60 },
+      "security": { "min": 40, "max": 60 },
+      "alignment_confidence": { "min": 20, "max": 40 }
+    },
+    "environment": {
+      "stability": { "min": 40, "max": 60 },
+      "bio_risk": { "min": 10, "max": 30 },
+      "cyber_risk": { "min": 20, "max": 40 },
+      "labor_shock": { "min": 10, "max": 30 },
+      "climate_load": { "min": 10, "max": 30 }
+    },
+    "ai_capability": {
+      "coding": { "min": 30, "max": 50 },
+      "hacking": { "min": 20, "max": 40 },
+      "bioweapons": { "min": 10, "max": 30 },
+      "politics_persuasion": { "min": 20, "max": 40 },
+      "robotics_embodied": { "min": 20, "max": 40 },
+      "research_taste": { "min": 30, "max": 50 }
+    }
+  }
