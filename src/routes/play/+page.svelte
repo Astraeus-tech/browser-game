@@ -58,12 +58,17 @@
     game.set(nextState);
     pickEvent();
   }
+
+  function startOver() {
+    game.set({ ...defaultState, seed: Date.now() });
+    pickEvent();
+  }
 </script>
 
 {#if browser}
 <main class="p-4 font-mono bg-black text-green-300 min-h-screen flex flex-col gap-4">
   <div class="text-xs">
-    Year: {$game.year} – Quarter: {$game.quarter}
+    Year: {$game.year} – Quarter: {$game.quarter}
   </div>
 
   <ResourceBars
@@ -95,7 +100,12 @@
 
   <section class="mt-4">
     {#if $game.gameOver && $game.gameOver !== 'playing'}
-      <p class="text-green-500 italic">Game Over</p>
+      <button
+        class="block mb-2 px-4 py-2 bg-green-700 hover:bg-green-600 rounded"
+        on:click={startOver}
+      >
+        Start Over
+      </button>
     {:else if selectedEvent}
       {#each selectedEvent.choices as c}
         <button

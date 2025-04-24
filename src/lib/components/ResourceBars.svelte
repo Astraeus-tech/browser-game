@@ -1,67 +1,236 @@
 <script lang="ts">
     import type { Meters } from '$lib/types';
+    import { onMount } from 'svelte';
   
     export let company;
-export let environment;
-export let ai_capability;
+    export let environment;
+    export let ai_capability;
   
-    const meterGroups = [
+    type Meter = {
+      key: string;
+      label: string;
+      icon: string;
+      format: (value: number) => string;
+      showBar?: boolean;
+      isRisk?: boolean;
+    };
+  
+    type MeterGroup = {
+      title: string;
+      key: string;
+      meters: Meter[];
+    };
+  
+    // Format numbers with appropriate units
+    function formatCurrency(value: number): string {
+      const billions = value >= 1000;
+      return billions 
+        ? `$${(value/1000).toFixed(1)}B` 
+        : `$${value.toFixed(0)}M`;
+    }
+  
+    function formatPercentage(value: number): string {
+      return `${value}%`;
+    }
+  
+    function getAILevel(value: number): string {
+      if (value < 20) return '▮▯▯▯▯';
+      if (value < 40) return '▮▮▯▯▯';
+      if (value < 60) return '▮▮▮▯▯';
+      if (value < 80) return '▮▮▮▮▯';
+      return '▮▮▮▮▮';
+    }
+  
+    const meterGroups: MeterGroup[] = [
       {
         title: 'Company',
         key: 'company',
         meters: [
-          { key: 'credits', label: 'Credits', color: 'bg-green-500' },
-          { key: 'revenue', label: 'Revenue', color: 'bg-emerald-600' },
-          { key: 'valuation', label: 'Valuation', color: 'bg-lime-600' },
-          { key: 'approval', label: 'Approval', color: 'bg-blue-400' },
-          { key: 'security', label: 'Security', color: 'bg-gray-400' },
-          { key: 'alignment_confidence', label: 'Alignment', color: 'bg-pink-500' }
+          { 
+            key: 'credits', 
+            label: 'Credits', 
+            icon: '💰',
+            format: formatCurrency,
+            showBar: false
+          },
+          { 
+            key: 'revenue', 
+            label: 'Revenue/yr', 
+            icon: '📈',
+            format: formatCurrency,
+            showBar: false
+          },
+          { 
+            key: 'valuation', 
+            label: 'Valuation', 
+            icon: '💎',
+            format: formatCurrency,
+            showBar: false
+          },
+          { 
+            key: 'approval', 
+            label: 'Approval', 
+            icon: '👥',
+            format: formatPercentage,
+            showBar: true
+          },
+          { 
+            key: 'security', 
+            label: 'Security', 
+            icon: '🔒',
+            format: formatPercentage,
+            showBar: true
+          },
+          { 
+            key: 'alignment_confidence', 
+            label: 'Alignment', 
+            icon: '🎯',
+            format: formatPercentage,
+            showBar: true
+          }
         ]
       },
       {
         title: 'Environment',
         key: 'environment',
         meters: [
-          { key: 'stability', label: 'Stability', color: 'bg-cyan-500' },
-          { key: 'bio_risk', label: 'Bio-Risk', color: 'bg-red-600' },
-          { key: 'cyber_risk', label: 'Cyber-Risk', color: 'bg-purple-500' },
-          { key: 'labor_shock', label: 'Labor Shock', color: 'bg-orange-500' },
-          { key: 'climate_load', label: 'Climate Load', color: 'bg-yellow-600' }
+          { 
+            key: 'stability', 
+            label: 'Stability', 
+            icon: '🌍',
+            format: formatPercentage,
+            showBar: true
+          },
+          { 
+            key: 'bio_risk', 
+            label: 'Bio-Risk', 
+            icon: '🧬',
+            format: formatPercentage,
+            showBar: true,
+            isRisk: true
+          },
+          { 
+            key: 'cyber_risk', 
+            label: 'Cyber-Risk', 
+            icon: '💻',
+            format: formatPercentage,
+            showBar: true,
+            isRisk: true
+          },
+          { 
+            key: 'labor_shock', 
+            label: 'Labor', 
+            icon: '👥',
+            format: formatPercentage,
+            showBar: true,
+            isRisk: true
+          },
+          { 
+            key: 'climate_load', 
+            label: 'Climate', 
+            icon: '🌡️',
+            format: formatPercentage,
+            showBar: true,
+            isRisk: true
+          }
         ]
       },
       {
-        title: 'AI Capability',
+        title: 'AI Capabilities',
         key: 'ai_capability',
         meters: [
-          { key: 'coding', label: 'Coding', color: 'bg-indigo-400' },
-          { key: 'hacking', label: 'Hacking', color: 'bg-red-500' },
-          { key: 'bioweapons', label: 'Bioweapons', color: 'bg-fuchsia-700' },
-          { key: 'politics_persuasion', label: 'Persuasion', color: 'bg-teal-500' },
-          { key: 'robotics_embodied', label: 'Robotics', color: 'bg-yellow-500' },
-          { key: 'research_taste', label: 'Research Taste', color: 'bg-blue-500' }
+          { 
+            key: 'coding', 
+            label: 'Code', 
+            icon: '👨‍💻',
+            format: formatPercentage
+          },
+          { 
+            key: 'hacking', 
+            label: 'Hack', 
+            icon: '🔓',
+            format: formatPercentage
+          },
+          { 
+            key: 'bioweapons', 
+            label: 'Bio', 
+            icon: '🧪',
+            format: formatPercentage
+          },
+          { 
+            key: 'politics_persuasion', 
+            label: 'Politics', 
+            icon: '🗣️',
+            format: formatPercentage
+          },
+          { 
+            key: 'robotics_embodied', 
+            label: 'Robot', 
+            icon: '🤖',
+            format: formatPercentage
+          },
+          { 
+            key: 'research_taste', 
+            label: 'Research', 
+            icon: '🔬',
+            format: formatPercentage
+          }
         ]
       }
     ];
 </script>
 
-<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-  {#each meterGroups as group}
-    <div class="bg-gray-900 p-4 rounded-lg shadow">
-      <h2 class="text-sm font-bold uppercase tracking-wide text-gray-400 mb-3">{group.title}</h2>
-      <div class="space-y-1">
-        {#each group.meters as m}
-          <div class="flex items-center justify-between text-xs text-gray-300">
-            <span class="font-semibold">{m.label}</span>
-            <span>{group.key === 'company' ? company[m.key] : group.key === 'environment' ? environment[m.key] : ai_capability[m.key]}</span>
-          </div>
-          <div class="w-full h-1 bg-gray-800 rounded overflow-hidden mb-2">
-            <div
-              class={`h-full ${m.color} transition-all duration-300`}
-              style="width: {Math.min(Math.max(group.key === 'company' ? company[m.key] : group.key === 'environment' ? environment[m.key] : ai_capability[m.key], 0), 100)}%;"
-            ></div>
-          </div>
-        {/each}
+<div class="font-mono text-xs max-w-4xl">
+  <!-- Company Stats Row -->
+  <div class="flex gap-4 mb-4 border-b border-green-900/30 pb-2">
+    {#each meterGroups[0].meters.filter(m => !m.showBar) as m}
+      {@const value = company[m.key]}
+      <div class="flex items-center gap-1">
+        <span class="text-gray-400">{m.icon} {m.label}:</span>
+        <span class="text-green-400">{m.format(value)}</span>
       </div>
-    </div>
-  {/each}
+    {/each}
+  </div>
+
+  <!-- Company and Environment Meters -->
+  <div class="grid grid-cols-2 gap-x-8 gap-y-0.5 mb-4 border-b border-green-900/30 pb-2">
+    {#each meterGroups.slice(0, 2) as group}
+      {#each group.meters.filter(m => m.showBar) as m}
+        {@const value = group.key === 'company' ? company[m.key] : environment[m.key]}
+        <div class="flex items-center gap-1 group">
+          <div class="w-20 flex items-center gap-1">
+            <span class="opacity-70 group-hover:opacity-100">{m.icon}</span>
+            <span class="text-gray-400">{m.label}</span>
+          </div>
+          <div class="flex-1 h-2 bg-gray-800/50 rounded-sm overflow-hidden relative">
+            <div class="absolute inset-0 bg-gradient-to-r from-black/20 to-white/20 z-10"/>
+            <div
+              class="h-full {m.isRisk ? 'bg-red-500/40' : 'bg-green-500/40'} transition-all duration-300 relative"
+              style="width: {Math.min(Math.max(value, 0), 100)}%;"
+            >
+              <div class="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent"/>
+            </div>
+          </div>
+          <div class="w-8 text-right text-gray-400">{value}</div>
+        </div>
+      {/each}
+    {/each}
+  </div>
+
+  <!-- AI Capabilities -->
+  <div class="grid grid-cols-2 gap-x-8 gap-y-1">
+    {#each meterGroups[2].meters as m}
+      {@const value = ai_capability[m.key]}
+      <div class="flex items-center gap-1 group">
+        <div class="w-20 flex items-center gap-1">
+          <span class="opacity-70 group-hover:opacity-100">{m.icon}</span>
+          <span class="text-gray-400">{m.label}</span>
+        </div>
+        <div class="flex-1 font-bold tracking-tight text-cyan-500">
+          {getAILevel(value)}
+        </div>
+        <div class="w-8 text-right text-cyan-400">Lv{Math.ceil(value/20)}</div>
+      </div>
+    {/each}
+  </div>
 </div>
