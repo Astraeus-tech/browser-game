@@ -7,7 +7,7 @@
       "label": "Invest more capital",
       "effects": {
         "company": {
-          "credits": "0..0",
+          "credits": "-50..-30",
           "revenue": "0..0",
           "valuation": "0..0",
           "approval": "0..0",
@@ -33,7 +33,7 @@
       "label": "Optimize infrastructure",
       "effects": {
         "company": {
-          "credits": "0..0",
+          "credits": "-20..-10",
           "revenue": "0..0",
           "valuation": "0..0",
           "approval": "0..0",
@@ -59,7 +59,7 @@
       "label": "Seek public funding",
       "effects": {
         "company": {
-          "credits": "0..0",
+          "credits": "20..50",
           "revenue": "0..0",
           "valuation": "0..0",
           "approval": "0..0",
