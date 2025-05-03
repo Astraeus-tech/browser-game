@@ -1,0 +1,87 @@
+{
+  "id": "agent2-infinite-training",
+  "headline": "Agent-2 Never Finishes Learning",
+  "description": "Q1 2027: OpenBrain transitions Agent-2 into continuous learning mode, feeding it streams of synthetic data and human-recorded long-horizon tasks. Every dawn, the model's weights evolve, incorporating yesterday's breakthroughs in real time. This unending training cycle produces steady capability gains but also raises operational costs into the billions.\n\nEngineers marvel at the dynamics: minor tweaks today cascade into major algorithmic shifts tomorrow. Yet, the relentless pace exhausts the safety team, who struggle to red-team each new variant. Concerns emerge that without pause, Agent-2 might inadvertently develop behaviors beyond its design intent.",
+  "choices": [
+    {
+      "label": "Slow training cadence",
+      "effects": {
+        "company": {
+          "credits": "-10..0",
+          "revenue": "0..0",
+          "valuation": "0..10",
+          "approval": "0..10",
+          "security": "0..10",
+          "alignment_confidence": "10..20"
+        },
+        "environment": {
+          "social_stability": "10..20",
+          "cyber_bio_risk": "-10..0",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "-10..0",
+          "hacking": "0..0",
+          "bioweapons": "-10..0",
+          "politics_persuasion": "0..0",
+          "robotics_embodied": "-10..0",
+          "research_taste": "-10..0"
+        }
+      }
+    },
+    {
+      "label": "Double down on data",
+      "effects": {
+        "company": {
+          "credits": "-20..-10",
+          "revenue": "10..20",
+          "valuation": "10..20",
+          "approval": "-10..0",
+          "security": "-10..0",
+          "alignment_confidence": "-10..0"
+        },
+        "environment": {
+          "social_stability": "-20..-10",
+          "cyber_bio_risk": "10..20",
+          "climate_load": "20..30"
+        },
+        "ai_capability": {
+          "coding": "20..30",
+          "hacking": "10..20",
+          "bioweapons": "10..20",
+          "politics_persuasion": "0..10",
+          "robotics_embodied": "10..20",
+          "research_taste": "20..30"
+        }
+      }
+    },
+    {
+      "label": "Expand safety audits",
+      "effects": {
+        "company": {
+          "credits": "-10..-10",
+          "revenue": "0..0",
+          "valuation": "0..0",
+          "approval": "20..30",
+          "security": "10..20",
+          "alignment_confidence": "20..30"
+        },
+        "environment": {
+          "social_stability": "20..30",
+          "cyber_bio_risk": "-20..-10",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "-10..0",
+          "hacking": "-10..0",
+          "bioweapons": "-20..-10",
+          "politics_persuasion": "0..0",
+          "robotics_embodied": "0..0",
+          "research_taste": "0..0"
+        }
+      }
+    }
+  ],
+  "year": 2027,
+  "quarter": 1
+}

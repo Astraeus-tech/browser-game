@@ -1,0 +1,87 @@
+{
+  "id": "stumbling-agents-1",
+  "headline": "Stumbling Agents Debut",
+  "description": "In mid-2025, personal AI agents are launched to much fanfare. Early adopters share stories of their AI companions assisting with daily tasks, from scheduling appointments to providing personalized recommendations. However, not all experiences are positive; some users report frustrating glitches and misunderstandings that highlight the tension between the promise of AI and its reliability. The excitement is palpable, yet tempered by concerns about the technology's limitations.\n\nAs the market responds to both praise and criticism, companies scramble to refine their offerings. The media buzzes with discussions about the implications of AI in personal spaces, and the industry watches closely as user feedback shapes the future of these agents. Will they become indispensable tools, or will the early hiccups deter widespread adoption?",
+  "choices": [
+    {
+      "label": "Roll out to consumers",
+      "effects": {
+        "company": {
+          "credits": "-30..-20",
+          "revenue": "40..80",
+          "valuation": "0..10",
+          "approval": "-20..-10",
+          "security": "0..0",
+          "alignment_confidence": "0..0"
+        },
+        "environment": {
+          "social_stability": "10..30",
+          "cyber_bio_risk": "10..30",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "0..10",
+          "hacking": "0..0",
+          "bioweapons": "0..0",
+          "politics_persuasion": "0..10",
+          "robotics_embodied": "0..0",
+          "research_taste": "0..0"
+        }
+      }
+    },
+    {
+      "label": "Restrict to enterprise",
+      "effects": {
+        "company": {
+          "credits": "-10..-5",
+          "revenue": "10..30",
+          "valuation": "5..15",
+          "approval": "10..20",
+          "security": "0..10",
+          "alignment_confidence": "0..0"
+        },
+        "environment": {
+          "social_stability": "5..15",
+          "cyber_bio_risk": "-10..0",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "0..0",
+          "hacking": "0..0",
+          "bioweapons": "0..0",
+          "politics_persuasion": "0..0",
+          "robotics_embodied": "0..0",
+          "research_taste": "0..0"
+        }
+      }
+    },
+    {
+      "label": "Enhance user training",
+      "effects": {
+        "company": {
+          "credits": "-30..-10",
+          "revenue": "10..20",
+          "valuation": "0..10",
+          "approval": "0..10",
+          "security": "0..0",
+          "alignment_confidence": "10..20"
+        },
+        "environment": {
+          "social_stability": "10..20",
+          "cyber_bio_risk": "-10..0",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "0..10",
+          "hacking": "0..0",
+          "bioweapons": "0..0",
+          "politics_persuasion": "0..10",
+          "robotics_embodied": "0..0",
+          "research_taste": "0..0"
+        }
+      }
+    }
+  ],
+  "year": 2025,
+  "quarter": 3
+}

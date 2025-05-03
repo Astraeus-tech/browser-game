@@ -1,0 +1,87 @@
+{
+  "id": "china-centralization-1",
+  "headline": "China Centralizes AI Development",
+  "description": "Q2 2026: The Chinese government announces a sweeping initiative to centralize AI research and development under state control, consolidating leading labs and startups into a national research network. Provincial agencies are ordered to channel funding into designated 'AI National Research Institutes,' while private firms face new mandates to share data and model architectures. International collaborations come under scrutiny, with stricter export controls and visa restrictions for foreign researchers.\n\nIndustry powerhouses like SenseTech and DragonAI respond with cautious optimism, pledging to align with national goals while lobbying for greater flexibility. Academic institutions pivot their curricula toward government-approved AI ethics and security frameworks. Meanwhile, overseas players weigh the risks of continued investment amid the shifting regulatory landscape. The move solidifies China's strategic posture but raises tensions over data sovereignty and global research freedom.",
+  "choices": [
+    {
+      "label": "Support state funding",
+      "effects": {
+        "company": {
+          "credits": "-10..0",
+          "revenue": "10..20",
+          "valuation": "10..20",
+          "approval": "-20..-10",
+          "security": "0..0",
+          "alignment_confidence": "0..0"
+        },
+        "environment": {
+          "social_stability": "-10..0",
+          "cyber_bio_risk": "0..10",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "0..10",
+          "hacking": "0..10",
+          "bioweapons": "0..0",
+          "politics_persuasion": "10..20",
+          "robotics_embodied": "0..0",
+          "research_taste": "10..20"
+        }
+      }
+    },
+    {
+      "label": "Push for private sector collaboration",
+      "effects": {
+        "company": {
+          "credits": "-10..0",
+          "revenue": "0..10",
+          "valuation": "0..10",
+          "approval": "10..20",
+          "security": "0..0",
+          "alignment_confidence": "0..0"
+        },
+        "environment": {
+          "social_stability": "5..15",
+          "cyber_bio_risk": "-10..0",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "-10..0",
+          "hacking": "0..0",
+          "bioweapons": "0..0",
+          "politics_persuasion": "0..10",
+          "robotics_embodied": "0..0",
+          "research_taste": "-10..0"
+        }
+      }
+    },
+    {
+      "label": "Advocate for open-source projects",
+      "effects": {
+        "company": {
+          "credits": "-10..0",
+          "revenue": "0..0",
+          "valuation": "0..10",
+          "approval": "0..10",
+          "security": "0..0",
+          "alignment_confidence": "0..10"
+        },
+        "environment": {
+          "social_stability": "10..20",
+          "cyber_bio_risk": "0..0",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "-10..0",
+          "hacking": "0..0",
+          "bioweapons": "0..0",
+          "politics_persuasion": "0..10",
+          "robotics_embodied": "0..0",
+          "research_taste": "0..10"
+        }
+      }
+    }
+  ],
+  "year": 2026,
+  "quarter": 2
+}

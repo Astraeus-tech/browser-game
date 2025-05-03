@@ -18,6 +18,10 @@ function initMeters(ranges: MeterRanges): Meters {
       out[group][meterKey] = randInt(range.min, range.max);
     }
   }
+  // After initializing all meters, recalc initial valuation:
+  const aiValues = Object.values(out.ai_capability);
+  const aiAvg    = aiValues.reduce((sum, v) => sum + v, 0) / aiValues.length;
+  out.company.valuation = aiAvg * out.company.revenue;
   return out;
 }
 

@@ -1,0 +1,87 @@
+{
+  "id": "ai-job-protests",
+  "headline": "Protests Erupt Over AI Job Loss",
+  "description": "Q4 2026: Thousands of tech workers march in major cities demanding protections as AI systematically replaces routine roles. Union leaders call for universal basic income pilots, and social media campaigns under #HumansFirst gain traction among the public.\n\nGovernments face pressure to enact emergency measures. Some propose temporary AI moratoriums in public sector hiring, while others warn that halting innovation could cede strategic advantages to adversaries. The debate over jobs versus progress rages in parliaments and on news networks.",
+  "choices": [
+    {
+      "label": "Implement UBI trials",
+      "effects": {
+        "company": {
+          "credits": "-30..-20",
+          "revenue": "0..0",
+          "valuation": "-10..0",
+          "approval": "20..30",
+          "security": "0..0",
+          "alignment_confidence": "0..0"
+        },
+        "environment": {
+          "social_stability": "20..30",
+          "cyber_bio_risk": "0..0",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "0..0",
+          "hacking": "0..0",
+          "bioweapons": "0..0",
+          "politics_persuasion": "10..20",
+          "robotics_embodied": "0..0",
+          "research_taste": "0..0"
+        }
+      }
+    },
+    {
+      "label": "Ban AI in public hiring",
+      "effects": {
+        "company": {
+          "credits": "-10..-10",
+          "revenue": "-10..0",
+          "valuation": "-10..0",
+          "approval": "10..20",
+          "security": "0..0",
+          "alignment_confidence": "0..10"
+        },
+        "environment": {
+          "social_stability": "10..20",
+          "cyber_bio_risk": "0..0",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "-10..0",
+          "hacking": "0..0",
+          "bioweapons": "0..0",
+          "politics_persuasion": "0..0",
+          "robotics_embodied": "-10..0",
+          "research_taste": "0..0"
+        }
+      }
+    },
+    {
+      "label": "Offer retraining grants",
+      "effects": {
+        "company": {
+          "credits": "-20..-10",
+          "revenue": "0..0",
+          "valuation": "-10..0",
+          "approval": "20..30",
+          "security": "0..0",
+          "alignment_confidence": "0..10"
+        },
+        "environment": {
+          "social_stability": "15..25",
+          "cyber_bio_risk": "0..0",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "-10..0",
+          "hacking": "0..0",
+          "bioweapons": "0..0",
+          "politics_persuasion": "0..10",
+          "robotics_embodied": "0..0",
+          "research_taste": "0..0"
+        }
+      }
+    }
+  ],
+  "year": 2026,
+  "quarter": 4
+}

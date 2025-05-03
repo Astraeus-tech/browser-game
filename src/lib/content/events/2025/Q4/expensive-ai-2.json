@@ -1,0 +1,87 @@
+{
+  "id": "expensive-ai-2",
+  "headline": "Carbon Footprint Backlash",
+  "description": "As environmental activism gains momentum, OpenBrain faces mounting criticism for its massive energy consumption associated with AI training. Reports indicate that the datacenter's energy use is equivalent to that of a small city, prompting calls for more sustainable practices. Activists highlight the urgent need for policies that address the environmental impact of AI development, sparking a broader conversation about corporate responsibility.\n\nIn response to public outcry, the company is forced to reevaluate its energy sources and consider transitioning to renewable options. The debate over energy use statistics and environmental impact becomes a focal point of policy discussions, as stakeholders push for regulations that will ensure a balance between technological advancement and ecological stewardship.",
+  "choices": [
+    {
+      "label": "Switch to renewables",
+      "effects": {
+        "company": {
+          "credits": "-40..-20",
+          "revenue": "0..0",
+          "valuation": "-10..0",
+          "approval": "10..20",
+          "security": "0..0",
+          "alignment_confidence": "0..0"
+        },
+        "environment": {
+          "social_stability": "10..20",
+          "cyber_bio_risk": "0..0",
+          "climate_load": "-30..-10"
+        },
+        "ai_capability": {
+          "coding": "0..0",
+          "hacking": "0..0",
+          "bioweapons": "0..0",
+          "politics_persuasion": "0..0",
+          "robotics_embodied": "0..0",
+          "research_taste": "0..0"
+        }
+      }
+    },
+    {
+      "label": "Continue as planned",
+      "effects": {
+        "company": {
+          "credits": "-20..-10",
+          "revenue": "0..0",
+          "valuation": "10..20",
+          "approval": "-30..-20",
+          "security": "-10..0",
+          "alignment_confidence": "0..0"
+        },
+        "environment": {
+          "social_stability": "-20..-10",
+          "cyber_bio_risk": "0..0",
+          "climate_load": "30..40"
+        },
+        "ai_capability": {
+          "coding": "0..10",
+          "hacking": "0..0",
+          "bioweapons": "0..0",
+          "politics_persuasion": "0..0",
+          "robotics_embodied": "0..0",
+          "research_taste": "0..0"
+        }
+      }
+    },
+    {
+      "label": "Invest in carbon offsets",
+      "effects": {
+        "company": {
+          "credits": "-10..-10",
+          "revenue": "0..10",
+          "valuation": "0..0",
+          "approval": "0..10",
+          "security": "0..0",
+          "alignment_confidence": "0..0"
+        },
+        "environment": {
+          "social_stability": "5..15",
+          "cyber_bio_risk": "0..0",
+          "climate_load": "-20..-10"
+        },
+        "ai_capability": {
+          "coding": "0..0",
+          "hacking": "0..0",
+          "bioweapons": "0..0",
+          "politics_persuasion": "0..0",
+          "robotics_embodied": "0..0",
+          "research_taste": "0..0"
+        }
+      }
+    }
+  ],
+  "year": 2025,
+  "quarter": 4
+}

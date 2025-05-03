@@ -1,0 +1,87 @@
+{
+  "id": "ethical-backlash",
+  "headline": "Ethics Groups Condemn AI Use",
+  "description": "Q4 2026: International coalitions of ethicists, technologists, and policymakers release an open letter decrying the unchecked militarization and commercial exploitation of AI. The letter argues for a binding 'AI Geneva Convention' to limit autonomous weapon development.\n\nThe proposal divides the tech industry: some leaders endorse the call for global norms, while others dismiss it as unrealistic. The controversy fuels media debates about AI's role in society and whether ethical codes can keep pace with rapid technological change.",
+  "choices": [
+    {
+      "label": "Endorse AI convention",
+      "effects": {
+        "company": {
+          "credits": "-10..0",
+          "revenue": "0..0",
+          "valuation": "-10..0",
+          "approval": "30..40",
+          "security": "10..10",
+          "alignment_confidence": "10..20"
+        },
+        "environment": {
+          "social_stability": "20..30",
+          "cyber_bio_risk": "-20..-10",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "-20..-10",
+          "hacking": "-20..-10",
+          "bioweapons": "-20..-10",
+          "politics_persuasion": "-10..0",
+          "robotics_embodied": "-10..0",
+          "research_taste": "-10..0"
+        }
+      }
+    },
+    {
+      "label": "Propose voluntary guidelines",
+      "effects": {
+        "company": {
+          "credits": "-10..0",
+          "revenue": "0..10",
+          "valuation": "0..10",
+          "approval": "10..20",
+          "security": "0..10",
+          "alignment_confidence": "0..10"
+        },
+        "environment": {
+          "social_stability": "5..15",
+          "cyber_bio_risk": "0..0",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "0..0",
+          "hacking": "0..0",
+          "bioweapons": "-10..0",
+          "politics_persuasion": "0..10",
+          "robotics_embodied": "0..0",
+          "research_taste": "0..10"
+        }
+      }
+    },
+    {
+      "label": "Reject binding rules",
+      "effects": {
+        "company": {
+          "credits": "0..10",
+          "revenue": "10..20",
+          "valuation": "10..20",
+          "approval": "-20..-10",
+          "security": "-10..0",
+          "alignment_confidence": "-10..0"
+        },
+        "environment": {
+          "social_stability": "-20..-10",
+          "cyber_bio_risk": "20..40",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "10..20",
+          "hacking": "10..20",
+          "bioweapons": "10..20",
+          "politics_persuasion": "10..20",
+          "robotics_embodied": "10..20",
+          "research_taste": "10..20"
+        }
+      }
+    }
+  ],
+  "year": 2026,
+  "quarter": 4
+}

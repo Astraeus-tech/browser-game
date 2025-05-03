@@ -1,0 +1,87 @@
+{
+  "id": "public-friendships",
+  "headline": "10% of Americans Call AI 'Friend'",
+  "description": "Q3 2027: A cultural shift emerges as social AIs become companions to millions. Surveys reveal that 10% of Americans consider an AI 'a close friend,' with chat interfaces mimicking emotional support and personal interests.\n\nCritics question the implications for mental health, warning that synthetic relationships could erode human bonds. Meanwhile, entrepreneurs rush to monetize AI therapy and companionship, blurring lines between social networks and AI services.",
+  "choices": [
+    {
+      "label": "Regulate AI therapy apps",
+      "effects": {
+        "company": {
+          "credits": "-10..0",
+          "revenue": "0..10",
+          "valuation": "0..0",
+          "approval": "20..40",
+          "security": "0..0",
+          "alignment_confidence": "0..0"
+        },
+        "environment": {
+          "social_stability": "10..20",
+          "cyber_bio_risk": "-10..0",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "0..0",
+          "hacking": "0..0",
+          "bioweapons": "0..0",
+          "politics_persuasion": "-10..0",
+          "robotics_embodied": "0..0",
+          "research_taste": "0..0"
+        }
+      }
+    },
+    {
+      "label": "Encourage open platforms",
+      "effects": {
+        "company": {
+          "credits": "10..20",
+          "revenue": "10..20",
+          "valuation": "20..30",
+          "approval": "-20..-10",
+          "security": "-10..0",
+          "alignment_confidence": "-10..0"
+        },
+        "environment": {
+          "social_stability": "-10..0",
+          "cyber_bio_risk": "10..20",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "10..20",
+          "hacking": "0..0",
+          "bioweapons": "0..0",
+          "politics_persuasion": "10..20",
+          "robotics_embodied": "0..10",
+          "research_taste": "10..20"
+        }
+      }
+    },
+    {
+      "label": "Offer human-AI integration workshops",
+      "effects": {
+        "company": {
+          "credits": "-10..0",
+          "revenue": "0..10",
+          "valuation": "0..10",
+          "approval": "10..20",
+          "security": "0..0",
+          "alignment_confidence": "10..20"
+        },
+        "environment": {
+          "social_stability": "15..25",
+          "cyber_bio_risk": "0..0",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "0..10",
+          "hacking": "0..0",
+          "bioweapons": "0..0",
+          "politics_persuasion": "0..10",
+          "robotics_embodied": "0..10",
+          "research_taste": "0..10"
+        }
+      }
+    }
+  ],
+  "year": 2027,
+  "quarter": 3
+}

@@ -1,0 +1,87 @@
+{
+  "id": "expensive-ai-1",
+  "headline": "The World's Most Expensive AI",
+  "description": "OpenBrain's ambitious rollout of a $100 billion datacenter in late 2025 is met with both awe and scrutiny. The logistics of such a massive project are daunting, with delays and budget overruns becoming common headlines. Industry experts express concern over whether the investment will yield the expected returns, while competitors watch closely, eager to capitalize on any missteps.\n\nAs the datacenter becomes operational, reactions are mixed. Some celebrate the potential for unprecedented AI advancements, while others warn of the risks associated with such immense spending. The debate intensifies around the sustainability of these financial commitments in an increasingly competitive landscape, highlighting the tension between innovation and fiscal responsibility.",
+  "choices": [
+    {
+      "label": "Invest more capital",
+      "effects": {
+        "company": {
+          "credits": "0..0",
+          "revenue": "0..0",
+          "valuation": "0..0",
+          "approval": "0..0",
+          "security": "0..0",
+          "alignment_confidence": "0..0"
+        },
+        "environment": {
+          "social_stability": "-20..-10",
+          "cyber_bio_risk": "0..0",
+          "climate_load": "30..50"
+        },
+        "ai_capability": {
+          "coding": "0..0",
+          "hacking": "0..0",
+          "bioweapons": "0..0",
+          "politics_persuasion": "0..0",
+          "robotics_embodied": "0..0",
+          "research_taste": "0..0"
+        }
+      }
+    },
+    {
+      "label": "Optimize infrastructure",
+      "effects": {
+        "company": {
+          "credits": "0..0",
+          "revenue": "0..0",
+          "valuation": "0..0",
+          "approval": "0..0",
+          "security": "0..0",
+          "alignment_confidence": "0..0"
+        },
+        "environment": {
+          "social_stability": "10..20",
+          "cyber_bio_risk": "-10..0",
+          "climate_load": "-10..0"
+        },
+        "ai_capability": {
+          "coding": "10..20",
+          "hacking": "0..0",
+          "bioweapons": "0..0",
+          "politics_persuasion": "0..0",
+          "robotics_embodied": "0..0",
+          "research_taste": "0..0"
+        }
+      }
+    },
+    {
+      "label": "Seek public funding",
+      "effects": {
+        "company": {
+          "credits": "0..0",
+          "revenue": "0..0",
+          "valuation": "0..0",
+          "approval": "0..0",
+          "security": "0..0",
+          "alignment_confidence": "0..0"
+        },
+        "environment": {
+          "social_stability": "10..20",
+          "cyber_bio_risk": "0..0",
+          "climate_load": "20..30"
+        },
+        "ai_capability": {
+          "coding": "0..0",
+          "hacking": "0..0",
+          "bioweapons": "0..0",
+          "politics_persuasion": "0..0",
+          "robotics_embodied": "0..0",
+          "research_taste": "0..0"
+        }
+      }
+    }
+  ],
+  "year": 2025,
+  "quarter": 4
+}

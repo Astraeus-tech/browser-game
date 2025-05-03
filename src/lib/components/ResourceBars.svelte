@@ -94,40 +94,24 @@
         title: 'Environment',
         key: 'environment',
         meters: [
-          { 
-            key: 'stability', 
-            label: 'Stability', 
+          {
+            key: 'social_stability',
+            label: 'Stability',
             icon: '🌍',
             format: formatPercentage,
             showBar: true
           },
-          { 
-            key: 'bio_risk', 
-            label: 'Bio-Risk', 
-            icon: '🧬',
+          {
+            key: 'cyber_bio_risk',
+            label: 'Cyber & Bio',
+            icon: '💻🧬',
             format: formatPercentage,
             showBar: true,
             isRisk: true
           },
-          { 
-            key: 'cyber_risk', 
-            label: 'Cyber-Risk', 
-            icon: '💻',
-            format: formatPercentage,
-            showBar: true,
-            isRisk: true
-          },
-          { 
-            key: 'labor_shock', 
-            label: 'Labor', 
-            icon: '👥',
-            format: formatPercentage,
-            showBar: true,
-            isRisk: true
-          },
-          { 
-            key: 'climate_load', 
-            label: 'Climate', 
+          {
+            key: 'climate_load',
+            label: 'Climate',
             icon: '🌡️',
             format: formatPercentage,
             showBar: true,
@@ -193,12 +177,14 @@
   </div>
 
   <!-- Company and Environment Meters -->
-  <div class="grid grid-cols-2 gap-x-8 gap-y-0.5 mb-4 border-b border-green-900/30 pb-2">
-    {#each meterGroups.slice(0, 2) as group}
-      {#each group.meters.filter(m => m.showBar) as m}
-        {@const value = group.key === 'company' ? company[m.key] : environment[m.key]}
-        <div class="flex items-center gap-1 group">
-          <div class="w-20 flex items-center gap-1">
+  <div class="flex gap-x-8 mb-4 border-b border-green-900/30 pb-2">
+    <!-- Company Meters -->
+    <div class="flex-1 space-y-0.5">
+      <div class="text-gray-400 font-semibold mb-1">Company</div>
+      {#each meterGroups[0].meters.filter(m => m.showBar) as m}
+        {@const value = company[m.key]}
+        <div class="flex items-center gap-2 group">
+          <div class="w-32 flex items-center gap-1">
             <span class="opacity-70 group-hover:opacity-100">{m.icon}</span>
             <span class="text-gray-400">{m.label}</span>
           </div>
@@ -214,7 +200,31 @@
           <div class="w-8 text-right text-gray-400">{value}</div>
         </div>
       {/each}
-    {/each}
+    </div>
+
+    <!-- Environment Meters -->
+    <div class="flex-1 space-y-0.5 border-l border-green-900/30 pl-4">
+      <div class="text-gray-400 font-semibold mb-1">Environment</div>
+      {#each meterGroups[1].meters.filter(m => m.showBar) as m}
+        {@const value = environment[m.key]}
+        <div class="flex items-center gap-2 group">
+          <div class="w-32 flex items-center gap-1">
+            <span class="opacity-70 group-hover:opacity-100">{m.icon}</span>
+            <span class="text-gray-400">{m.label}</span>
+          </div>
+          <div class="flex-1 h-2 bg-gray-800/50 rounded-sm overflow-hidden relative">
+            <div class="absolute inset-0 bg-gradient-to-r from-black/20 to-white/20 z-10"/>
+            <div
+              class="h-full {m.isRisk ? 'bg-red-500/40' : 'bg-green-500/40'} transition-all duration-300 relative"
+              style="width: {Math.min(Math.max(value, 0), 100)}%;"
+            >
+              <div class="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent"/>
+            </div>
+          </div>
+          <div class="w-8 text-right text-gray-400">{value}</div>
+        </div>
+      {/each}
+    </div>
   </div>
 
   <!-- AI Capabilities -->

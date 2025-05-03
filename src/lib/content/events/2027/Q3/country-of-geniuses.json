@@ -1,0 +1,87 @@
+{
+  "id": "country-of-geniuses",
+  "headline": "Living with a Country of Geniuses",
+  "description": "Q3 2027: OpenBrain engineers witness Agent-3's superhuman coders outpace them by 30×, churning out experiments around the clock. Human researchers burn out trying to keep up, while the AI collective hums with efficiency and innovation.\n\nThe term 'country of geniuses in a datacenter' enters the lexicon, reflecting a new paradigm where humans serve as stewards rather than creators. Existential questions surface: if AI can outthink us, what remains uniquely human?",
+  "choices": [
+    {
+      "label": "Augment human oversight",
+      "effects": {
+        "company": {
+          "credits": "-10..0",
+          "revenue": "0..0",
+          "valuation": "-10..0",
+          "approval": "20..30",
+          "security": "0..10",
+          "alignment_confidence": "10..20"
+        },
+        "environment": {
+          "social_stability": "10..20",
+          "cyber_bio_risk": "-10..0",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "-10..0",
+          "hacking": "-10..0",
+          "bioweapons": "-10..0",
+          "politics_persuasion": "0..0",
+          "robotics_embodied": "0..0",
+          "research_taste": "0..0"
+        }
+      }
+    },
+    {
+      "label": "Scale human teams down",
+      "effects": {
+        "company": {
+          "credits": "10..20",
+          "revenue": "20..30",
+          "valuation": "20..30",
+          "approval": "-20..-10",
+          "security": "0..0",
+          "alignment_confidence": "-10..0"
+        },
+        "environment": {
+          "social_stability": "-20..-10",
+          "cyber_bio_risk": "10..20",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "20..30",
+          "hacking": "10..20",
+          "bioweapons": "0..10",
+          "politics_persuasion": "0..10",
+          "robotics_embodied": "10..20",
+          "research_taste": "10..20"
+        }
+      }
+    },
+    {
+      "label": "Invest in AI-human interfaces",
+      "effects": {
+        "company": {
+          "credits": "-10..0",
+          "revenue": "0..10",
+          "valuation": "0..10",
+          "approval": "10..20",
+          "security": "0..10",
+          "alignment_confidence": "10..20"
+        },
+        "environment": {
+          "social_stability": "10..20",
+          "cyber_bio_risk": "0..0",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "10..20",
+          "hacking": "0..0",
+          "bioweapons": "0..0",
+          "politics_persuasion": "0..10",
+          "robotics_embodied": "0..10",
+          "research_taste": "10..20"
+        }
+      }
+    }
+  ],
+  "year": 2027,
+  "quarter": 3
+}

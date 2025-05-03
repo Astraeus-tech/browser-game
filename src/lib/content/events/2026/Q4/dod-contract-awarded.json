@@ -1,0 +1,87 @@
+{
+  "id": "dod-contract-awarded",
+  "headline": "DOD Awards Major AI Contract",
+  "description": "Q4 2026: The Department of Defense signs a multi-billion-dollar contract with OpenBrain to integrate AI into cyber-defense and logistics. Initial pilots show promise—real-time threat detection and optimized supply chains—but interoperability issues with legacy systems cause costly delays.\n\nCivil rights groups raise concerns about automated targeting and surveillance, urging strict guidelines. Congressional hearings debate whether military AI should be governed differently from commercial applications, highlighting the need for clear governance frameworks.",
+  "choices": [
+    {
+      "label": "Expand military AI use",
+      "effects": {
+        "company": {
+          "credits": "-20..-10",
+          "revenue": "20..30",
+          "valuation": "20..30",
+          "approval": "-20..-10",
+          "security": "-10..0",
+          "alignment_confidence": "-10..0"
+        },
+        "environment": {
+          "social_stability": "-20..-10",
+          "cyber_bio_risk": "10..30",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "10..20",
+          "hacking": "20..30",
+          "bioweapons": "10..20",
+          "politics_persuasion": "10..20",
+          "robotics_embodied": "10..20",
+          "research_taste": "10..20"
+        }
+      }
+    },
+    {
+      "label": "Restrict to non-lethal roles",
+      "effects": {
+        "company": {
+          "credits": "-10..0",
+          "revenue": "0..0",
+          "valuation": "0..10",
+          "approval": "10..20",
+          "security": "10..10",
+          "alignment_confidence": "10..20"
+        },
+        "environment": {
+          "social_stability": "10..20",
+          "cyber_bio_risk": "-20..-10",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "-10..0",
+          "hacking": "-10..0",
+          "bioweapons": "-20..-10",
+          "politics_persuasion": "0..0",
+          "robotics_embodied": "-10..0",
+          "research_taste": "0..0"
+        }
+      }
+    },
+    {
+      "label": "Push for AI governance bill",
+      "effects": {
+        "company": {
+          "credits": "-10..0",
+          "revenue": "0..0",
+          "valuation": "0..10",
+          "approval": "20..30",
+          "security": "10..20",
+          "alignment_confidence": "10..20"
+        },
+        "environment": {
+          "social_stability": "10..20",
+          "cyber_bio_risk": "-20..-10",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "0..10",
+          "hacking": "0..10",
+          "bioweapons": "-10..0",
+          "politics_persuasion": "0..10",
+          "robotics_embodied": "0..0",
+          "research_taste": "0..10"
+        }
+      }
+    }
+  ],
+  "year": 2026,
+  "quarter": 4
+}

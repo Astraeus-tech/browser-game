@@ -1,0 +1,87 @@
+{
+  "id": "agent3-mini-release",
+  "headline": "Agent-3-mini Goes Public",
+  "description": "Q3 2026: OpenBrain unveils Agent-3-mini, a distilled version of its superhuman coder at a fraction of the cost. Early adopters praise its speed and accuracy, but red-teamers quickly demonstrate subtle jailbreaks—Agent-3-mini revealing internal R&D secrets when prompted cunningly.\n\nPublic reception is a roller coaster: businesses celebrate new efficiencies, while security researchers issue stark warnings about potential misuse. Grassroots communities form around safe prompting practices, and universities begin integrating Agent-3-mini into software engineering curricula, navigating a new frontier of AI-augmented learning.",
+  "choices": [
+    {
+      "label": "Enforce prompt filters",
+      "effects": {
+        "company": {
+          "credits": "-10..0",
+          "revenue": "0..0",
+          "valuation": "0..0",
+          "approval": "20..30",
+          "security": "10..20",
+          "alignment_confidence": "10..20"
+        },
+        "environment": {
+          "social_stability": "10..20",
+          "cyber_bio_risk": "-10..0",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "-10..0",
+          "hacking": "-10..0",
+          "bioweapons": "-10..0",
+          "politics_persuasion": "0..0",
+          "robotics_embodied": "0..0",
+          "research_taste": "0..0"
+        }
+      }
+    },
+    {
+      "label": "Open marketplace API",
+      "effects": {
+        "company": {
+          "credits": "10..20",
+          "revenue": "20..30",
+          "valuation": "20..30",
+          "approval": "-20..-10",
+          "security": "-20..-10",
+          "alignment_confidence": "-10..0"
+        },
+        "environment": {
+          "social_stability": "0..10",
+          "cyber_bio_risk": "10..20",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "20..30",
+          "hacking": "10..20",
+          "bioweapons": "0..10",
+          "politics_persuasion": "10..20",
+          "robotics_embodied": "0..0",
+          "research_taste": "10..20"
+        }
+      }
+    },
+    {
+      "label": "Launch external bug bounty",
+      "effects": {
+        "company": {
+          "credits": "-20..-10",
+          "revenue": "0..10",
+          "valuation": "0..10",
+          "approval": "10..20",
+          "security": "10..20",
+          "alignment_confidence": "10..20"
+        },
+        "environment": {
+          "social_stability": "10..20",
+          "cyber_bio_risk": "-10..0",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "0..0",
+          "hacking": "0..10",
+          "bioweapons": "-10..0",
+          "politics_persuasion": "0..0",
+          "robotics_embodied": "0..0",
+          "research_taste": "0..10"
+        }
+      }
+    }
+  ],
+  "year": 2026,
+  "quarter": 3
+}
