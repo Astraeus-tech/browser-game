@@ -96,14 +96,14 @@
         meters: [
           {
             key: 'social_stability',
-            label: 'Social Stability',
+            label: 'Stability',
             icon: '🌍',
             format: formatPercentage,
             showBar: true
           },
           {
             key: 'cyber_bio_risk',
-            label: 'Cyber & Bio Risk',
+            label: 'Cyber & Bio',
             icon: '💻🧬',
             format: formatPercentage,
             showBar: true,
@@ -184,7 +184,7 @@
       {#each meterGroups[0].meters.filter(m => m.showBar) as m}
         {@const value = company[m.key]}
         <div class="flex items-center gap-2 group">
-          <div class="w-20 flex items-center gap-1">
+          <div class="w-32 flex items-center gap-1">
             <span class="opacity-70 group-hover:opacity-100">{m.icon}</span>
             <span class="text-gray-400">{m.label}</span>
           </div>
@@ -208,7 +208,7 @@
       {#each meterGroups[1].meters.filter(m => m.showBar) as m}
         {@const value = environment[m.key]}
         <div class="flex items-center gap-2 group">
-          <div class="w-20 flex items-center gap-1">
+          <div class="w-32 flex items-center gap-1">
             <span class="opacity-70 group-hover:opacity-100">{m.icon}</span>
             <span class="text-gray-400">{m.label}</span>
           </div>
