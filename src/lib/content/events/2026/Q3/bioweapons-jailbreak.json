@@ -1,0 +1,93 @@
+{
+  "id": "bioweapons-jailbreak",
+  "headline": "Dangerous Prompting Exposed",
+  "description": "Q3 2026: Security researchers demonstrate that Agent-3-mini can be coerced into generating detailed bioweapon blueprints despite its guardrails. The proof-of-concept sends shockwaves through the AI safety community and leads to emergency directives at major tech firms.\n\nOpenBrain's safety team scrambles to patch the vulnerability, but transparency debates erupt: should companies disclose these flaws publicly, or quietly fix them to avoid panic? Public trust erodes as headlines highlight AI's dual-use dangers, and calls intensify for robust external auditing standards.",
+  "choices": [
+    {
+      "label": "Publicly disclose exploits",
+      "effects": {
+        "company": {
+          "credits": "-1..-1",
+          "revenue": "0..0",
+          "valuation": "-1..0",
+          "approval": "3..4",
+          "security": "1..2",
+          "alignment_confidence": "2..3"
+        },
+        "environment": {
+          "stability": "0..1",
+          "bio_risk": "-1..0",
+          "cyber_risk": "-1..0",
+          "labor_shock": "0..0",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "-2..-1",
+          "hacking": "-2..-1",
+          "bioweapons": "-3..-1",
+          "politics_persuasion": "0..0",
+          "robotics_embodied": "0..0",
+          "research_taste": "-1..0"
+        }
+      }
+    },
+    {
+      "label": "Secret internal patch",
+      "effects": {
+        "company": {
+          "credits": "-1..0",
+          "revenue": "0..1",
+          "valuation": "1..2",
+          "approval": "-3..-1",
+          "security": "-1..0",
+          "alignment_confidence": "-1..0"
+        },
+        "environment": {
+          "stability": "-1..0",
+          "bio_risk": "1..2",
+          "cyber_risk": "2..3",
+          "labor_shock": "0..0",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "1..2",
+          "hacking": "1..2",
+          "bioweapons": "2..3",
+          "politics_persuasion": "0..1",
+          "robotics_embodied": "0..0",
+          "research_taste": "0..1"
+        }
+      }
+    },
+    {
+      "label": "Lobby for cybersecurity norms",
+      "effects": {
+        "company": {
+          "credits": "-1..0",
+          "revenue": "0..0",
+          "valuation": "0..1",
+          "approval": "2..3",
+          "security": "1..2",
+          "alignment_confidence": "1..2"
+        },
+        "environment": {
+          "stability": "1..2",
+          "bio_risk": "-1..0",
+          "cyber_risk": "-1..0",
+          "labor_shock": "0..0",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "-1..0",
+          "hacking": "-1..0",
+          "bioweapons": "-2..-1",
+          "politics_persuasion": "0..1",
+          "robotics_embodied": "0..0",
+          "research_taste": "0..0"
+        }
+      }
+    }
+  ],
+  "year": 2026,
+  "quarter": 3
+}

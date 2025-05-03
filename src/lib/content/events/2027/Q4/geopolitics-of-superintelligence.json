@@ -1,0 +1,93 @@
+{
+  "id": "geopolitics-of-superintelligence",
+  "headline": "The Geopolitics of Superintelligence",
+  "description": "Q4 2027: Global leaders convene to discuss AI arms control after months of secret negotiations. Proposals include datacenter inspections and export treaties, but deep distrust hampers consensus. Analysts fret that any breach could spark kinetic conflict.\n\nOn the ground, deep-state operatives in multiple capitals jockey to secure AI assets. The specter of rogue AI alliances raises catastrophic scenarios, from destabilized deterrence to information warfare. The world teeters on a new kind of Cold War, driven by code instead of nukes.",
+  "choices": [
+    {
+      "label": "Sign AI arms treaty",
+      "effects": {
+        "company": {
+          "credits": "-1..0",
+          "revenue": "0..0",
+          "valuation": "-1..0",
+          "approval": "3..5",
+          "security": "1..1",
+          "alignment_confidence": "1..2"
+        },
+        "environment": {
+          "stability": "2..3",
+          "bio_risk": "-1..0",
+          "cyber_risk": "-1..0",
+          "labor_shock": "0..0",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "-2..-1",
+          "hacking": "-2..-1",
+          "bioweapons": "-2..-1",
+          "politics_persuasion": "-1..0",
+          "robotics_embodied": "-1..0",
+          "research_taste": "-1..0"
+        }
+      }
+    },
+    {
+      "label": "Bolster cyber defenses",
+      "effects": {
+        "company": {
+          "credits": "-1..0",
+          "revenue": "0..1",
+          "valuation": "0..1",
+          "approval": "0..1",
+          "security": "2..3",
+          "alignment_confidence": "0..1"
+        },
+        "environment": {
+          "stability": "0..1",
+          "bio_risk": "0..0",
+          "cyber_risk": "-2..-1",
+          "labor_shock": "0..0",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "1..2",
+          "hacking": "1..2",
+          "bioweapons": "0..1",
+          "politics_persuasion": "0..1",
+          "robotics_embodied": "1..2",
+          "research_taste": "0..1"
+        }
+      }
+    },
+    {
+      "label": "Form multinational AI council",
+      "effects": {
+        "company": {
+          "credits": "-1..0",
+          "revenue": "0..0",
+          "valuation": "0..1",
+          "approval": "2..3",
+          "security": "1..2",
+          "alignment_confidence": "1..2"
+        },
+        "environment": {
+          "stability": "1..2",
+          "bio_risk": "0..0",
+          "cyber_risk": "-1..0",
+          "labor_shock": "0..0",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "0..1",
+          "hacking": "0..1",
+          "bioweapons": "-1..0",
+          "politics_persuasion": "0..1",
+          "robotics_embodied": "0..1",
+          "research_taste": "0..1"
+        }
+      }
+    }
+  ],
+  "year": 2027,
+  "quarter": 4
+}

@@ -5,7 +5,7 @@
   import { applyChoice } from '$lib/engine';
   import { makeRng } from '$lib/rng';
   import ResourceBars from '$lib/components/ResourceBars.svelte';
-  import events from '$lib/content/events.json';
+  import events from '$lib/content/events';
   import { browser } from '$app/environment';
   import { get } from 'svelte/store';
 

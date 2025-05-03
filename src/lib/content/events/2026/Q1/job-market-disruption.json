@@ -1,0 +1,93 @@
+{
+  "id": "job-market-disruption",
+  "headline": "Job Market Shakes Under AI Surge",
+  "description": "Q1 2026: Entry-level developer positions vanish almost overnight as companies deploy AI teams for routine coding tasks. The sudden displacement sends shockwaves through the tech labor market, as junior engineers and interns find themselves sidelined by efficient code-generating models. Industry conferences erupt with heated debates over job security, and university career centers report a flood of students reconsidering tech degrees.\n\nGovernments and corporations scramble to respond: training programs for AI oversight, coding apprenticeships, and reskilling bootcamps are announced, but many question if these initiatives can keep pace with the relentless march of automation. Unions form around displaced tech workers, lobbying for hiring quotas and social safety nets. As the dust settles, a new ecosystem emerges—one where human roles shift from hands-on coding to oversight, strategy, and ethical stewardship.",
+  "choices": [
+    {
+      "label": "Fund reskilling initiatives",
+      "effects": {
+        "company": {
+          "credits": "-3..-2",
+          "revenue": "0..0",
+          "valuation": "-1..0",
+          "approval": "2..4",
+          "security": "0..0",
+          "alignment_confidence": "0..1"
+        },
+        "environment": {
+          "stability": "0..0",
+          "bio_risk": "0..0",
+          "cyber_risk": "0..0",
+          "labor_shock": "-2..-1",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "-1..0",
+          "hacking": "0..0",
+          "bioweapons": "0..0",
+          "politics_persuasion": "0..1",
+          "robotics_embodied": "0..0",
+          "research_taste": "0..0"
+        }
+      }
+    },
+    {
+      "label": "Encourage AI adoption",
+      "effects": {
+        "company": {
+          "credits": "-2..-1",
+          "revenue": "1..2",
+          "valuation": "1..2",
+          "approval": "-2..-1",
+          "security": "0..0",
+          "alignment_confidence": "0..0"
+        },
+        "environment": {
+          "stability": "-1..0",
+          "bio_risk": "0..0",
+          "cyber_risk": "0..0",
+          "labor_shock": "2..3",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "1..2",
+          "hacking": "0..0",
+          "bioweapons": "0..0",
+          "politics_persuasion": "0..1",
+          "robotics_embodied": "0..1",
+          "research_taste": "0..1"
+        }
+      }
+    },
+    {
+      "label": "Impose hiring quotas",
+      "effects": {
+        "company": {
+          "credits": "-1..-1",
+          "revenue": "-1..0",
+          "valuation": "-1..0",
+          "approval": "1..2",
+          "security": "0..0",
+          "alignment_confidence": "0..1"
+        },
+        "environment": {
+          "stability": "0..0",
+          "bio_risk": "0..0",
+          "cyber_risk": "0..0",
+          "labor_shock": "-1..0",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "-1..0",
+          "hacking": "0..0",
+          "bioweapons": "0..0",
+          "politics_persuasion": "0..0",
+          "robotics_embodied": "-1..0",
+          "research_taste": "0..0"
+        }
+      }
+    }
+  ],
+  "year": 2026,
+  "quarter": 1
+}

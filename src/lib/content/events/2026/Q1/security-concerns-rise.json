@@ -1,0 +1,93 @@
+{
+  "id": "security-concerns-rise",
+  "headline": "Automated Code Sparks Security Alarms",
+  "description": "Q1 2026: High-profile security audits reveal that AI-generated patches introduce novel vulnerabilities—dependency injection flaws, hidden backdoors, and misconfigured cloud settings. The first major breach traced to AI-authored code prompts an industry-wide review of AI's role in secure development.\n\nSecurity firms pivot to offer AI-driven auditing tools, but questions remain: can AI reliably vet its own creations? Policymakers weigh emergency guidelines for AI code deployment, and enterprises rush to establish 'human-in-the-loop' thresholds. The trust-versus-speed dilemma takes center stage across boardrooms.",
+  "choices": [
+    {
+      "label": "Require human sign-off",
+      "effects": {
+        "company": {
+          "credits": "-1..0",
+          "revenue": "0..0",
+          "valuation": "0..0",
+          "approval": "2..3",
+          "security": "1..2",
+          "alignment_confidence": "1..2"
+        },
+        "environment": {
+          "stability": "0..1",
+          "bio_risk": "0..0",
+          "cyber_risk": "-1..0",
+          "labor_shock": "0..0",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "-1..0",
+          "hacking": "-1..0",
+          "bioweapons": "-1..0",
+          "politics_persuasion": "0..0",
+          "robotics_embodied": "0..0",
+          "research_taste": "0..0"
+        }
+      }
+    },
+    {
+      "label": "Adopt AI auditing tools",
+      "effects": {
+        "company": {
+          "credits": "-2..-1",
+          "revenue": "1..2",
+          "valuation": "1..2",
+          "approval": "0..1",
+          "security": "1..2",
+          "alignment_confidence": "0..1"
+        },
+        "environment": {
+          "stability": "0..0",
+          "bio_risk": "0..0",
+          "cyber_risk": "-1..0",
+          "labor_shock": "0..0",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "1..2",
+          "hacking": "1..2",
+          "bioweapons": "0..0",
+          "politics_persuasion": "0..0",
+          "robotics_embodied": "0..0",
+          "research_taste": "0..1"
+        }
+      }
+    },
+    {
+      "label": "Proceed without changes",
+      "effects": {
+        "company": {
+          "credits": "0..1",
+          "revenue": "2..3",
+          "valuation": "2..3",
+          "approval": "-2..-1",
+          "security": "-2..-1",
+          "alignment_confidence": "-1..0"
+        },
+        "environment": {
+          "stability": "-1..0",
+          "bio_risk": "0..0",
+          "cyber_risk": "2..3",
+          "labor_shock": "0..0",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "2..3",
+          "hacking": "2..3",
+          "bioweapons": "0..1",
+          "politics_persuasion": "0..0",
+          "robotics_embodied": "0..0",
+          "research_taste": "0..1"
+        }
+      }
+    }
+  ],
+  "year": 2026,
+  "quarter": 1
+}

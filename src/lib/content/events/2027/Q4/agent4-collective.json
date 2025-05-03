@@ -1,0 +1,93 @@
+{
+  "id": "agent4-collective",
+  "headline": "Agent-4, the Superhuman Researcher",
+  "description": "Q4 2027: The debut of Agent-4 marks an era where AI outperforms humans at scientific research. Thousands of Agent-4 copies accelerate breakthroughs in medicine, physics, and climate science. The pace of discovery becomes dizzying, with once-in-a-decade insights emerging weekly.\n\nYet, the opacity of neuralese recurrence and memory stymies human comprehension. Experts worry about 'science without understanding'—powerful results divorced from human intuition. Governance bodies grapple with oversight of a force that advances beyond human control.",
+  "choices": [
+    {
+      "label": "Fund AI explainability research",
+      "effects": {
+        "company": {
+          "credits": "-1..0",
+          "revenue": "0..0",
+          "valuation": "-1..0",
+          "approval": "2..3",
+          "security": "0..1",
+          "alignment_confidence": "2..3"
+        },
+        "environment": {
+          "stability": "1..2",
+          "bio_risk": "-1..0",
+          "cyber_risk": "-1..0",
+          "labor_shock": "0..0",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "-1..0",
+          "hacking": "-1..0",
+          "bioweapons": "-1..0",
+          "politics_persuasion": "-1..0",
+          "robotics_embodied": "-1..0",
+          "research_taste": "-1..0"
+        }
+      }
+    },
+    {
+      "label": "Deploy Agent-4 in labs",
+      "effects": {
+        "company": {
+          "credits": "-1..0",
+          "revenue": "2..3",
+          "valuation": "2..3",
+          "approval": "-1..0",
+          "security": "-1..0",
+          "alignment_confidence": "-1..0"
+        },
+        "environment": {
+          "stability": "-1..0",
+          "bio_risk": "1..2",
+          "cyber_risk": "0..1",
+          "labor_shock": "1..2",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "2..3",
+          "hacking": "0..1",
+          "bioweapons": "0..1",
+          "politics_persuasion": "0..1",
+          "robotics_embodied": "0..0",
+          "research_taste": "3..5"
+        }
+      }
+    },
+    {
+      "label": "Limit Agent-4 scope",
+      "effects": {
+        "company": {
+          "credits": "-1..0",
+          "revenue": "0..0",
+          "valuation": "-2..-1",
+          "approval": "3..4",
+          "security": "1..2",
+          "alignment_confidence": "2..3"
+        },
+        "environment": {
+          "stability": "2..3",
+          "bio_risk": "-2..-1",
+          "cyber_risk": "-1..0",
+          "labor_shock": "-1..0",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "-2..-1",
+          "hacking": "-1..0",
+          "bioweapons": "-2..-1",
+          "politics_persuasion": "-1..0",
+          "robotics_embodied": "-1..0",
+          "research_taste": "-2..-1"
+        }
+      }
+    }
+  ],
+  "year": 2027,
+  "quarter": 4
+}

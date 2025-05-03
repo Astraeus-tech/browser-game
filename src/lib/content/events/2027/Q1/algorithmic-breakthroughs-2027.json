@@ -1,0 +1,93 @@
+{
+  "id": "algorithmic-breakthroughs-2027",
+  "headline": "Algorithmic Breakthroughs Ignite",
+  "description": "Q1 2027: With thousands of Agent-2 copies churning synthetic training data, OpenBrain unveils two major breakthroughs: neuralese recurrence and iterated distillation. These advances slash training times by half and improve model coherence on complex tasks.\n\nThe breakthroughs propel OpenBrain's R&D output to triple speed, dazzling investors and researchers alike. Competitors scramble to replicate the methods, but only OpenBrain's integrated agent pipeline achieves the full performance leap, cementing its lead—at least for now.",
+  "choices": [
+    {
+      "label": "Share research publicly",
+      "effects": {
+        "company": {
+          "credits": "-1..0",
+          "revenue": "0..0",
+          "valuation": "0..0",
+          "approval": "2..3",
+          "security": "0..1",
+          "alignment_confidence": "1..2"
+        },
+        "environment": {
+          "stability": "0..1",
+          "bio_risk": "0..0",
+          "cyber_risk": "-1..0",
+          "labor_shock": "0..0",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "-1..0",
+          "hacking": "-1..0",
+          "bioweapons": "-1..0",
+          "politics_persuasion": "0..1",
+          "robotics_embodied": "0..0",
+          "research_taste": "1..2"
+        }
+      }
+    },
+    {
+      "label": "Keep methods secret",
+      "effects": {
+        "company": {
+          "credits": "1..2",
+          "revenue": "2..3",
+          "valuation": "2..3",
+          "approval": "-2..-1",
+          "security": "-1..0",
+          "alignment_confidence": "-1..0"
+        },
+        "environment": {
+          "stability": "-1..0",
+          "bio_risk": "0..0",
+          "cyber_risk": "1..2",
+          "labor_shock": "0..0",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "2..3",
+          "hacking": "1..2",
+          "bioweapons": "1..2",
+          "politics_persuasion": "1..2",
+          "robotics_embodied": "1..2",
+          "research_taste": "2..4"
+        }
+      }
+    },
+    {
+      "label": "Offer academic grants",
+      "effects": {
+        "company": {
+          "credits": "-1..0",
+          "revenue": "0..1",
+          "valuation": "0..1",
+          "approval": "1..2",
+          "security": "0..0",
+          "alignment_confidence": "1..2"
+        },
+        "environment": {
+          "stability": "1..2",
+          "bio_risk": "0..0",
+          "cyber_risk": "0..0",
+          "labor_shock": "0..0",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "0..1",
+          "hacking": "0..0",
+          "bioweapons": "0..0",
+          "politics_persuasion": "0..1",
+          "robotics_embodied": "0..0",
+          "research_taste": "1..2"
+        }
+      }
+    }
+  ],
+  "year": 2027,
+  "quarter": 1
+}

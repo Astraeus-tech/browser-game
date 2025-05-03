@@ -1,0 +1,93 @@
+{
+  "id": "national-security-scare",
+  "headline": "National Security Panic",
+  "description": "Q2 2027: Intelligence briefings warn that AI cyber-warfare tools could blind U.S. defenses in days. The White House elevates AI to top security priority, and Congress drafts emergency export controls on AI chips and algorithms.\n\nOpenBrain lodges formal complaints, arguing that restrictions could cripple innovation. Meanwhile, the Pentagon integrates Agent-3 into logistics simulations, highlighting AI's dual-use nature. The clash between security and progress intensifies as 2027's midterm elections approach.",
+  "choices": [
+    {
+      "label": "Impose strict controls",
+      "effects": {
+        "company": {
+          "credits": "-2..-1",
+          "revenue": "-1..0",
+          "valuation": "-1..0",
+          "approval": "1..2",
+          "security": "1..2",
+          "alignment_confidence": "0..0"
+        },
+        "environment": {
+          "stability": "1..2",
+          "bio_risk": "-1..0",
+          "cyber_risk": "-1..0",
+          "labor_shock": "0..0",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "-1..0",
+          "hacking": "-1..0",
+          "bioweapons": "-1..0",
+          "politics_persuasion": "0..0",
+          "robotics_embodied": "0..0",
+          "research_taste": "-1..0"
+        }
+      }
+    },
+    {
+      "label": "Balance regulation",
+      "effects": {
+        "company": {
+          "credits": "-1..0",
+          "revenue": "0..1",
+          "valuation": "0..1",
+          "approval": "1..1",
+          "security": "0..1",
+          "alignment_confidence": "0..1"
+        },
+        "environment": {
+          "stability": "0..1",
+          "bio_risk": "0..0",
+          "cyber_risk": "0..0",
+          "labor_shock": "0..0",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "0..1",
+          "hacking": "0..0",
+          "bioweapons": "0..0",
+          "politics_persuasion": "0..1",
+          "robotics_embodied": "0..0",
+          "research_taste": "0..1"
+        }
+      }
+    },
+    {
+      "label": "Accelerate domestic chipplay",
+      "effects": {
+        "company": {
+          "credits": "-2..-1",
+          "revenue": "0..0",
+          "valuation": "1..2",
+          "approval": "0..1",
+          "security": "0..1",
+          "alignment_confidence": "0..0"
+        },
+        "environment": {
+          "stability": "-1..0",
+          "bio_risk": "0..0",
+          "cyber_risk": "1..2",
+          "labor_shock": "1..2",
+          "climate_load": "1..2"
+        },
+        "ai_capability": {
+          "coding": "1..2",
+          "hacking": "0..1",
+          "bioweapons": "0..0",
+          "politics_persuasion": "0..1",
+          "robotics_embodied": "0..1",
+          "research_taste": "1..2"
+        }
+      }
+    }
+  ],
+  "year": 2027,
+  "quarter": 2
+}

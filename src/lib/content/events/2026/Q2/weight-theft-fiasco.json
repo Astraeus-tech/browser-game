@@ -1,0 +1,93 @@
+{
+  "id": "weight-theft-fiasco",
+  "headline": "Weight Theft Fiasco",
+  "description": "Q2 2026: A scandal erupts when it is revealed that several high-profile AI companies have been secretly stealing weight data from millions of wearable device users and social media profiles, repurposing it to train advanced biometric prediction models. Whistleblowers allege unauthorized pipelines siphoned data under the guise of 'anonymization,' sparking privacy and security alarms. Journalists uncover that stolen datasets were sold on darknet forums, fueling consumer outrage and legal investigations.\n\nRegulators launch joint inquiries into data harvesting practices, threatening steep fines and operational bans. Affected companies scramble to contain the fallout—issuing apologies, freezing data-sharing partnerships, and overhauling privacy policies. Civil liberties groups demand stronger consent frameworks and transparent auditing. As trust in AI business models erodes, startups pivot toward privacy-first design, and governments debate new legislation to rein in unconsented data collection.",
+  "choices": [
+    {
+      "label": "Implement strict data policies",
+      "effects": {
+        "company": {
+          "credits": "-1..0",
+          "revenue": "0..1",
+          "valuation": "-1..0",
+          "approval": "2..3",
+          "security": "1..2",
+          "alignment_confidence": "1..2"
+        },
+        "environment": {
+          "stability": "0..1",
+          "bio_risk": "0..0",
+          "cyber_risk": "-1..0",
+          "labor_shock": "0..0",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "-1..0",
+          "hacking": "-1..0",
+          "bioweapons": "-1..0",
+          "politics_persuasion": "-1..0",
+          "robotics_embodied": "0..0",
+          "research_taste": "0..0"
+        }
+      }
+    },
+    {
+      "label": "Launch public inquiry",
+      "effects": {
+        "company": {
+          "credits": "-1..0",
+          "revenue": "0..0",
+          "valuation": "-2..-1",
+          "approval": "-2..-1",
+          "security": "0..0",
+          "alignment_confidence": "0..0"
+        },
+        "environment": {
+          "stability": "1..2",
+          "bio_risk": "0..0",
+          "cyber_risk": "0..0",
+          "labor_shock": "0..0",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "0..0",
+          "hacking": "0..0",
+          "bioweapons": "0..0",
+          "politics_persuasion": "0..0",
+          "robotics_embodied": "0..0",
+          "research_taste": "0..0"
+        }
+      }
+    },
+    {
+      "label": "Ignore and move on",
+      "effects": {
+        "company": {
+          "credits": "0..0",
+          "revenue": "1..2",
+          "valuation": "1..2",
+          "approval": "-3..-2",
+          "security": "-2..-1",
+          "alignment_confidence": "-1..0"
+        },
+        "environment": {
+          "stability": "-1..0",
+          "bio_risk": "0..0",
+          "cyber_risk": "2..3",
+          "labor_shock": "0..0",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "1..2",
+          "hacking": "1..2",
+          "bioweapons": "0..1",
+          "politics_persuasion": "0..1",
+          "robotics_embodied": "0..0",
+          "research_taste": "0..0"
+        }
+      }
+    }
+  ],
+  "year": 2026,
+  "quarter": 2
+}

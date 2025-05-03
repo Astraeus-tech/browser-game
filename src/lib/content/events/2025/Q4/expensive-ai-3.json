@@ -1,0 +1,93 @@
+{
+  "id": "expensive-ai-3",
+  "headline": "Govt Considers Regulation",
+  "description": "In the wake of security lapses at datacenters, regulatory bodies begin to propose new AI safety laws aimed at protecting consumers and ensuring ethical standards. Policymakers grapple with the balance between fostering innovation and implementing necessary safeguards, as industry leaders lobby against overly stringent regulations that could stifle growth. The dialogue around these proposals reveals deep divisions between advocates for safety and those prioritizing technological advancement.\n\nAs discussions unfold, companies ramp up their lobbying efforts, emphasizing the need for flexibility in regulation to keep pace with rapid advancements in AI. The outcome of these deliberations will shape the future landscape of AI governance, with the potential to either enhance safety or hinder innovation depending on the balance struck.",
+  "choices": [
+    {
+      "label": "Lobby for light rules",
+      "effects": {
+        "company": {
+          "credits": "-1..0",
+          "revenue": "0..1",
+          "valuation": "1..2",
+          "approval": "-1..0",
+          "security": "-1..0",
+          "alignment_confidence": "0..0"
+        },
+        "environment": {
+          "stability": "-1..0",
+          "bio_risk": "0..0",
+          "cyber_risk": "1..2",
+          "labor_shock": "0..0",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "1..2",
+          "hacking": "0..1",
+          "bioweapons": "0..0",
+          "politics_persuasion": "1..2",
+          "robotics_embodied": "0..0",
+          "research_taste": "0..1"
+        }
+      }
+    },
+    {
+      "label": "Support strict oversight",
+      "effects": {
+        "company": {
+          "credits": "-1..-1",
+          "revenue": "0..0",
+          "valuation": "-2..-1",
+          "approval": "2..3",
+          "security": "1..2",
+          "alignment_confidence": "1..2"
+        },
+        "environment": {
+          "stability": "1..2",
+          "bio_risk": "0..0",
+          "cyber_risk": "-1..0",
+          "labor_shock": "0..0",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "-1..0",
+          "hacking": "-1..0",
+          "bioweapons": "-1..0",
+          "politics_persuasion": "-1..0",
+          "robotics_embodied": "0..0",
+          "research_taste": "0..0"
+        }
+      }
+    },
+    {
+      "label": "Propose self-regulation",
+      "effects": {
+        "company": {
+          "credits": "-1..0",
+          "revenue": "0..1",
+          "valuation": "0..1",
+          "approval": "0..1",
+          "security": "0..1",
+          "alignment_confidence": "0..1"
+        },
+        "environment": {
+          "stability": "0..0",
+          "bio_risk": "0..0",
+          "cyber_risk": "0..1",
+          "labor_shock": "0..0",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "0..1",
+          "hacking": "0..0",
+          "bioweapons": "0..0",
+          "politics_persuasion": "0..1",
+          "robotics_embodied": "0..0",
+          "research_taste": "0..1"
+        }
+      }
+    }
+  ],
+  "year": 2025,
+  "quarter": 4
+}

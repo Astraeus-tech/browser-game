@@ -1,0 +1,93 @@
+{
+  "id": "coding-automation-1",
+  "headline": "AI Codes Its Own Upgrades",
+  "description": "Q1 2026: Agent-1 pipelines now handle end-to-end code changes—refactoring legacy systems, writing tests, and even proposing feature enhancements. Teams report development cycles halving, but with the speed comes new challenges: subtle bugs slip through automated tests, and oversight bottlenecks emerge as humans struggle to keep pace.\n\nThe industry marvels at this inflection point. Startups form around AI-driven devops, offering turnkey integration. At the same time, veteran engineers voice concerns: are we ceding too much control to black‑box agents? The race is on to balance rapid iteration with reliability, setting the tone for AI's next wave of adoption.",
+  "choices": [
+    {
+      "label": "Open‑source core tooling",
+      "effects": {
+        "company": {
+          "credits": "-2..-1",
+          "revenue": "1..2",
+          "valuation": "1..2",
+          "approval": "0..1",
+          "security": "0..0",
+          "alignment_confidence": "0..1"
+        },
+        "environment": {
+          "stability": "0..0",
+          "bio_risk": "0..0",
+          "cyber_risk": "0..0",
+          "labor_shock": "0..1",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "2..4",
+          "hacking": "0..0",
+          "bioweapons": "0..0",
+          "politics_persuasion": "0..0",
+          "robotics_embodied": "0..0",
+          "research_taste": "0..1"
+        }
+      }
+    },
+    {
+      "label": "License proprietary stack",
+      "effects": {
+        "company": {
+          "credits": "1..2",
+          "revenue": "2..3",
+          "valuation": "2..3",
+          "approval": "-2..-1",
+          "security": "0..0",
+          "alignment_confidence": "0..0"
+        },
+        "environment": {
+          "stability": "0..0",
+          "bio_risk": "0..0",
+          "cyber_risk": "0..1",
+          "labor_shock": "0..1",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "1..2",
+          "hacking": "0..0",
+          "bioweapons": "0..0",
+          "politics_persuasion": "0..1",
+          "robotics_embodied": "0..0",
+          "research_taste": "0..0"
+        }
+      }
+    },
+    {
+      "label": "Mandate code audits",
+      "effects": {
+        "company": {
+          "credits": "-1..-1",
+          "revenue": "0..1",
+          "valuation": "0..1",
+          "approval": "1..3",
+          "security": "1..2",
+          "alignment_confidence": "1..2"
+        },
+        "environment": {
+          "stability": "0..1",
+          "bio_risk": "0..0",
+          "cyber_risk": "-1..0",
+          "labor_shock": "0..0",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "-1..0",
+          "hacking": "-1..0",
+          "bioweapons": "-1..0",
+          "politics_persuasion": "0..0",
+          "robotics_embodied": "0..0",
+          "research_taste": "0..0"
+        }
+      }
+    }
+  ],
+  "year": 2026,
+  "quarter": 1
+}

@@ -1,0 +1,93 @@
+{
+  "id": "productivity-explosion",
+  "headline": "AI-Driven Productivity Boom",
+  "description": "Q3 2026: Enterprise leaders report unprecedented productivity gains—teams accomplish months of work in weeks. Stock indices for AI-focused firms spike as investors pour capital into automation-driven startups.\n\nYet, whistleblowers emerge with stories of 'shadow work': human reviewers forced to fix edge-case failures at all hours. The gloss of hyperproductivity clashes with the reality of overtaxed human oversight teams. Labor advocates push for regulations to cap AI-driven workloads and protect workers' well-being.",
+  "choices": [
+    {
+      "label": "Cap AI workload per human",
+      "effects": {
+        "company": {
+          "credits": "-1..0",
+          "revenue": "0..0",
+          "valuation": "-1..0",
+          "approval": "2..3",
+          "security": "0..0",
+          "alignment_confidence": "1..2"
+        },
+        "environment": {
+          "stability": "0..0",
+          "bio_risk": "0..0",
+          "cyber_risk": "0..0",
+          "labor_shock": "-2..-1",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "-1..0",
+          "hacking": "0..0",
+          "bioweapons": "0..0",
+          "politics_persuasion": "0..0",
+          "robotics_embodied": "-1..0",
+          "research_taste": "0..0"
+        }
+      }
+    },
+    {
+      "label": "Double down on automation",
+      "effects": {
+        "company": {
+          "credits": "-2..-1",
+          "revenue": "2..3",
+          "valuation": "2..3",
+          "approval": "-2..-1",
+          "security": "0..0",
+          "alignment_confidence": "-1..0"
+        },
+        "environment": {
+          "stability": "-1..0",
+          "bio_risk": "0..0",
+          "cyber_risk": "0..1",
+          "labor_shock": "2..3",
+          "climate_load": "1..2"
+        },
+        "ai_capability": {
+          "coding": "3..5",
+          "hacking": "0..1",
+          "bioweapons": "0..1",
+          "politics_persuasion": "0..1",
+          "robotics_embodied": "1..2",
+          "research_taste": "1..2"
+        }
+      }
+    },
+    {
+      "label": "Increase oversight staffing",
+      "effects": {
+        "company": {
+          "credits": "-2..-1",
+          "revenue": "0..1",
+          "valuation": "0..1",
+          "approval": "1..2",
+          "security": "1..1",
+          "alignment_confidence": "1..2"
+        },
+        "environment": {
+          "stability": "0..1",
+          "bio_risk": "0..0",
+          "cyber_risk": "0..0",
+          "labor_shock": "-1..0",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "-1..0",
+          "hacking": "-1..0",
+          "bioweapons": "-1..0",
+          "politics_persuasion": "0..0",
+          "robotics_embodied": "0..0",
+          "research_taste": "0..0"
+        }
+      }
+    }
+  ],
+  "year": 2026,
+  "quarter": 3
+}

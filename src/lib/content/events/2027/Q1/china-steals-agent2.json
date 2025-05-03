@@ -1,0 +1,93 @@
+{
+  "id": "china-steals-agent2",
+  "headline": "China Steals Agent-2 Weights",
+  "description": "Q1 2027: A breach at the Tianwan CDZ yields a full copy of Agent-2's weights. Chinese cyber-operators exfiltrate terabytes of model data before OpenBrain's intrusion detection kicks in. The leak triggers emergency meetings in Washington and Beijing, each side accusing the other of overreach.\n\nAnalysts warn that China's AI research speed could jump by 50%, unsettling the global balance. OpenBrain hastily tightens its network perimeters, while DeepCent celebrates a technical coup. The world watches anxiously as two superpowers vie for advantage in the high-stakes AI arms race.",
+  "choices": [
+    {
+      "label": "Reinforce CDZ security",
+      "effects": {
+        "company": {
+          "credits": "-1..0",
+          "revenue": "0..0",
+          "valuation": "0..0",
+          "approval": "1..2",
+          "security": "2..3",
+          "alignment_confidence": "1..2"
+        },
+        "environment": {
+          "stability": "0..0",
+          "bio_risk": "0..0",
+          "cyber_risk": "-2..-1",
+          "labor_shock": "0..0",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "0..0",
+          "hacking": "-1..0",
+          "bioweapons": "0..0",
+          "politics_persuasion": "0..0",
+          "robotics_embodied": "0..0",
+          "research_taste": "0..0"
+        }
+      }
+    },
+    {
+      "label": "Launch diplomatic protest",
+      "effects": {
+        "company": {
+          "credits": "0..0",
+          "revenue": "0..0",
+          "valuation": "-1..0",
+          "approval": "2..3",
+          "security": "0..0",
+          "alignment_confidence": "0..0"
+        },
+        "environment": {
+          "stability": "1..2",
+          "bio_risk": "0..0",
+          "cyber_risk": "0..0",
+          "labor_shock": "0..0",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "0..0",
+          "hacking": "0..0",
+          "bioweapons": "0..0",
+          "politics_persuasion": "0..0",
+          "robotics_embodied": "0..0",
+          "research_taste": "0..0"
+        }
+      }
+    },
+    {
+      "label": "Counter-hack operation",
+      "effects": {
+        "company": {
+          "credits": "-1..0",
+          "revenue": "1..2",
+          "valuation": "1..2",
+          "approval": "-2..-1",
+          "security": "-1..0",
+          "alignment_confidence": "-1..0"
+        },
+        "environment": {
+          "stability": "-1..0",
+          "bio_risk": "0..0",
+          "cyber_risk": "2..3",
+          "labor_shock": "0..0",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "1..2",
+          "hacking": "2..3",
+          "bioweapons": "0..1",
+          "politics_persuasion": "1..2",
+          "robotics_embodied": "0..0",
+          "research_taste": "1..2"
+        }
+      }
+    }
+  ],
+  "year": 2027,
+  "quarter": 1
+}

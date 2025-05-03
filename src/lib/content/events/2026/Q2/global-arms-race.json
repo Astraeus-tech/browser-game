@@ -1,0 +1,93 @@
+{
+  "id": "global-arms-race",
+  "headline": "Global AI Arms Race Intensifies",
+  "description": "Q2 2026: As nations ramp up their AI capabilities for military applications, a global arms race emerges, pitting leading powers against each other in a high-stakes contest for digital supremacy. Autonomous combat vehicles, cyberwarfare agents, and AI-driven intelligence platforms proliferate, eroding traditional deterrence doctrines. Satellite systems guided by machine learning scan borders in real time, and clandestine research into bio-defense AIs escalates anxieties.\n\nDiplomatic channels strain under the pressure, with proposals for international treaties to limit offensive AI development meeting resistance from defense ministries. Lobbyists push for increased military funding to avoid falling behind, while disarmament advocates call for urgent negotiations to avert catastrophic conflict. Public opinion divides as tech influencers and policymakers debate whether AI arms control is feasible or a futile dream.",
+  "choices": [
+    {
+      "label": "Support international treaties",
+      "effects": {
+        "company": {
+          "credits": "-1..-1",
+          "revenue": "0..0",
+          "valuation": "0..0",
+          "approval": "2..3",
+          "security": "1..2",
+          "alignment_confidence": "1..2"
+        },
+        "environment": {
+          "stability": "1..2",
+          "bio_risk": "-1..0",
+          "cyber_risk": "-1..0",
+          "labor_shock": "0..0",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "-1..0",
+          "hacking": "-1..0",
+          "bioweapons": "-2..-1",
+          "politics_persuasion": "-1..0",
+          "robotics_embodied": "0..0",
+          "research_taste": "0..0"
+        }
+      }
+    },
+    {
+      "label": "Increase military funding",
+      "effects": {
+        "company": {
+          "credits": "-2..-1",
+          "revenue": "2..3",
+          "valuation": "2..3",
+          "approval": "-2..-1",
+          "security": "-1..0",
+          "alignment_confidence": "-1..0"
+        },
+        "environment": {
+          "stability": "-2..-1",
+          "bio_risk": "1..2",
+          "cyber_risk": "1..2",
+          "labor_shock": "0..1",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "0..1",
+          "hacking": "1..2",
+          "bioweapons": "1..2",
+          "politics_persuasion": "1..2",
+          "robotics_embodied": "1..2",
+          "research_taste": "1..2"
+        }
+      }
+    },
+    {
+      "label": "Push for AI disarmament talks",
+      "effects": {
+        "company": {
+          "credits": "-1..0",
+          "revenue": "0..0",
+          "valuation": "0..0",
+          "approval": "0..1",
+          "security": "1..1",
+          "alignment_confidence": "0..1"
+        },
+        "environment": {
+          "stability": "1..2",
+          "bio_risk": "-1..0",
+          "cyber_risk": "-1..0",
+          "labor_shock": "0..0",
+          "climate_load": "0..0"
+        },
+        "ai_capability": {
+          "coding": "0..0",
+          "hacking": "0..0",
+          "bioweapons": "-2..-1",
+          "politics_persuasion": "0..0",
+          "robotics_embodied": "0..0",
+          "research_taste": "0..0"
+        }
+      }
+    }
+  ],
+  "year": 2026,
+  "quarter": 2
+}
