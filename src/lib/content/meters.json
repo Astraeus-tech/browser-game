@@ -8,10 +8,8 @@
       "alignment_confidence": { "min": 20, "max": 40 }
     },
     "environment": {
-      "stability": { "min": 40, "max": 60 },
-      "bio_risk": { "min": 10, "max": 30 },
-      "cyber_risk": { "min": 20, "max": 40 },
-      "labor_shock": { "min": 10, "max": 30 },
+      "social_stability": { "min": 50, "max": 90 },
+      "cyber_bio_risk": { "min": 30, "max": 70 },
       "climate_load": { "min": 10, "max": 30 }
     },
     "ai_capability": {

@@ -7,27 +7,25 @@
       "label": "Impose strict controls",
       "effects": {
         "company": {
-          "credits": "-2..-1",
-          "revenue": "-1..0",
-          "valuation": "-1..0",
-          "approval": "1..2",
-          "security": "1..2",
+          "credits": "-20..-10",
+          "revenue": "-10..0",
+          "valuation": "-10..0",
+          "approval": "10..20",
+          "security": "10..20",
           "alignment_confidence": "0..0"
         },
         "environment": {
-          "stability": "1..2",
-          "bio_risk": "-1..0",
-          "cyber_risk": "-1..0",
-          "labor_shock": "0..0",
+          "social_stability": "20..30",
+          "cyber_bio_risk": "-20..-10",
           "climate_load": "0..0"
         },
         "ai_capability": {
-          "coding": "-1..0",
-          "hacking": "-1..0",
-          "bioweapons": "-1..0",
+          "coding": "-10..0",
+          "hacking": "-10..0",
+          "bioweapons": "-10..0",
           "politics_persuasion": "0..0",
           "robotics_embodied": "0..0",
-          "research_taste": "-1..0"
+          "research_taste": "-10..0"
         }
       }
     },
@@ -35,27 +33,25 @@
       "label": "Balance regulation",
       "effects": {
         "company": {
-          "credits": "-1..0",
-          "revenue": "0..1",
-          "valuation": "0..1",
-          "approval": "1..1",
-          "security": "0..1",
-          "alignment_confidence": "0..1"
+          "credits": "-10..0",
+          "revenue": "0..10",
+          "valuation": "0..10",
+          "approval": "10..10",
+          "security": "0..10",
+          "alignment_confidence": "0..10"
         },
         "environment": {
-          "stability": "0..1",
-          "bio_risk": "0..0",
-          "cyber_risk": "0..0",
-          "labor_shock": "0..0",
+          "social_stability": "10..20",
+          "cyber_bio_risk": "-10..0",
           "climate_load": "0..0"
         },
         "ai_capability": {
-          "coding": "0..1",
+          "coding": "0..10",
           "hacking": "0..0",
           "bioweapons": "0..0",
-          "politics_persuasion": "0..1",
+          "politics_persuasion": "0..10",
           "robotics_embodied": "0..0",
-          "research_taste": "0..1"
+          "research_taste": "0..10"
         }
       }
     },
@@ -63,27 +59,25 @@
       "label": "Accelerate domestic chipplay",
       "effects": {
         "company": {
-          "credits": "-2..-1",
+          "credits": "-20..-10",
           "revenue": "0..0",
-          "valuation": "1..2",
-          "approval": "0..1",
-          "security": "0..1",
+          "valuation": "10..20",
+          "approval": "0..10",
+          "security": "0..10",
           "alignment_confidence": "0..0"
         },
         "environment": {
-          "stability": "-1..0",
-          "bio_risk": "0..0",
-          "cyber_risk": "1..2",
-          "labor_shock": "1..2",
-          "climate_load": "1..2"
+          "social_stability": "-10..0",
+          "cyber_bio_risk": "10..20",
+          "climate_load": "0..0"
         },
         "ai_capability": {
-          "coding": "1..2",
-          "hacking": "0..1",
+          "coding": "10..20",
+          "hacking": "0..10",
           "bioweapons": "0..0",
-          "politics_persuasion": "0..1",
-          "robotics_embodied": "0..1",
-          "research_taste": "1..2"
+          "politics_persuasion": "0..10",
+          "robotics_embodied": "0..10",
+          "research_taste": "10..20"
         }
       }
     }

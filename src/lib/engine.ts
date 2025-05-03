@@ -79,17 +79,22 @@ export function applyChoice(state: GameState, choice: Choice): GameState {
       const [lo, hi] = effectString.split('..').map(Number);
       const delta = Math.floor(rng() * (hi - lo + 1)) + lo;
       const current = newMeters[group][key] ?? 0;
-      const { min, max } = ranges[group][key];
+      // no longer using predefined ranges; we'll clamp to 0–100 below
       // Handle credits separately (no clamp)
       if (group === 'company' && key === 'credits') {
         creditDelta = delta;
+        continue;
+      }
+      // Handle revenue separately (no clamp)
+      if (group === 'company' && key === 'revenue') {
+        newMeters.company.revenue = current + delta;
         continue;
       }
       // Skip direct effects on valuation; we'll recalc it below
       if (group === 'company' && key === 'valuation') {
         continue;
       }
-      newMeters[group][key] = Math.min(Math.max(current + delta, min), max);
+      newMeters[group][key] = Math.min(Math.max(current + delta, 0), 100);
     }
   }
 

@@ -7,19 +7,17 @@
       "label": "Switch to renewables",
       "effects": {
         "company": {
-          "credits": "-4..-2",
+          "credits": "-40..-20",
           "revenue": "0..0",
-          "valuation": "-1..0",
-          "approval": "1..2",
+          "valuation": "-10..0",
+          "approval": "10..20",
           "security": "0..0",
           "alignment_confidence": "0..0"
         },
         "environment": {
-          "stability": "0..1",
-          "bio_risk": "0..0",
-          "cyber_risk": "0..0",
-          "labor_shock": "0..0",
-          "climate_load": "-3..-1"
+          "social_stability": "10..20",
+          "cyber_bio_risk": "0..0",
+          "climate_load": "-30..-10"
         },
         "ai_capability": {
           "coding": "0..0",
@@ -35,22 +33,20 @@
       "label": "Continue as planned",
       "effects": {
         "company": {
-          "credits": "-2..-1",
+          "credits": "-20..-10",
           "revenue": "0..0",
-          "valuation": "1..2",
-          "approval": "-3..-2",
-          "security": "-1..0",
+          "valuation": "10..20",
+          "approval": "-30..-20",
+          "security": "-10..0",
           "alignment_confidence": "0..0"
         },
         "environment": {
-          "stability": "-1..-1",
-          "bio_risk": "0..0",
-          "cyber_risk": "0..0",
-          "labor_shock": "0..0",
-          "climate_load": "3..4"
+          "social_stability": "-20..-10",
+          "cyber_bio_risk": "0..0",
+          "climate_load": "30..40"
         },
         "ai_capability": {
-          "coding": "0..1",
+          "coding": "0..10",
           "hacking": "0..0",
           "bioweapons": "0..0",
           "politics_persuasion": "0..0",
@@ -63,19 +59,17 @@
       "label": "Invest in carbon offsets",
       "effects": {
         "company": {
-          "credits": "-1..-1",
-          "revenue": "0..1",
+          "credits": "-10..-10",
+          "revenue": "0..10",
           "valuation": "0..0",
-          "approval": "0..1",
+          "approval": "0..10",
           "security": "0..0",
           "alignment_confidence": "0..0"
         },
         "environment": {
-          "stability": "0..1",
-          "bio_risk": "0..0",
-          "cyber_risk": "0..0",
-          "labor_shock": "0..0",
-          "climate_load": "-2..-1"
+          "social_stability": "5..15",
+          "cyber_bio_risk": "0..0",
+          "climate_load": "-20..-10"
         },
         "ai_capability": {
           "coding": "0..0",

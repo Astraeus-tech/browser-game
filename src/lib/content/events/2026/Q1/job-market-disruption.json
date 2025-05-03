@@ -7,25 +7,23 @@
       "label": "Fund reskilling initiatives",
       "effects": {
         "company": {
-          "credits": "-3..-2",
+          "credits": "-30..-20",
           "revenue": "0..0",
-          "valuation": "-1..0",
-          "approval": "2..4",
+          "valuation": "-10..0",
+          "approval": "20..40",
           "security": "0..0",
-          "alignment_confidence": "0..1"
+          "alignment_confidence": "0..10"
         },
         "environment": {
-          "stability": "0..0",
-          "bio_risk": "0..0",
-          "cyber_risk": "0..0",
-          "labor_shock": "-2..-1",
+          "social_stability": "20..30",
+          "cyber_bio_risk": "0..0",
           "climate_load": "0..0"
         },
         "ai_capability": {
-          "coding": "-1..0",
+          "coding": "-10..0",
           "hacking": "0..0",
           "bioweapons": "0..0",
-          "politics_persuasion": "0..1",
+          "politics_persuasion": "0..10",
           "robotics_embodied": "0..0",
           "research_taste": "0..0"
         }
@@ -35,27 +33,25 @@
       "label": "Encourage AI adoption",
       "effects": {
         "company": {
-          "credits": "-2..-1",
-          "revenue": "1..2",
-          "valuation": "1..2",
-          "approval": "-2..-1",
+          "credits": "-20..-10",
+          "revenue": "10..20",
+          "valuation": "10..20",
+          "approval": "-20..-10",
           "security": "0..0",
           "alignment_confidence": "0..0"
         },
         "environment": {
-          "stability": "-1..0",
-          "bio_risk": "0..0",
-          "cyber_risk": "0..0",
-          "labor_shock": "2..3",
+          "social_stability": "-20..-10",
+          "cyber_bio_risk": "0..0",
           "climate_load": "0..0"
         },
         "ai_capability": {
-          "coding": "1..2",
+          "coding": "10..20",
           "hacking": "0..0",
           "bioweapons": "0..0",
-          "politics_persuasion": "0..1",
-          "robotics_embodied": "0..1",
-          "research_taste": "0..1"
+          "politics_persuasion": "0..10",
+          "robotics_embodied": "0..10",
+          "research_taste": "0..10"
         }
       }
     },
@@ -63,26 +59,24 @@
       "label": "Impose hiring quotas",
       "effects": {
         "company": {
-          "credits": "-1..-1",
-          "revenue": "-1..0",
-          "valuation": "-1..0",
-          "approval": "1..2",
+          "credits": "-10..-10",
+          "revenue": "-10..0",
+          "valuation": "-10..0",
+          "approval": "10..20",
           "security": "0..0",
-          "alignment_confidence": "0..1"
+          "alignment_confidence": "0..10"
         },
         "environment": {
-          "stability": "0..0",
-          "bio_risk": "0..0",
-          "cyber_risk": "0..0",
-          "labor_shock": "-1..0",
+          "social_stability": "10..20",
+          "cyber_bio_risk": "0..0",
           "climate_load": "0..0"
         },
         "ai_capability": {
-          "coding": "-1..0",
+          "coding": "-10..0",
           "hacking": "0..0",
           "bioweapons": "0..0",
           "politics_persuasion": "0..0",
-          "robotics_embodied": "-1..0",
+          "robotics_embodied": "-10..0",
           "research_taste": "0..0"
         }
       }

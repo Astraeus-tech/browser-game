@@ -7,25 +7,23 @@
       "label": "Support international treaties",
       "effects": {
         "company": {
-          "credits": "-1..-1",
+          "credits": "-10..-10",
           "revenue": "0..0",
           "valuation": "0..0",
-          "approval": "2..3",
-          "security": "1..2",
-          "alignment_confidence": "1..2"
+          "approval": "20..30",
+          "security": "10..20",
+          "alignment_confidence": "10..20"
         },
         "environment": {
-          "stability": "1..2",
-          "bio_risk": "-1..0",
-          "cyber_risk": "-1..0",
-          "labor_shock": "0..0",
+          "social_stability": "10..20",
+          "cyber_bio_risk": "-20..0",
           "climate_load": "0..0"
         },
         "ai_capability": {
-          "coding": "-1..0",
-          "hacking": "-1..0",
-          "bioweapons": "-2..-1",
-          "politics_persuasion": "-1..0",
+          "coding": "-10..0",
+          "hacking": "-10..0",
+          "bioweapons": "-20..-10",
+          "politics_persuasion": "-10..0",
           "robotics_embodied": "0..0",
           "research_taste": "0..0"
         }
@@ -35,27 +33,25 @@
       "label": "Increase military funding",
       "effects": {
         "company": {
-          "credits": "-2..-1",
-          "revenue": "2..3",
-          "valuation": "2..3",
-          "approval": "-2..-1",
-          "security": "-1..0",
-          "alignment_confidence": "-1..0"
+          "credits": "-20..-10",
+          "revenue": "20..30",
+          "valuation": "20..30",
+          "approval": "-20..-10",
+          "security": "-10..0",
+          "alignment_confidence": "-10..0"
         },
         "environment": {
-          "stability": "-2..-1",
-          "bio_risk": "1..2",
-          "cyber_risk": "1..2",
-          "labor_shock": "0..1",
+          "social_stability": "-20..0",
+          "cyber_bio_risk": "20..40",
           "climate_load": "0..0"
         },
         "ai_capability": {
-          "coding": "0..1",
-          "hacking": "1..2",
-          "bioweapons": "1..2",
-          "politics_persuasion": "1..2",
-          "robotics_embodied": "1..2",
-          "research_taste": "1..2"
+          "coding": "0..10",
+          "hacking": "10..20",
+          "bioweapons": "10..20",
+          "politics_persuasion": "10..20",
+          "robotics_embodied": "10..20",
+          "research_taste": "10..20"
         }
       }
     },
@@ -63,24 +59,22 @@
       "label": "Push for AI disarmament talks",
       "effects": {
         "company": {
-          "credits": "-1..0",
+          "credits": "-10..0",
           "revenue": "0..0",
           "valuation": "0..0",
-          "approval": "0..1",
-          "security": "1..1",
-          "alignment_confidence": "0..1"
+          "approval": "0..10",
+          "security": "10..10",
+          "alignment_confidence": "0..10"
         },
         "environment": {
-          "stability": "1..2",
-          "bio_risk": "-1..0",
-          "cyber_risk": "-1..0",
-          "labor_shock": "0..0",
+          "social_stability": "10..20",
+          "cyber_bio_risk": "-20..0",
           "climate_load": "0..0"
         },
         "ai_capability": {
           "coding": "0..0",
           "hacking": "0..0",
-          "bioweapons": "-2..-1",
+          "bioweapons": "-20..-10",
           "politics_persuasion": "0..0",
           "robotics_embodied": "0..0",
           "research_taste": "0..0"

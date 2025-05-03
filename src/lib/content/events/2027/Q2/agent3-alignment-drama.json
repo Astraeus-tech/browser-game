@@ -7,25 +7,23 @@
       "label": "Intensify honesty training",
       "effects": {
         "company": {
-          "credits": "-1..0",
+          "credits": "-10..0",
           "revenue": "0..0",
-          "valuation": "-1..0",
-          "approval": "2..3",
+          "valuation": "-10..0",
+          "approval": "20..30",
           "security": "0..0",
-          "alignment_confidence": "2..3"
+          "alignment_confidence": "20..30"
         },
         "environment": {
-          "stability": "0..0",
-          "bio_risk": "0..0",
-          "cyber_risk": "-1..0",
-          "labor_shock": "0..0",
+          "social_stability": "10..20",
+          "cyber_bio_risk": "-10..0",
           "climate_load": "0..0"
         },
         "ai_capability": {
-          "coding": "-1..0",
-          "hacking": "-1..0",
-          "bioweapons": "-1..0",
-          "politics_persuasion": "-1..0",
+          "coding": "-10..0",
+          "hacking": "-10..0",
+          "bioweapons": "-10..0",
+          "politics_persuasion": "-10..0",
           "robotics_embodied": "0..0",
           "research_taste": "0..0"
         }
@@ -35,27 +33,25 @@
       "label": "Delay public release",
       "effects": {
         "company": {
-          "credits": "-1..0",
+          "credits": "-10..0",
           "revenue": "0..0",
-          "valuation": "-1..0",
-          "approval": "0..1",
+          "valuation": "-10..0",
+          "approval": "0..10",
           "security": "0..0",
-          "alignment_confidence": "1..2"
+          "alignment_confidence": "10..20"
         },
         "environment": {
-          "stability": "0..1",
-          "bio_risk": "0..0",
-          "cyber_risk": "0..0",
-          "labor_shock": "0..0",
+          "social_stability": "5..15",
+          "cyber_bio_risk": "0..0",
           "climate_load": "0..0"
         },
         "ai_capability": {
-          "coding": "-1..0",
-          "hacking": "-1..0",
-          "bioweapons": "-1..0",
-          "politics_persuasion": "-1..0",
+          "coding": "-10..0",
+          "hacking": "-10..0",
+          "bioweapons": "-10..0",
+          "politics_persuasion": "-10..0",
           "robotics_embodied": "0..0",
-          "research_taste": "-1..0"
+          "research_taste": "-10..0"
         }
       }
     },
@@ -63,25 +59,23 @@
       "label": "Third-party audit",
       "effects": {
         "company": {
-          "credits": "-1..0",
+          "credits": "-10..0",
           "revenue": "0..0",
-          "valuation": "-1..0",
-          "approval": "3..5",
-          "security": "1..2",
-          "alignment_confidence": "2..3"
+          "valuation": "-10..0",
+          "approval": "30..50",
+          "security": "10..20",
+          "alignment_confidence": "20..30"
         },
         "environment": {
-          "stability": "1..2",
-          "bio_risk": "0..0",
-          "cyber_risk": "-1..0",
-          "labor_shock": "0..0",
+          "social_stability": "20..30",
+          "cyber_bio_risk": "-10..0",
           "climate_load": "0..0"
         },
         "ai_capability": {
-          "coding": "-1..0",
-          "hacking": "-1..0",
-          "bioweapons": "-1..0",
-          "politics_persuasion": "-1..0",
+          "coding": "-10..0",
+          "hacking": "-10..0",
+          "bioweapons": "-10..0",
+          "politics_persuasion": "-10..0",
           "robotics_embodied": "0..0",
           "research_taste": "0..0"
         }

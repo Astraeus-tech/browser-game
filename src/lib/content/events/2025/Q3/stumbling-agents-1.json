@@ -7,25 +7,23 @@
       "label": "Roll out to consumers",
       "effects": {
         "company": {
-          "credits": "-5..-3",
-          "revenue": "1..3",
-          "valuation": "0..1",
-          "approval": "-2..-1",
+          "credits": "-30..-20",
+          "revenue": "40..80",
+          "valuation": "0..10",
+          "approval": "-20..-10",
           "security": "0..0",
           "alignment_confidence": "0..0"
         },
         "environment": {
-          "stability": "-1..0",
-          "bio_risk": "0..0",
-          "cyber_risk": "0..0",
-          "labor_shock": "1..2",
-          "climate_load": "0..1"
+          "social_stability": "10..30",
+          "cyber_bio_risk": "10..30",
+          "climate_load": "0..0"
         },
         "ai_capability": {
-          "coding": "0..1",
+          "coding": "0..10",
           "hacking": "0..0",
           "bioweapons": "0..0",
-          "politics_persuasion": "0..1",
+          "politics_persuasion": "0..10",
           "robotics_embodied": "0..0",
           "research_taste": "0..0"
         }
@@ -35,18 +33,16 @@
       "label": "Restrict to enterprise",
       "effects": {
         "company": {
-          "credits": "-2..-1",
-          "revenue": "0..1",
-          "valuation": "0..1",
-          "approval": "1..2",
-          "security": "0..1",
+          "credits": "-10..-5",
+          "revenue": "10..30",
+          "valuation": "5..15",
+          "approval": "10..20",
+          "security": "0..10",
           "alignment_confidence": "0..0"
         },
         "environment": {
-          "stability": "0..1",
-          "bio_risk": "0..0",
-          "cyber_risk": "0..0",
-          "labor_shock": "0..1",
+          "social_stability": "5..15",
+          "cyber_bio_risk": "-10..0",
           "climate_load": "0..0"
         },
         "ai_capability": {
@@ -63,25 +59,23 @@
       "label": "Enhance user training",
       "effects": {
         "company": {
-          "credits": "-1..0",
-          "revenue": "1..2",
-          "valuation": "0..1",
-          "approval": "0..1",
+          "credits": "-30..-10",
+          "revenue": "10..20",
+          "valuation": "0..10",
+          "approval": "0..10",
           "security": "0..0",
-          "alignment_confidence": "1..2"
+          "alignment_confidence": "10..20"
         },
         "environment": {
-          "stability": "0..0",
-          "bio_risk": "0..0",
-          "cyber_risk": "0..0",
-          "labor_shock": "0..0",
+          "social_stability": "10..20",
+          "cyber_bio_risk": "-10..0",
           "climate_load": "0..0"
         },
         "ai_capability": {
-          "coding": "0..1",
+          "coding": "0..10",
           "hacking": "0..0",
           "bioweapons": "0..0",
-          "politics_persuasion": "0..1",
+          "politics_persuasion": "0..10",
           "robotics_embodied": "0..0",
           "research_taste": "0..0"
         }

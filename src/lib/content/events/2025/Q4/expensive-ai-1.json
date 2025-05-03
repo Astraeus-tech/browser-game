@@ -15,11 +15,9 @@
           "alignment_confidence": "0..0"
         },
         "environment": {
-          "stability": "-1..0",
-          "bio_risk": "0..0",
-          "cyber_risk": "0..0",
-          "labor_shock": "0..0",
-          "climate_load": "3..5"
+          "social_stability": "-20..-10",
+          "cyber_bio_risk": "0..0",
+          "climate_load": "30..50"
         },
         "ai_capability": {
           "coding": "0..0",
@@ -43,14 +41,12 @@
           "alignment_confidence": "0..0"
         },
         "environment": {
-          "stability": "0..0",
-          "bio_risk": "0..0",
-          "cyber_risk": "0..0",
-          "labor_shock": "0..0",
-          "climate_load": "-1..0"
+          "social_stability": "10..20",
+          "cyber_bio_risk": "-10..0",
+          "climate_load": "-10..0"
         },
         "ai_capability": {
-          "coding": "1..2",
+          "coding": "10..20",
           "hacking": "0..0",
           "bioweapons": "0..0",
           "politics_persuasion": "0..0",
@@ -71,11 +67,9 @@
           "alignment_confidence": "0..0"
         },
         "environment": {
-          "stability": "0..1",
-          "bio_risk": "0..0",
-          "cyber_risk": "0..0",
-          "labor_shock": "0..0",
-          "climate_load": "2..3"
+          "social_stability": "10..20",
+          "cyber_bio_risk": "0..0",
+          "climate_load": "20..30"
         },
         "ai_capability": {
           "coding": "0..0",

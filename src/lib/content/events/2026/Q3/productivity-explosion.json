@@ -7,26 +7,24 @@
       "label": "Cap AI workload per human",
       "effects": {
         "company": {
-          "credits": "-1..0",
+          "credits": "-10..0",
           "revenue": "0..0",
-          "valuation": "-1..0",
-          "approval": "2..3",
+          "valuation": "-10..0",
+          "approval": "20..30",
           "security": "0..0",
-          "alignment_confidence": "1..2"
+          "alignment_confidence": "10..20"
         },
         "environment": {
-          "stability": "0..0",
-          "bio_risk": "0..0",
-          "cyber_risk": "0..0",
-          "labor_shock": "-2..-1",
+          "social_stability": "10..20",
+          "cyber_bio_risk": "0..0",
           "climate_load": "0..0"
         },
         "ai_capability": {
-          "coding": "-1..0",
+          "coding": "-10..0",
           "hacking": "0..0",
           "bioweapons": "0..0",
           "politics_persuasion": "0..0",
-          "robotics_embodied": "-1..0",
+          "robotics_embodied": "-10..0",
           "research_taste": "0..0"
         }
       }
@@ -35,27 +33,25 @@
       "label": "Double down on automation",
       "effects": {
         "company": {
-          "credits": "-2..-1",
-          "revenue": "2..3",
-          "valuation": "2..3",
-          "approval": "-2..-1",
+          "credits": "-20..-10",
+          "revenue": "20..30",
+          "valuation": "20..30",
+          "approval": "-20..-10",
           "security": "0..0",
-          "alignment_confidence": "-1..0"
+          "alignment_confidence": "-10..0"
         },
         "environment": {
-          "stability": "-1..0",
-          "bio_risk": "0..0",
-          "cyber_risk": "0..1",
-          "labor_shock": "2..3",
-          "climate_load": "1..2"
+          "social_stability": "-10..-30",
+          "cyber_bio_risk": "0..0",
+          "climate_load": "10..20"
         },
         "ai_capability": {
-          "coding": "3..5",
-          "hacking": "0..1",
-          "bioweapons": "0..1",
-          "politics_persuasion": "0..1",
-          "robotics_embodied": "1..2",
-          "research_taste": "1..2"
+          "coding": "30..50",
+          "hacking": "0..10",
+          "bioweapons": "0..10",
+          "politics_persuasion": "0..10",
+          "robotics_embodied": "10..20",
+          "research_taste": "10..20"
         }
       }
     },
@@ -63,24 +59,22 @@
       "label": "Increase oversight staffing",
       "effects": {
         "company": {
-          "credits": "-2..-1",
-          "revenue": "0..1",
-          "valuation": "0..1",
-          "approval": "1..2",
-          "security": "1..1",
-          "alignment_confidence": "1..2"
+          "credits": "-20..-10",
+          "revenue": "0..10",
+          "valuation": "0..10",
+          "approval": "10..20",
+          "security": "10..10",
+          "alignment_confidence": "10..20"
         },
         "environment": {
-          "stability": "0..1",
-          "bio_risk": "0..0",
-          "cyber_risk": "0..0",
-          "labor_shock": "-1..0",
+          "social_stability": "5..15",
+          "cyber_bio_risk": "0..0",
           "climate_load": "0..0"
         },
         "ai_capability": {
-          "coding": "-1..0",
-          "hacking": "-1..0",
-          "bioweapons": "-1..0",
+          "coding": "-10..0",
+          "hacking": "-10..0",
+          "bioweapons": "-10..0",
           "politics_persuasion": "0..0",
           "robotics_embodied": "0..0",
           "research_taste": "0..0"
