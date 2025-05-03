@@ -64,6 +64,11 @@ export function applyChoice(state: GameState, choice: Choice): GameState {
     ai_capability: { ...state.meters.ai_capability }
   };
 
+  // Capture last round's credits and revenue, initialize creditDelta
+  const oldCredits = state.meters.company.credits;
+  const oldRevenue = state.meters.company.revenue;
+  let creditDelta = 0;
+
   // 1) apply and clamp
   for (const group of (Object.keys(choice.effects) as MeterGroup[])) {
     const groupEffects = choice.effects[group];
@@ -75,9 +80,26 @@ export function applyChoice(state: GameState, choice: Choice): GameState {
       const delta = Math.floor(rng() * (hi - lo + 1)) + lo;
       const current = newMeters[group][key] ?? 0;
       const { min, max } = ranges[group][key];
+      // Handle credits separately (no clamp)
+      if (group === 'company' && key === 'credits') {
+        creditDelta = delta;
+        continue;
+      }
+      // Skip direct effects on valuation; we'll recalc it below
+      if (group === 'company' && key === 'valuation') {
+        continue;
+      }
       newMeters[group][key] = Math.min(Math.max(current + delta, min), max);
     }
   }
+
+  // After applying all deltas, accumulate credits without clamp
+  newMeters.company.credits = oldCredits + (oldRevenue / 4) + creditDelta;
+  // Recalculate valuation: average AI capability * current annual revenue
+  const aiValues = Object.values(newMeters.ai_capability);
+  const aiAvg = aiValues.reduce((sum, v) => sum + v, 0) / aiValues.length;
+  const revenueForVal = newMeters.company.revenue;
+  newMeters.company.valuation = aiAvg * revenueForVal;
 
   // 2) check for hard losses immediately (before advancing time)
   const lossEnding = checkEnding(newMeters, state.year, state.quarter);

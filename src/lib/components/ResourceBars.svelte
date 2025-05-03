@@ -197,7 +197,7 @@
     {#each meterGroups.slice(0, 2) as group}
       {#each group.meters.filter(m => m.showBar) as m}
         {@const value = group.key === 'company' ? company[m.key] : environment[m.key]}
-        <div class="flex items-center gap-1 group">
+        <div class="flex items-center gap-2 group">
           <div class="w-20 flex items-center gap-1">
             <span class="opacity-70 group-hover:opacity-100">{m.icon}</span>
             <span class="text-gray-400">{m.label}</span>
