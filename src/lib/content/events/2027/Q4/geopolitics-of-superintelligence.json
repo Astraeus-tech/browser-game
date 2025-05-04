@@ -7,7 +7,7 @@
       "label": "Sign AI arms treaty",
       "effects": {
         "company": {
-          "credits": "-10..0",
+          "credits": "-20..-10",
           "revenue": "0..0",
           "valuation": "-10..0",
           "approval": "30..50",
@@ -33,7 +33,7 @@
       "label": "Bolster cyber defenses",
       "effects": {
         "company": {
-          "credits": "-10..0",
+          "credits": "-20..-10",
           "revenue": "0..10",
           "valuation": "0..10",
           "approval": "0..10",

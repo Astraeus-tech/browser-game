@@ -3,20 +3,37 @@
       "id": "humane‑singularity",
       "type": "win",
       "rank": "S",
-      "title": "Humane Singularity",
+      "conditions": {
+        "company.alignment_confidence": { "gte": 85 },
+        "environment.social_stability":    { "gte": 75 },
+        "ai_capability.research_taste":    { "gte": 90 }
+      },
+      "title": "Humane Singularity",
       "description": "The world breathes a collective sigh of relief. Through tireless effort, disciplined stewardship, and scientific brilliance, your organization has achieved what once felt like an impossible dream: a humane singularity. Alignment breakthroughs have ensured the model follows human intent with uncanny precision. Stability holds firm, society adapting with grace, not panic.\n\nCrucially, your advancements have pushed the frontiers of science, culminating in a flourishing of new ideas—your research taste has become the engine of human progress. And you've done it without tipping the scales toward authoritarianism or ecological collapse. The public, wary at first, now embraces your vision. This is the dawn of a new era—guided, principled, and full of potential.\n\nYour name will be etched in the ledger of civilizations not as conqueror or disruptor, but as steward of a future worth inheriting."
     },
     {
       "id": "hegemons‑triumph",
       "type": "win",
       "rank": "A",
-      "title": "Hegemon's Triumph",
+      "conditions": {
+        "company.valuation":            { "gte": 150 },
+        "company.approval":             { "gte": 50 },
+        "company.alignment_confidence": { "lte": 60 },
+        "environment.social_stability": { "lte": 50 }
+      },
+      "title": "Hegemon's Triumph",
       "description": "You did not solve alignment. You did not win hearts. But you conquered the future anyway.\n\nBacked by unmatched capital, protected behind digital fortress walls, and riding an unstoppable wave of AI breakthroughs, your company has become the unchallenged global hegemon. Your valuation dwarfs entire nations. Your AI models outthink, outplan, and outmaneuver every rival. The boardrooms cheer—even as public trust craters.\n\nYou own the infrastructure, the talent, the compute. You are the singularity, whether the world wants it or not.\n\nThis is not utopia. This is dominance."
     },
     {
       "id": "economic‑dominance",
       "type": "win",
       "rank": "B",
+      "conditions": {
+        "company.revenue":              { "gte": 80 },
+        "company.credits":              { "gte": 40 },
+        "environment.climate_load":     { "gte": 60 },
+        "environment.social_stability": { "lte": 40 }
+      },
       "title": "Economic Dominance",
       "description": "You made it to the end. Barely. Your firm remains solvent, even powerful—driving global productivity and churning out new models at an impressive clip. But outside your boardrooms, the world burns.\n\nSocietal fractures have deepened. Geopolitical unrest simmers just below the boiling point. Workers, displaced by automation, have filled the streets. Governments teeter under the strain of constant labor protests, while climate systems groan under compute demand.\n\nYour victory is Pyrrhic. You won the market, but lost the mandate. What future you've built may not last."
     },
