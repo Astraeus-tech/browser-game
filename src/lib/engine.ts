@@ -53,6 +53,18 @@ function checkEnding(meters: any, year: number, quarter: number): { id: string }
   return null;
 }
 
+// Centralize credit scaling logic
+export function getCreditScaleFactor(year: number, quarter: number): number {
+  const deltaQuarters = (year - 2025) * 4 + (quarter - 3);
+  return Math.pow(1.5, deltaQuarters);
+}
+
+export function scaleCreditRange(effect: string, year: number, quarter: number): [number, number] {
+  const [lo, hi] = effect.split('..').map(Number);
+  const scale = getCreditScaleFactor(year, quarter);
+  return [Math.floor(lo * scale), Math.ceil(hi * scale)];
+}
+
 export function applyChoice(state: GameState, choice: Choice): GameState {
   const { rng, nextSeed } = makeRng(state);
   const ranges = meterRanges as MeterRanges;
@@ -77,7 +89,14 @@ export function applyChoice(state: GameState, choice: Choice): GameState {
       const effectString = choice.effects[group]?.[key];
       if (!effectString) continue;
       const [lo, hi] = effectString.split('..').map(Number);
-      const delta = Math.floor(rng() * (hi - lo + 1)) + lo;
+      // Ramping company credits & revenue impacts by quarter progression (1.5^n multiplier)
+      // Base JSON files should remain unchanged — scaling applied at runtime only
+      let scaledLo = lo;
+      let scaledHi = hi;
+      if (group === 'company' && (key === 'credits' || key === 'revenue')) {
+        [scaledLo, scaledHi] = scaleCreditRange(effectString, state.year, state.quarter);
+      }
+      const delta = Math.floor(rng() * (scaledHi - scaledLo + 1)) + scaledLo;
       const current = newMeters[group][key] ?? 0;
       // no longer using predefined ranges; we'll clamp to 0–100 below
       // Handle credits separately (no clamp)

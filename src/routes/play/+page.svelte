@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
   import { game, defaultState } from '$lib/stores/game';
   import type { Event } from '$lib/types';
-  import { applyChoice } from '$lib/engine';
+  import { applyChoice, scaleCreditRange } from '$lib/engine';
   import { makeRng } from '$lib/rng';
   import ResourceBars from '$lib/components/ResourceBars.svelte';
   import events from '$lib/content/events';
@@ -34,7 +34,28 @@
       const idx = Math.floor(rng() * currentEvents.length);
       selectedEvent = currentEvents[idx];
       console.log('SELECTED EVENT →', selectedEvent.id);
-      game.update(s => ({ ...s, seed: nextSeed }));
+      // Check affordability on the new seed state before continuing
+      const currentState = get(game);
+      const updatedState = { ...currentState, seed: nextSeed };
+      const credits = updatedState.meters.company.credits;
+      const hasAffordable = selectedEvent.choices.some(c =>
+        credits >= getChoiceCost(c.effects.company?.credits)
+      );
+      if (!hasAffordable) {
+        // Trigger out-of-credits loss ending
+        game.set({
+          ...updatedState,
+          gameOver: {
+            id: 'out_of_credits',
+            type: 'loss',
+            title: 'Acquired at the Brink',
+            description: `Your runaway burn rate has drained every credit. As the final operations stall, Macrosoft swooped in with a surprise rescue acquisition—stripping you of the CEO title and subsuming your vision into their empire. Soon, your pioneering work will be relegated to corporate archives, another forgotten footnote in tech history.`
+          }
+        });
+        return;
+      }
+      // Otherwise just update seed and continue
+      game.set(updatedState);
     } else {
       selectedEvent = null;
       console.warn('No events matched the current state.');
@@ -43,19 +64,21 @@
 
   // Helper to format a credit cost effect string (e.g. "-5..-3" → "-$5M credits")
   function formatCreditCost(effect: string): string {
-    const [lo] = effect.split('..').map(Number);
-    const abs = Math.abs(lo);
+    const { year, quarter } = get(game);
+    const [scaledLo] = scaleCreditRange(effect, year, quarter);
+    const absVal = Math.abs(scaledLo);
     // use M for millions, B for billions
-    const unit = abs >= 1000 ? `${(abs/1000).toFixed(1)}B` : `${abs}M`;
-    const sign = lo < 0 ? '-' : '';
+    const unit = absVal >= 1000 ? `${(absVal / 1000).toFixed(1)}B` : `${absVal}M`;
+    const sign = scaledLo < 0 ? '-' : '';
     return `${sign}$${unit} credits`;
   }
 
   // Helper to compute numeric credit cost (e.g. "-5..-3" → 5)
   function getChoiceCost(effect?: string): number {
     if (!effect) return 0;
-    const [lo] = effect.split('..').map(Number);
-    return lo < 0 ? Math.abs(lo) : 0;
+    const { year, quarter } = get(game);
+    const [scaledLo] = scaleCreditRange(effect, year, quarter);
+    return scaledLo < 0 ? Math.abs(scaledLo) : 0;
   }
 
   function choose(label: string) {
@@ -85,9 +108,26 @@
 {#if browser}
 <div class="flex items-center justify-center bg-black min-h-screen font-mono text-green-300">
   <div class="w-full max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl 2xl:max-w-3xl bg-gray-900 border-4 border-gray-700 rounded-lg shadow-lg flex flex-col overflow-hidden">
-    <header class="flex items-center justify-between bg-gray-800 px-4 py-2 border-b border-gray-700">
+    <header class="flex items-center bg-gray-800 px-4 py-2 border-b border-gray-700">
       <h1 class="text-lg font-bold">Singularity Run</h1>
-      <div class="text-xs">Year: {$game.year} – Q{$game.quarter}</div>
+      {#if $game.gameOver === 'playing' && $game.log.length > 0}
+        <button
+          on:click={startOver}
+          class="ml-4 text-xs bg-gray-600 hover:bg-gray-500 text-white px-2 py-1 rounded"
+        >
+          Abandon Run
+        </button>
+      {/if}
+      {#if $game.gameOver && $game.gameOver !== 'playing'}
+        {#if $game.gameOver.type === 'win'}
+          <span class="text-green-400 font-bold ml-4">Victory!</span>
+        {:else if $game.gameOver.type === 'draw'}
+          <span class="text-yellow-400 font-bold ml-4">Draw</span>
+        {:else}
+          <span class="text-red-400 font-bold ml-4">Defeat</span>
+        {/if}
+      {/if}
+      <div class="text-xs ml-auto">Year: {$game.year} – Q{$game.quarter}</div>
     </header>
     <div class="px-4 py-2 border-b border-gray-700">
       <ResourceBars
