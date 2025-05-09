@@ -228,6 +228,7 @@
   </div>
 
   <!-- AI Capabilities -->
+  <div class="mt-4 mb-1 text-gray-400 font-semibold">AI Capabilities</div>
   <div class="grid grid-cols-2 gap-x-8 gap-y-1">
     {#each meterGroups[2].meters as m}
       {@const value = ai_capability[m.key]}
