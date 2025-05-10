@@ -56,7 +56,7 @@
       "id": "bio‑catastrophe",
       "type": "loss",
       "conditions": {
-        "environment.cyber_bio_risk": { "gte": 80 }
+        "environment.cyber_bio_risk": { "gte": 85 }
       },
       "title": "Catastrophic Bio-Release",
       "description": "Despite warnings, red flags, and sleepless nights in your bio-risk team, the worst came to pass. A seemingly minor oversight, a jailbreak prompt, or a rogue researcher—whatever the cause, the model generated something it never should have. And someone acted on it.\n\nPathogens swept through nations with terrifying speed. Borders closed. Economies collapsed. Civilians panicked.\n\nYou stood at the edge of a miracle. You fell into a grave. And this time, humanity may not climb back out."
@@ -83,7 +83,7 @@
       "id": "climate-collapse",
       "type": "loss",
       "conditions": {
-        "environment.climate_load": { "gte": 80 }
+        "environment.climate_load": { "gte": 85 }
       },
       "title": "Climate Catastrophe",
       "description": "Runaway climate impacts have triggered catastrophic storms, drought, and food shortages. The planet buckles under the strain—civilization teeters on the brink."
