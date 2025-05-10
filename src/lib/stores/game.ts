@@ -25,14 +25,21 @@ function initMeters(ranges: MeterRanges): Meters {
   return out;
 }
 
-export const defaultState: GameState = {
-  year: 2025,
-  quarter: 3,
-  meters: initMeters(meterRanges as MeterRanges),
-  log: [],
-  seed: Date.now(),
-  gameOver: 'playing'
-};
+// Convert from constant to function to get fresh values each time
+export function getDefaultState(): GameState {
+  return {
+    year: 2025,
+    quarter: 3,
+    meters: initMeters(meterRanges as MeterRanges),
+    log: [],
+    seed: Date.now(),
+    gameOver: 'playing',
+    currentEventId: undefined
+  };
+}
+
+// Keep a reference for initial load
+const defaultState = getDefaultState();
 
 function createGameStore() {
   let initial: GameState = defaultState;

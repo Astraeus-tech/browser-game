@@ -46,6 +46,7 @@ export interface GameState {
   log: string[];
   seed: number;
   gameOver: 'playing' | Ending | null;
+  currentEventId?: string;
 }
 export type Ending = {
   id: string;
