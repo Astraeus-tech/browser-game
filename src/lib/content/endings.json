@@ -17,19 +17,37 @@
       "rank": "A",
       "conditions": {
         "company.valuation":            { "gte": 100000 },
-        "company.approval":             { "gte": 50 },
+        "company.approval":             { "lte": 75 },
+        "company.security":             { "gte": 80 },
         "company.alignment_confidence": { "lte": 60 }
       },
       "title": "Hegemon's Triumph",
       "description": "You did not solve alignment. You did not win hearts. But you conquered the future anyway.\n\nBacked by unmatched capital, protected behind digital fortress walls, and riding an unstoppable wave of AI breakthroughs, your company has become the unchallenged global hegemon. Your valuation dwarfs entire nations. Your AI models outthink, outplan, and outmaneuver every rival. The boardrooms cheer—even as public trust craters.\n\nYou own the infrastructure, the talent, the compute. You are the singularity, whether the world wants it or not.\n\nThis is not utopia. This is dominance."
     },
     {
+      "id": "beloved‑company",
+      "type": "win",
+      "rank": "B+",
+      "conditions": {
+        "company.revenue":              { "gte": 500 },
+        "company.credits":              { "gte": 400 },
+        "company.valuation":            { "lte": 100000 },
+        "company.approval":             { "gte": 75 },
+        "environment.social_stability": { "gte": 50 },
+        "environment.climate_load":     { "lte": 50 }
+      },
+      "title": "Global Champion",
+      "description": "You made it to the end. Triumphant. Your firm stands at the pinnacle—beloved by users, courted by investors, lionized in headlines. Your products shape habits, your platform defines the standard.\n\nBut the horizon darkens. AGI, your holy grail, remains just out of reach. Rivals stir, flush with breakthroughs and bolder bets. You can feel it: the next wave rising, just beyond your grasp.\n\nYour reign is undisputed—for now. But the race never ends, and the crown is never secure."
+    },    
+    {
       "id": "economic‑dominance",
       "type": "win",
       "rank": "B",
       "conditions": {
         "company.revenue":              { "gte": 500 },
-        "company.credits":              { "gte": 400 }
+        "company.credits":              { "gte": 400 },
+        "environment.social_stability": { "lte": 50 },
+        "environment.climate_load":     { "gte": 50 }
       },
       "title": "Economic Dominance",
       "description": "You made it to the end. Barely. Your firm remains solvent, even powerful—driving global productivity and churning out new models at an impressive clip. But outside your boardrooms, the world burns.\n\nSocietal fractures have deepened. Geopolitical unrest simmers just below the boiling point. Workers, displaced by automation, have filled the streets. Governments teeter under the strain of constant labor protests, while climate systems groan under compute demand.\n\nYour victory is Pyrrhic. You won the market, but lost the mandate. What future you've built may not last."
