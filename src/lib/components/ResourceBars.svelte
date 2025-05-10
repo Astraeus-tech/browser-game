@@ -1,6 +1,7 @@
 <script lang="ts">
     import type { Meters } from '$lib/types';
     import { onMount } from 'svelte';
+    import MetricTooltip from './MetricTooltip.svelte';
   
     export let company;
     export let environment;
@@ -19,6 +20,25 @@
       title: string;
       key: string;
       meters: Meter[];
+    };
+  
+    // Tooltip descriptions for each metric
+    const tooltips: Record<string, string> = {
+      credits: "Your available credits to spend on projects",
+      revenue: "Projected annual revenue from current operations",
+      valuation: "Company valuation derived from AI capability and revenue",
+      approval: "Public approval rating as a percentage",
+      security: "Security posture and resilience rating",
+      alignment_confidence: "Confidence score that your AI aligns with human intent",
+      social_stability: "General social stability in the environment",
+      cyber_bio_risk: "Risk level of cyber or bio catastrophes",
+      climate_load: "Environmental burden due to compute and emissions",
+      coding: "AI coding capability level",
+      hacking: "AI hacking capability level",
+      bioweapons: "AI bio-weapon development capability level",
+      politics_persuasion: "AI's ability to influence political discourse",
+      robotics_embodied: "AI robotics and embodied intelligence capability level",
+      research_taste: "AI's research direction quality and innovation index"
     };
   
     // Format numbers with appropriate units
@@ -170,7 +190,13 @@
     {#each meterGroups[0].meters.filter(m => !m.showBar) as m}
       {@const value = company[m.key]}
       <div class="flex items-center gap-1">
-        <span class="text-gray-400">{m.icon} {m.label}:</span>
+        <MetricTooltip 
+          content={tooltips[m.key]}
+          icon={m.icon} 
+          label={`${m.label}:`} 
+          iconClass="opacity-70 group-hover:opacity-100"
+          labelClass="text-gray-400"
+        />
         <span class="text-green-400">{m.format(value)}</span>
       </div>
     {/each}
@@ -185,16 +211,21 @@
         {@const value = company[m.key]}
         <div class="flex items-center gap-2 group">
           <div class="w-32 flex items-center gap-1">
-            <span class="opacity-70 group-hover:opacity-100">{m.icon}</span>
-            <span class="text-gray-400">{m.label}</span>
+            <MetricTooltip 
+              content={tooltips[m.key]}
+              icon={m.icon} 
+              label={m.label} 
+              iconClass="opacity-70 group-hover:opacity-100"
+              labelClass="text-gray-400"
+            />
           </div>
           <div class="flex-1 h-2 bg-gray-800/50 rounded-sm overflow-hidden relative">
-            <div class="absolute inset-0 bg-gradient-to-r from-black/20 to-white/20 z-10"/>
+            <div class="absolute inset-0 bg-gradient-to-r from-black/20 to-white/20 z-10"></div>
             <div
               class="h-full {m.isRisk ? 'bg-red-500/40' : 'bg-green-500/40'} transition-all duration-300 relative"
               style="width: {Math.min(Math.max(value, 0), 100)}%;"
             >
-              <div class="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent"/>
+              <div class="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent"></div>
             </div>
           </div>
           <div class="w-8 text-right text-gray-400">{value}</div>
@@ -209,16 +240,21 @@
         {@const value = environment[m.key]}
         <div class="flex items-center gap-2 group">
           <div class="w-32 flex items-center gap-1">
-            <span class="opacity-70 group-hover:opacity-100">{m.icon}</span>
-            <span class="text-gray-400">{m.label}</span>
+            <MetricTooltip 
+              content={tooltips[m.key]}
+              icon={m.icon} 
+              label={m.label} 
+              iconClass="opacity-70 group-hover:opacity-100"
+              labelClass="text-gray-400"
+            />
           </div>
           <div class="flex-1 h-2 bg-gray-800/50 rounded-sm overflow-hidden relative">
-            <div class="absolute inset-0 bg-gradient-to-r from-black/20 to-white/20 z-10"/>
+            <div class="absolute inset-0 bg-gradient-to-r from-black/20 to-white/20 z-10"></div>
             <div
               class="h-full {m.isRisk ? 'bg-red-500/40' : 'bg-green-500/40'} transition-all duration-300 relative"
               style="width: {Math.min(Math.max(value, 0), 100)}%;"
             >
-              <div class="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent"/>
+              <div class="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent"></div>
             </div>
           </div>
           <div class="w-8 text-right text-gray-400">{value}</div>
@@ -234,8 +270,13 @@
       {@const value = ai_capability[m.key]}
       <div class="flex items-center gap-1 group">
         <div class="w-20 flex items-center gap-1">
-          <span class="opacity-70 group-hover:opacity-100">{m.icon}</span>
-          <span class="text-gray-400">{m.label}</span>
+          <MetricTooltip 
+            content={tooltips[m.key]}
+            icon={m.icon} 
+            label={m.label} 
+            iconClass="opacity-70 group-hover:opacity-100"
+            labelClass="text-gray-400"
+          />
         </div>
         <div class="flex-1 font-bold tracking-tight text-cyan-500">
           {getAILevel(value)}
