@@ -124,7 +124,7 @@
           {
             key: 'cyber_bio_risk',
             label: 'Cyber & Bio',
-            icon: '💻🧬',
+            icon: '⚠️',
             format: formatPercentage,
             showBar: true,
             isRisk: true
@@ -186,7 +186,7 @@
 
 <div class="font-mono text-xs max-w-4xl">
   <!-- Company Stats Row -->
-  <div class="flex flex-col sm:flex-row sm:flex-wrap gap-x-4 gap-y-2 mb-4 border-b border-green-900/30 pb-2">
+  <div class="flex flex-row flex-wrap gap-x-4 gap-y-2 mb-4 border-b border-green-900/30 pb-2">
     {#each meterGroups[0].meters.filter(m => !m.showBar) as m}
       {@const value = company[m.key]}
       <div class="flex items-center gap-1 min-w-[90px]">
@@ -203,14 +203,14 @@
   </div>
 
   <!-- Company and Environment Meters -->
-  <div class="flex flex-col sm:flex-row gap-x-8 gap-y-4 mb-4 border-b border-green-900/30 pb-2">
+  <div class="flex flex-row gap-x-2 gap-y-4 mb-4 border-b border-green-900/30 pb-2">
     <!-- Company Meters -->
     <div class="flex-1 space-y-0.5">
       <div class="text-gray-400 font-semibold mb-1">Company</div>
       {#each meterGroups[0].meters.filter(m => m.showBar) as m}
         {@const value = company[m.key]}
-        <div class="flex items-center gap-2 group">
-          <div class="w-24 sm:w-32 flex items-center gap-1">
+        <div class="flex items-center gap-1 group">
+          <div class="w-27 flex items-center gap-1">
             <MetricTooltip 
               content={tooltips[m.key]}
               icon={m.icon} 
@@ -228,18 +228,18 @@
               <div class="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent"></div>
             </div>
           </div>
-          <div class="w-8 text-right text-gray-400">{value}</div>
+          <div class="4 text-right text-gray-400">{value}</div>
         </div>
       {/each}
     </div>
 
     <!-- Environment Meters -->
-    <div class="flex-1 space-y-0.5 sm:border-l border-green-900/30 sm:pl-4">
+    <div class="flex-1 space-y-0.5 border-l border-green-900/30 pl-4">
       <div class="text-gray-400 font-semibold mb-1">Environment</div>
       {#each meterGroups[1].meters.filter(m => m.showBar) as m}
         {@const value = environment[m.key]}
-        <div class="flex items-center gap-2 group">
-          <div class="w-24 sm:w-32 flex items-center gap-1">
+        <div class="flex items-center gap-1 group">
+          <div class="w-27 flex items-center gap-1">
             <MetricTooltip 
               content={tooltips[m.key]}
               icon={m.icon} 
@@ -257,7 +257,7 @@
               <div class="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent"></div>
             </div>
           </div>
-          <div class="w-8 text-right text-gray-400">{value}</div>
+          <div class="w-4 text-right text-gray-400">{value}</div>
         </div>
       {/each}
     </div>
