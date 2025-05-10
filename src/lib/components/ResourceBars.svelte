@@ -186,10 +186,10 @@
 
 <div class="font-mono text-xs max-w-4xl">
   <!-- Company Stats Row -->
-  <div class="flex gap-4 mb-4 border-b border-green-900/30 pb-2">
+  <div class="flex flex-col sm:flex-row sm:flex-wrap gap-x-4 gap-y-2 mb-4 border-b border-green-900/30 pb-2">
     {#each meterGroups[0].meters.filter(m => !m.showBar) as m}
       {@const value = company[m.key]}
-      <div class="flex items-center gap-1">
+      <div class="flex items-center gap-1 min-w-[90px]">
         <MetricTooltip 
           content={tooltips[m.key]}
           icon={m.icon} 
@@ -203,14 +203,14 @@
   </div>
 
   <!-- Company and Environment Meters -->
-  <div class="flex gap-x-8 mb-4 border-b border-green-900/30 pb-2">
+  <div class="flex flex-col sm:flex-row gap-x-8 gap-y-4 mb-4 border-b border-green-900/30 pb-2">
     <!-- Company Meters -->
     <div class="flex-1 space-y-0.5">
       <div class="text-gray-400 font-semibold mb-1">Company</div>
       {#each meterGroups[0].meters.filter(m => m.showBar) as m}
         {@const value = company[m.key]}
         <div class="flex items-center gap-2 group">
-          <div class="w-32 flex items-center gap-1">
+          <div class="w-24 sm:w-32 flex items-center gap-1">
             <MetricTooltip 
               content={tooltips[m.key]}
               icon={m.icon} 
@@ -234,12 +234,12 @@
     </div>
 
     <!-- Environment Meters -->
-    <div class="flex-1 space-y-0.5 border-l border-green-900/30 pl-4">
+    <div class="flex-1 space-y-0.5 sm:border-l border-green-900/30 sm:pl-4">
       <div class="text-gray-400 font-semibold mb-1">Environment</div>
       {#each meterGroups[1].meters.filter(m => m.showBar) as m}
         {@const value = environment[m.key]}
         <div class="flex items-center gap-2 group">
-          <div class="w-32 flex items-center gap-1">
+          <div class="w-24 sm:w-32 flex items-center gap-1">
             <MetricTooltip 
               content={tooltips[m.key]}
               icon={m.icon} 
@@ -265,23 +265,24 @@
 
   <!-- AI Capabilities -->
   <div class="mt-4 mb-1 text-gray-400 font-semibold">AI Capabilities</div>
-  <div class="grid grid-cols-2 gap-x-8 gap-y-1">
+  <div class="grid grid-cols-2 gap-x-4 gap-y-1">
     {#each meterGroups[2].meters as m}
       {@const value = ai_capability[m.key]}
-      <div class="flex items-center gap-1 group">
-        <div class="w-20 flex items-center gap-1">
+      <div class="grid grid-cols-[24px_70px_1fr_30px] items-center group">
+        <div>
           <MetricTooltip 
             content={tooltips[m.key]}
             icon={m.icon} 
-            label={m.label} 
+            label=""
             iconClass="opacity-70 group-hover:opacity-100"
-            labelClass="text-gray-400"
+            labelClass="hidden"
           />
         </div>
-        <div class="flex-1 font-bold tracking-tight text-cyan-500">
+        <span class="text-gray-400 text-xs truncate pr-1">{m.label}</span>
+        <div class="font-bold tracking-tight text-cyan-500 text-xs mx-1">
           {getAILevel(value)}
         </div>
-        <div class="w-8 text-right text-cyan-400">Lv{Math.ceil(value/20)}</div>
+        <div class="text-right text-cyan-400 text-xs">Lv{Math.ceil(value/20)}</div>
       </div>
     {/each}
   </div>

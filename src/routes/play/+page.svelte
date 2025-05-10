@@ -130,28 +130,28 @@
 {#if browser}
 <div class="flex items-center justify-center bg-black min-h-screen font-mono text-green-300">
   <div class="w-full max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl 2xl:max-w-3xl bg-gray-900 border-4 border-gray-700 rounded-lg shadow-lg flex flex-col overflow-hidden">
-    <header class="flex items-center bg-gray-800 px-4 py-2 border-b border-gray-700">
-      <h1 class="text-lg font-bold">Singularity Run</h1>
+    <header class="flex flex-wrap items-center bg-gray-800 px-4 py-2 border-b border-gray-700">
+      <h1 class="text-lg font-bold mr-auto">Singularity Run</h1>
+      <div class="text-xs order-3 w-full mt-1 sm:mt-0 sm:w-auto sm:order-2 sm:mr-auto">Year: {$game.year} – Q{$game.quarter}</div>
       {#if $game.gameOver === 'playing' && $game.log.length > 0}
         <button
           on:click={startOver}
-          class="ml-4 text-xs bg-gray-600 hover:bg-gray-500 text-white px-2 py-1 rounded"
+          class="text-xs bg-gray-600 hover:bg-gray-500 text-white px-2 py-1 rounded order-2 sm:order-3"
         >
           Abandon Run
         </button>
       {/if}
       {#if $game.gameOver && $game.gameOver !== 'playing'}
         {#if $game.gameOver.type === 'win'}
-          <span class="text-green-400 font-bold ml-4">Victory! Rank:{$game.gameOver.rank}</span>
+          <span class="text-green-400 font-bold order-2 sm:order-3">Victory! Rank:{$game.gameOver.rank}</span>
         {:else if $game.gameOver.type === 'draw'}
-          <span class="text-yellow-400 font-bold ml-4">Draw</span>
+          <span class="text-yellow-400 font-bold order-2 sm:order-3">Draw</span>
         {:else}
-          <span class="text-red-400 font-bold ml-4">Defeat</span>
+          <span class="text-red-400 font-bold order-2 sm:order-3">Defeat</span>
         {/if}
       {/if}
-      <div class="text-xs ml-auto">Year: {$game.year} – Q{$game.quarter}</div>
     </header>
-    <div class="px-4 py-2 border-b border-gray-700">
+    <div class="px-4 py-2 border-b border-gray-700 overflow-x-auto">
       <ResourceBars
         company={$game.meters.company}
         environment={$game.meters.environment}
