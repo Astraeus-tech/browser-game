@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { game, defaultState } from '$lib/stores/game';
+  import { game, getDefaultState } from '$lib/stores/game';
   import type { Event } from '$lib/types';
   import { applyChoice, scaleCreditRange } from '$lib/engine';
   import { makeRng } from '$lib/rng';
@@ -30,13 +30,30 @@
     console.log('FILTERED EVENTS →', currentEvents.map(e => e.id));
 
     if (currentEvents.length) {
+      const currentState = get(game);
+      
+      // If we already have a saved event ID for this year/quarter, use it
+      if (currentState.currentEventId) {
+        const savedEvent = currentEvents.find(e => e.id === currentState.currentEventId);
+        if (savedEvent) {
+          selectedEvent = savedEvent;
+          console.log('LOADED SAVED EVENT →', selectedEvent.id);
+          return;
+        }
+      }
+      
+      // Otherwise, select a new random event
       const { rng, nextSeed } = makeRng($game);
       const idx = Math.floor(rng() * currentEvents.length);
       selectedEvent = currentEvents[idx];
       console.log('SELECTED EVENT →', selectedEvent.id);
+      
       // Check affordability on the new seed state before continuing
-      const currentState = get(game);
-      const updatedState = { ...currentState, seed: nextSeed };
+      const updatedState = { 
+        ...currentState, 
+        seed: nextSeed,
+        currentEventId: selectedEvent.id // Save the selected event ID
+      };
       const credits = updatedState.meters.company.credits;
       const hasAffordable = selectedEvent.choices.some(c =>
         credits >= getChoiceCost(c.effects.company?.credits)
@@ -95,12 +112,17 @@
       return;
     }
 
+    // Clear the currentEventId when advancing to new quarter/year
+    if (nextState.year !== currentState.year || nextState.quarter !== currentState.quarter) {
+      nextState.currentEventId = undefined;
+    }
+
     game.set(nextState);
     pickEvent();
   }
 
   function startOver() {
-    game.set({ ...defaultState, seed: Date.now() });
+    game.set(getDefaultState());
     pickEvent();
   }
 </script>
