@@ -120,7 +120,7 @@
       {/if}
       {#if $game.gameOver && $game.gameOver !== 'playing'}
         {#if $game.gameOver.type === 'win'}
-          <span class="text-green-400 font-bold ml-4">Victory!</span>
+          <span class="text-green-400 font-bold ml-4">Victory! Rank:{$game.gameOver.rank}</span>
         {:else if $game.gameOver.type === 'draw'}
           <span class="text-yellow-400 font-bold ml-4">Draw</span>
         {:else}
