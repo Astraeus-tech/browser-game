@@ -123,7 +123,7 @@
           },
           {
             key: 'cyber_bio_risk',
-            label: 'Cyber & Bio',
+            label: 'Cyber/Bio',
             icon: '⚠️',
             format: formatPercentage,
             showBar: true,
