@@ -56,7 +56,7 @@ function checkEnding(meters: any, year: number, quarter: number): { id: string }
 // Centralize credit scaling logic
 export function getCreditScaleFactor(year: number, quarter: number): number {
   const deltaQuarters = (year - 2025) * 4 + (quarter - 3);
-  return Math.pow(1.5, deltaQuarters);
+  return Math.pow(1.3, deltaQuarters);
 }
 
 export function scaleCreditRange(effect: string, year: number, quarter: number): [number, number] {

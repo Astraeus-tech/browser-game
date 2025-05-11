@@ -3,14 +3,14 @@
       "credits": { "min": 30, "max": 60 },
       "revenue": { "min": 30, "max": 60 },
       "valuation": { "min": 30, "max": 60 },
-      "approval": { "min": 20, "max": 50 },
+      "approval": { "min": 30, "max": 60 },
       "security": { "min": 30, "max": 60 },
-      "alignment_confidence": { "min": 10, "max": 40 }
+      "alignment_confidence": { "min": 30, "max": 60 }
     },
     "environment": {
       "social_stability": { "min": 40, "max": 70 },
-      "cyber_bio_risk": { "min": 30, "max": 60 },
-      "climate_load": { "min": 30, "max": 60 }
+      "cyber_bio_risk": { "min": 30, "max": 50 },
+      "climate_load": { "min": 30, "max": 50 }
     },
     "ai_capability": {
       "coding": { "min": 10, "max": 40 },
