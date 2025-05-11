@@ -264,17 +264,16 @@
   
   <!-- Choice Overlay -->
   {#if overlayChoice}
-    <div class="fixed min-h-screen inset-0 bg-black bg-opacity-75 flex items-center justify-center z-10">
-      <!-- Use the exact same dimensions and structure as the main UI -->
-      <div style="height: 48rem;" class="bg-gray-900 border-4 border-gray-700 rounded-lg shadow-lg w-full max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl 2xl:max-w-3xl flex flex-col overflow-hidden">
+    <div class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-10 p-4">
+      <!-- Container with max-height instead of fixed height -->
+      <div class="bg-gray-900 border-4 border-gray-700 rounded-lg shadow-lg w-full max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl 2xl:max-w-3xl flex flex-col overflow-hidden max-h-[90vh]">
         <!-- Header - exactly matching the main UI header height -->
-        <header class="flex items-center bg-gray-800 px-4 py-2 border-b border-gray-700">
+        <header class="flex items-center bg-gray-800 px-4 py-2 border-b border-gray-700 flex-shrink-0">
           <h2 class="text-xl font-bold">{overlayChoice.label}</h2>
-
         </header>
         
         <!-- Resource bar equivalent height space -->
-        <div class="px-4 py-3 border-b border-gray-700 bg-green-950">
+        <div class="px-4 py-3 border-b border-gray-700 bg-green-950 flex-shrink-0">
           {#if overlayChoice.effects.company?.credits}
           <div class="text-yellow-400 ml-auto">Cost: {formatCreditCost(overlayChoice.effects.company.credits)}</div>
           <div class="text-gray-400 ml-auto pb-2">(Available credits: ${$game.meters.company.credits}M)</div>
@@ -282,8 +281,8 @@
           <p class="mb-4">{overlayChoice.details}</p>
         </div>
         
-        <!-- Main content area - make taller to match screenshot -->
-        <div class="p-4 bg-green-950 border-b border-gray-700 overflow-y-auto" style="height: 38rem;">          
+        <!-- Main content area - scrollable with flex-grow -->
+        <div class="p-4 bg-green-950 border-b border-gray-700 overflow-y-auto flex-grow">          
           <!-- Wall Street Analysis -->
           <div class="my-4 px-4 py-3 bg-gray-800 rounded-md border-l-4 border-blue-500">
             <div 
@@ -406,8 +405,8 @@
           </div>
         </div>
         
-        <!-- Footer - exactly matching height -->
-        <footer class="px-4 py-2 bg-gray-800 border-t border-gray-700">
+        <!-- Footer - fixed at bottom -->
+        <footer class="px-4 py-2 bg-gray-800 border-t border-gray-700 flex-shrink-0">
           <div class="flex justify-between">
             <button 
               class="px-4 py-2 bg-gray-600 hover:bg-gray-500 rounded"
