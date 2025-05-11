@@ -44,13 +44,13 @@
           "credits": "-5..-1",
           "revenue": "0..0",
           "valuation": "-5..0",
-          "approval": "-40..-25",
+          "approval": "-25..-10",
           "security": "0..0",
           "alignment_confidence": "0..0"
         },
         "environment": {
           "social_stability": "-20..-10",
-          "cyber_bio_risk": "10..30",
+          "cyber_bio_risk": "10..25",
           "climate_load": "0..0"
         },
         "ai_capability": {
