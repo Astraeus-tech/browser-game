@@ -5,6 +5,10 @@
   "choices": [
     {
       "label": "Implement strict data policies",
+      "details": "Overhaul data governance with comprehensive privacy protections that exceed regulatory requirements. Establish transparent consent mechanisms, data minimization practices, and regular third-party audits while publicly committing to ethical data standards that prioritize user autonomy and protection.",
+      "wallstreet_analysis": "Prudent long-term brand protection strategy. While the valuation faces modest pressure from anticipated growth constraints, the substantial approval and security improvements create meaningful reputational assets. This approach represents an investment in sustainable business practices that should provide some insulation from future regulatory shocks while potentially creating premium positioning in an increasingly privacy-conscious market.",
+      "ngo_analysis": "Essential ethical recalibration. The policy improvements substantially increase social stability by addressing public trust concerns, while reducing cyber-bio risks through enhanced data protection. This approach acknowledges the fundamental importance of consent and data sovereignty, establishing guardrails that properly balance technological advancement with human rights considerations.",
+      "researcher_analysis": "Capability moderation across multiple domains. The strict data policies modestly constrain capabilities in coding, hacking, bioweapons, and persuasion by limiting available training data and application scenarios. However, the significant alignment confidence improvement suggests these constraints create a more robust foundation for long-term capability development that respects societal boundaries.",
       "effects": {
         "company": {
           "credits": "-10..0",
@@ -31,6 +35,10 @@
     },
     {
       "label": "Launch public inquiry",
+      "details": "Initiate a comprehensive investigation into the data theft incidents, engaging external experts to examine internal systems and publicly reporting findings regardless of what they reveal. Emphasize transparency while distancing the company from industry-wide misconduct.",
+      "wallstreet_analysis": "Risky short-term transparency play. The inquiry approach creates significant valuation pressure as markets react negatively to potential liability exposure and negative publicity. The approval decline suggests the inquiry may implicate the company rather than exonerate it, raising concerns about future regulatory action and customer trust that could constrain growth opportunities.",
+      "ngo_analysis": "Partial accountability with moderate social benefits. The inquiry produces modest social stability improvements by addressing the public demand for answers, while slightly reducing cyber-bio risks through increased scrutiny. However, without accompanying policy changes, this approach represents an incomplete response that investigates past misconduct without necessarily preventing future incidents.",
+      "researcher_analysis": "Limited capability impact with missed opportunity. The inquiry approach has minimal direct effect on capability development across domains, representing a neutral technical stance. However, the failure to implement substantive governance improvements represents a missed opportunity to advance alignment methodologies that could guide more responsible capability development.",
       "effects": {
         "company": {
           "credits": "-10..0",
@@ -57,6 +65,10 @@
     },
     {
       "label": "Ignore and move on",
+      "details": "Continue operations with minimal acknowledgment of the controversy, focusing instead on technical advancement and product development. Implement minor cosmetic policy changes while privately maintaining data practices that prioritize model performance over privacy concerns.",
+      "wallstreet_analysis": "High-risk growth maximization strategy. The approach delivers substantial revenue and valuation growth by maintaining aggressive data practices, though at the cost of severe approval ratings decline. While financially attractive in the near term, the concerning security deterioration creates material regulatory and litigation risks that could eventually trigger catastrophic penalties and operational restrictions.",
+      "ngo_analysis": "Alarming disregard for ethical boundaries. The significant social stability decline reflects public outrage at corporate unaccountability, while the dramatic cyber-bio risk increase stems from normalized data exploitation practices. This approach represents precisely the kind of prioritization of technical capability over human rights that undermines public trust in AI development.",
+      "researcher_analysis": "Short-term capability gains with alignment costs. The unrestricted data approach enables substantial advances in coding, hacking, bioweapons, and persuasion capabilities through continued access to sensitive data. However, the alignment confidence decline suggests these capabilities develop in ways that increasingly diverge from societal values and expectations, potentially creating future technical debt.",
       "effects": {
         "company": {
           "credits": "0..0",

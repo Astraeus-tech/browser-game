@@ -5,6 +5,10 @@
   "choices": [
     {
       "label": "Roll out to consumers",
+      "details": "Launch personal AI agents to the general consumer market despite known limitations. Focus on rapid iteration based on real-world feedback, accepting the inevitable PR challenges of early glitches in exchange for market penetration and first-mover advantage.",
+      "wallstreet_analysis": "Bold move with significant revenue upside. The projected revenue boost reflects high consumer interest, though implementation costs are substantial. Valuation upside is limited by reputational risks, with approval taking a hit due to inevitable early failures. Classic high-risk, high-reward play that could establish market dominance if executed well.",
+      "ngo_analysis": "Concerning rapid deployment without adequate safeguards. The predicted increase in social stability suggests beneficial use cases, but the significant rise in cyber-bio risk is troubling. Consumer-facing agents without proper guardrails could normalize problematic AI behaviors and create security vulnerabilities at scale.",
+      "researcher_analysis": "Limited but notable capability advancement. Consumer deployment will drive improvements in coding and persuasion capabilities through real-world feedback loops. The diversity of use cases will provide valuable training data, though improvements are modest without focused research direction.",
       "effects": {
         "company": {
           "credits": "-30..-20",
@@ -31,6 +35,10 @@
     },
     {
       "label": "Restrict to enterprise",
+      "details": "Limit deployment to enterprise customers with dedicated support teams and clear use cases. Focus on business applications where the value proposition is clear and the environment more controlled, allowing for refinement before wider release.",
+      "wallstreet_analysis": "Conservative but prudent strategy. The moderate revenue increase sacrifices short-term consumer market opportunity for enterprise credibility. Notably, this approach yields better valuation prospects and approval ratings than consumer deployment, suggesting investors appreciate the risk management. Security improvements add long-term value.",
+      "ngo_analysis": "Responsible staged approach. Enterprise restriction creates moderate social stability benefits with fewer risks, potentially even reducing cyber-bio threats through professional oversight. The controlled deployment environment allows for identification and mitigation of emerging issues before widespread impact occurs.",
+      "researcher_analysis": "Minimal immediate capability advancement. The enterprise-focused deployment prioritizes reliability over innovation in capability frontiers. While this approach sacrifices data diversity from consumer use cases, it establishes stronger foundations for responsible capability development in future iterations.",
       "effects": {
         "company": {
           "credits": "-10..-5",
@@ -57,6 +65,10 @@
     },
     {
       "label": "Enhance user training",
+      "details": "Invest heavily in user education and onboarding processes that set realistic expectations and teach effective interaction patterns. Deploy to consumers but with a structured introduction that frames the technology's capabilities and limitations accurately.",
+      "wallstreet_analysis": "Balanced long-term investment. The significant upfront cost creates modest revenue compared to immediate rollout, but improved approval ratings and alignment confidence build foundation for sustainable growth. Markets typically undervalue user education, but the alignment confidence boost may attract ESG-focused investors.",
+      "ngo_analysis": "Commendable focus on human-AI interaction quality. The predicted social stability increase with reduced cyber-bio risk suggests this approach creates responsible adoption patterns. User education creates realistic expectations and reduces misuse, addressing root causes of many AI deployment problems.",
+      "researcher_analysis": "Strategic capability development in key areas. The training focus yields similar coding and persuasion advances as general consumer deployment, but with the significant alignment confidence improvement. This suggests capabilities develop in more controllable, directed ways, potentially accelerating useful applications while managing risks.",
       "effects": {
         "company": {
           "credits": "-30..-10",

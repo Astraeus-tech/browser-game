@@ -5,6 +5,10 @@
   "choices": [
     {
       "label": "Lobby for light rules",
+      "details": "Mobilize an aggressive lobbying campaign advocating for minimal government intervention in AI development. Emphasize innovation, national competitiveness, and the risks of overregulation while building coalitions with like-minded tech companies to present a unified industry voice against stringent controls.",
+      "wallstreet_analysis": "Pro-growth regulatory strategy with strong financial upside. The light-touch regulatory approach preserves innovation potential and development velocity, directly supporting revenue growth and valuation expansion. While the slight approval decline represents a minor concern, markets generally reward regulatory freedom that enables faster product development and deployment.",
+      "ngo_analysis": "Concerning prioritization of speed over safety. The reduced social stability reflects public anxiety about unregulated AI development, while increased cyber-bio risks stem from fewer safeguards. This approach potentially sets dangerous precedents that favor corporate interests over public welfare, undermining trust in both the industry and regulatory institutions.",
+      "researcher_analysis": "Accelerated but less controlled capability development. The reduced regulatory friction enables faster advancement across multiple capability domains, particularly in coding, hacking, persuasion, and research taste. While beneficial for innovation pace, this approach may inadvertently enable capabilities with dual-use potential before appropriate safety measures are developed.",
       "effects": {
         "company": {
           "credits": "-10..0",
@@ -31,6 +35,10 @@
     },
     {
       "label": "Support strict oversight",
+      "details": "Publicly endorse robust safety regulations and collaborate with policymakers to develop comprehensive oversight frameworks. Implement internal compliance teams, participate in standards-setting bodies, and position the company as a responsible leader prioritizing safety alongside innovation.",
+      "wallstreet_analysis": "Prudent long-term risk mitigation at short-term cost. The approach sacrifices immediate valuation through reduced development speed and increased compliance costs. However, the substantial approval boost and security improvements represent valuable intangible assets that could prevent catastrophic reputational damage from future safety incidents, potentially preserving long-term shareholder value.",
+      "ngo_analysis": "Commendable prioritization of responsibility. The improved social stability reflects public appreciation for safety-conscious development, while reduced cyber-bio risks stem from enhanced protective measures. This approach exemplifies the precautionary principle in emerging technology governance, creating shared benefits through thoughtful guardrails.",
+      "researcher_analysis": "Temporarily constrained but more sustainable capability development. The regulatory structure modestly slows advancement across multiple capability domains, representing near-term technical constraints. However, the alignment confidence improvements suggest development will proceed along safer trajectories, potentially avoiding capability dead-ends that would ultimately require reversion.",
       "effects": {
         "company": {
           "credits": "-10..-10",
@@ -57,6 +65,10 @@
     },
     {
       "label": "Propose self-regulation",
+      "details": "Develop a detailed industry self-regulatory framework with voluntary but rigorous safety standards, transparency commitments, and peer review mechanisms. Propose this as an alternative to government regulation while demonstrating proactive responsibility through early adoption of the proposed standards.",
+      "wallstreet_analysis": "Balanced strategic positioning with modest financial benefits. This middle-path approach preserves most innovation flexibility while demonstrating sufficient responsibility to satisfy key stakeholders. The moderate improvements across revenue, valuation, and approval reflect the market's appreciation for proactive risk management that doesn't significantly constrain growth potential.",
+      "ngo_analysis": "Incremental improvement with accountability questions. The modest social stability increase reflects cautious public optimism about industry-led governance, though concerns about enforcement mechanisms remain. The slight cyber-bio risk increase highlights the inherent limitation of voluntary standards without independent oversight, representing an improvement over no regulation but falling short of comprehensive protection.",
+      "researcher_analysis": "Flexible capability advancement with light guardrails. The self-regulatory approach enables continued progress across coding, persuasion, and research taste domains while establishing minimal safety protocols. This balance allows for innovation within broadly defined ethical boundaries, though effectiveness ultimately depends on the rigor of the self-imposed standards and compliance mechanisms.",
       "effects": {
         "company": {
           "credits": "-10..0",

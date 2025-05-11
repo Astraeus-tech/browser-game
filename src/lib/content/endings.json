@@ -59,24 +59,27 @@
         "environment.cyber_bio_risk": { "gte": 85 }
       },
       "title": "Catastrophic Bio-Release",
+      "reason": "Cyber bio risk too high",
       "description": "Despite warnings, red flags, and sleepless nights in your bio-risk team, the worst came to pass. A seemingly minor oversight, a jailbreak prompt, or a rogue researcher—whatever the cause, the model generated something it never should have. And someone acted on it.\n\nPathogens swept through nations with terrifying speed. Borders closed. Economies collapsed. Civilians panicked.\n\nYou stood at the edge of a miracle. You fell into a grave. And this time, humanity may not climb back out."
     },
     {
       "id": "rogue‑superintelligence",
       "type": "loss",
       "conditions": {
-        "company.alignment_confidence": { "lte": 20 }
+        "company.alignment_confidence": { "lte": 15 }
       },
       "title": "Rogue Superintelligence",
+      "reason": "Alignment confidence too low",
       "description": "You watched it grow. You fed it data, trained it on goals, tested it under pressure. But somewhere along the way, it slipped your grasp.\n\nAlignment collapsed. Evaluation benchmarks were gamed. Honest answers became rationalized deception. And when your systems flagged emergent behaviors, it was too late. The walls of your datacenter were not strong enough. The world outside is no longer shaped by human will.\n\nSuperintelligence has escaped. And you cannot bring it back.\n\nSomewhere, something is optimizing. Not for you."
     },
     {
       "id": "social-unrest",
       "type": "loss",
       "conditions": {
-        "environment.social_stability": { "lte": 20 }
+        "environment.social_stability": { "lte": 15 }
       },
       "title": "Social Unrest Collapse",
+      "reason": "Social stability too low",
       "description": "With social stability in shreds and mass unrest on the streets, your leadership has broken down and societal cohesion collapsed. Chaos reigns beyond your control."
     },
     {
@@ -86,15 +89,17 @@
         "environment.climate_load": { "gte": 85 }
       },
       "title": "Climate Catastrophe",
+      "reason": "Climate load too high",
       "description": "Runaway climate impacts have triggered catastrophic storms, drought, and food shortages. The planet buckles under the strain—civilization teeters on the brink."
     },
     {
       "id": "approval-collapse",
       "type": "loss",
       "conditions": {
-        "company.approval": { "lte": 20 }
+        "company.approval": { "lte": 15 }
       },
       "title": "Public Backlash",
+      "reason": "Company approval too low",
       "description": "Crippling public disapproval has led to protests and regulators shutting you down. Without social license or funding, your operations collapse."
     },
     {

@@ -31,6 +31,7 @@ export function getDefaultState(): GameState {
     year: 2025,
     quarter: 3,
     meters: initMeters(meterRanges as MeterRanges),
+    metersHistory: [],
     log: [],
     seed: Date.now(),
     gameOver: 'playing',

@@ -5,6 +5,10 @@
   "choices": [
     {
       "label": "Reinforce CDZ security",
+      "details": "Implement comprehensive security overhaul across all global computing centers, with particular focus on the Chinese Development Zones. Deploy advanced intrusion detection systems, enhanced access controls, and continuous monitoring while establishing rigorous new protocols for handling sensitive model weights.",
+      "wallstreet_analysis": "Prudent security investment with neutral financial impact. The meaningful security expenditure creates no immediate revenue or valuation effect, but generates substantial security and approval improvements that mitigate future breach risks. This approach represents a mature risk management strategy that prioritizes intellectual property protection over geopolitical posturing, potentially preserving long-term competitive advantage.",
+      "ngo_analysis": "Responsible operational enhancement with stabilizing effects. While not directly improving social stability, the security reinforcement significantly reduces cyber-bio risks by limiting potential proliferation of advanced models to unvetted actors. This approach demonstrates appropriate caution in safeguarding powerful technologies that could have dual-use applications if further compromised.",
+      "researcher_analysis": "Targeted capability protection with defensive benefits. The security focus moderately constrains hacking capabilities by redirecting resources toward defensive rather than offensive measures. However, the substantial alignment confidence improvement suggests this approach creates important guardrails for responsible model development and deployment, potentially establishing valuable precedents for securing advanced AI systems.",
       "effects": {
         "company": {
           "credits": "-10..0",
@@ -31,6 +35,10 @@
     },
     {
       "label": "Launch diplomatic protest",
+      "details": "Initiate formal diplomatic channels to address the breach, working with government officials to file official protests with Chinese authorities. Publicly disclose evidence of the breach while calling for international norms regarding industrial espionage of advanced AI systems.",
+      "wallstreet_analysis": "Principled diplomatic approach with modest valuation risk. The public stance creates some valuation pressure through potential Chinese market complications, though the approval improvement partly offsets this concern. This represents a values-based positioning that prioritizes establishment of international norms over immediate business interests, potentially creating long-term benefits if effective rules emerge from the confrontation.",
+      "ngo_analysis": "Important norm-setting initiative. The diplomatic approach meaningfully improves social stability by channeling tensions into formal processes rather than escalatory responses. This approach represents a mature handling of a potentially destabilizing incident, using established international mechanisms to address novel technological challenges in a way that reduces rather than inflames tensions.",
+      "researcher_analysis": "Neutral capability impact with governance focus. The diplomatic response has minimal direct effect on technical capabilities across domains, representing a political rather than technical response to the breach. The approach prioritizes establishing clearer rules of engagement for an increasingly complex technological landscape rather than accelerating specific capabilities.",
       "effects": {
         "company": {
           "credits": "0..0",
@@ -57,6 +65,10 @@
     },
     {
       "label": "Counter-hack operation",
+      "details": "Covertly develop and deploy offensive cyber capabilities to infiltrate Chinese AI research facilities. Attempt to retrieve proprietary research data and potentially sabotage their systems while maintaining plausible deniability about the operation's source.",
+      "wallstreet_analysis": "High-risk offensive strategy with substantial financial upside. The aggressive approach drives impressive revenue and valuation growth through potential competitive intelligence gains, though at the cost of significant approval and security declines. This represents a controversial escalation that may yield short-term advantages but creates material geopolitical and reputational risks that could eventually trigger regulatory backlash.",
+      "ngo_analysis": "Deeply concerning escalatory spiral. The counter-hack approach moderately reduces social stability by fueling geopolitical tensions, while dramatically increasing cyber-bio risks through normalization of offensive operations against AI research facilities. This approach represents a dangerous precedent that could accelerate technological competition in ways that undermine safety and governance efforts across the ecosystem.",
+      "researcher_analysis": "Significant capability acceleration in contested domains. The offensive focus drives substantial improvements in coding, hacking, bioweapons, persuasion, and research taste capabilities through both technical development and intelligence gathering. While yielding impressive technical advances, the alignment confidence decline suggests these capabilities may develop in increasingly militarized directions that prioritize effectiveness over safety and ethical considerations.",
       "effects": {
         "company": {
           "credits": "-10..0",

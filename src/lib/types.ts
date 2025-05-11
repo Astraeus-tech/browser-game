@@ -43,6 +43,12 @@ export interface GameState {
   quarter: number;
   /** current meter values */
   meters: Meters;
+  /** history of meter values for each round (quarter) */
+  metersHistory: Array<{
+    year: number;
+    quarter: number;
+    meters: Meters;
+  }>;
   log: string[];
   seed: number;
   gameOver: 'playing' | Ending | null;
@@ -54,6 +60,7 @@ export type Ending = {
   rank?: 'S' | 'A' | 'B';
   title: string;
   description: string;
+  reason?: string;
   conditions?: Record<string, { gte?: number; gt?: number; lte?: number; lt?: number; eq?: number }>;
   conditions_any?: Record<string, { gte?: number; gt?: number; lte?: number; lt?: number; eq?: number }>[];
 };

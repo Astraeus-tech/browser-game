@@ -5,6 +5,10 @@
   "choices": [
     {
       "label": "Fund reskilling initiatives",
+      "details": "Launch a comprehensive program to retrain software developers for AI oversight, prompt engineering, and system evaluation roles. Invest in partnerships with universities and bootcamps to create specialized curricula, while offering scholarships and stipends to displaced workers during their transition period.",
+      "wallstreet_analysis": "Significant ESG investment with uncertain financial returns. The substantial capital outlay pressures short-term financials with no immediate revenue impact and potential valuation headwinds. However, the dramatic approval rating improvement creates valuable reputational capital and potential regulatory goodwill. This represents a long-term strategic bet that human-AI collaboration will remain essential despite full automation capabilities.",
+      "ngo_analysis": "Transformative social stabilization effort. The retraining initiative directly addresses the most pressing concern of technological disruption: workforce displacement. By creating viable career pathways for affected workers, this approach substantially improves social cohesion and reduces the polarization that often accompanies rapid technological change. This exemplifies responsible innovation that considers human impacts alongside technical progress.",
+      "researcher_analysis": "Modest technical tradeoffs with human-centric benefits. The investment in human oversight slightly constrains immediate coding progress as resources shift toward human-AI collaboration interfaces. The interesting side effect is improved persuasion capabilities as training materials need to effectively communicate complex technical concepts to transitioning workers, driving advances in AI explanation and education tools.",
       "effects": {
         "company": {
           "credits": "-30..-20",
@@ -53,7 +57,11 @@
           "robotics_embodied": "0..10",
           "research_taste": "0..10"
         }
-      }
+      },
+      "details": "Double down on automation by developing comprehensive toolkits and services that help companies rapidly implement AI coding solutions. Focus on demonstrating maximum efficiency gains and ROI, while framing job displacement as an inevitable market evolution that will create different opportunities in the long run.",
+      "wallstreet_analysis": "Aggressive growth strategy with strong financial metrics. The modernization play directly drives substantial revenue and valuation improvements by capturing the automation wave. While the approval decline is concerning, markets typically reward efficiency-driven growth over social considerations in the short term. This represents a technology-first approach that prioritizes competitive positioning in a rapidly evolving market.",
+      "ngo_analysis": "Troubling prioritization of technology over humans. The significant social stability decline reflects the real human costs of unmanaged technological disruption, potentially fueling social unrest and political backlash. This approach exemplifies the concerning tendency to treat workforce displacement as merely a transitional inconvenience rather than a fundamental social challenge requiring thoughtful intervention.",
+      "researcher_analysis": "Broad capability acceleration across multiple domains. The full-throttle automation focus drives substantial improvements in coding capabilities while creating secondary advances in persuasion, robotics, and research taste. This technically-optimal approach maximizes capability development by removing human constraints, though potentially at the cost of social acceptance and alignment considerations."
     },
     {
       "label": "Impose hiring quotas",
@@ -79,7 +87,11 @@
           "robotics_embodied": "-10..0",
           "research_taste": "0..0"
         }
-      }
+      },
+      "details": "Establish mandatory human staffing requirements for AI development teams, ensuring that human engineers retain key roles despite automation capabilities. Implement graduated requirements that maintain employment pathways for junior developers while embracing appropriate automation for suitable tasks.",
+      "wallstreet_analysis": "Regulatory compliance approach with mixed financial signals. The mandatory staffing requirements create moderate revenue and valuation pressure by maintaining higher operational costs compared to full automation. However, the approval improvement provides some compensation through improved brand perception and reduced regulatory risk. This represents a balanced strategy that accepts some financial optimization in exchange for social stability.",
+      "ngo_analysis": "Pragmatic social protection framework. The hiring requirements provide meaningful improvement to social stability by maintaining career entry points and professional development pathways despite technological disruption. While less comprehensive than full retraining programs, this approach creates structural protections that preserve human dignity and economic participation during technological transition.",
+      "researcher_analysis": "Capability constraints in select domains. The human quota requirements moderately slow progress in coding and robotics capabilities by maintaining human involvement in processes that could be fully automated. However, the improved alignment confidence suggests these constraints may actually improve long-term capability development by ensuring human oversight during critical development phases."
     }
   ],
   "year": 2026,

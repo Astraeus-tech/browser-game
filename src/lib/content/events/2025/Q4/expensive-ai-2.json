@@ -5,6 +5,10 @@
   "choices": [
     {
       "label": "Switch to renewables",
+      "details": "Make a comprehensive transition to renewable energy sources by investing in dedicated solar and wind farms to power the datacenter. Redesign infrastructure to optimize for variable energy inputs, potentially including large-scale battery storage systems and shifting computational loads to match renewable generation patterns.",
+      "wallstreet_analysis": "Long-term strategic investment with significant near-term costs. The substantial capital outlay for renewable infrastructure will pressure earnings and potentially impact valuation in the short term. However, the improved approval ratings and energy independence could create lasting operational advantages and ESG credential improvements that attract sustainability-focused investors.",
+      "ngo_analysis": "Transformative environmental leadership. The shift to renewables represents a genuine commitment to climate responsibility, dramatically reducing carbon emissions while setting an important precedent for the industry. The improved social stability reflects public appreciation for corporate accountability, potentially inspiring similar actions across the tech sector.",
+      "researcher_analysis": "Minimal direct capability impact. While the energy source transition doesn't directly advance AI capabilities, it does create a more sustainable foundation for future research. The engineering challenges of adapting to renewable energy variability could eventually inspire more energy-efficient algorithms, though such benefits would be secondary to the environmental improvements.",
       "effects": {
         "company": {
           "credits": "-40..-20",
@@ -31,6 +35,10 @@
     },
     {
       "label": "Continue as planned",
+      "details": "Maintain current operations without significant changes to energy sourcing, focusing instead on public relations efforts to contextualize the datacenter's environmental impact against its potential technological benefits. Emphasize the expected efficiency improvements in future iterations while continuing development at full speed.",
+      "wallstreet_analysis": "Short-term financial optimization with significant reputational risk. The approach preserves capital and maintains valuation momentum by prioritizing technological development over environmental concerns. However, the severe approval decline creates vulnerability to regulatory intervention and consumer backlash that could eventually threaten the company's social license to operate.",
+      "ngo_analysis": "Deeply concerning environmental negligence. The continued reliance on carbon-intensive energy sources significantly increases climate impact while eroding social stability through public backlash. This approach epitomizes the disconnect between technological advancement and environmental responsibility that activists have mobilized against, likely catalyzing stronger opposition movements.",
+      "researcher_analysis": "Modest coding capability improvements at environmental cost. The uninterrupted development allows for incremental advances in computational efficiency through standard iteration. However, the approach misses an opportunity to inspire more fundamentally sustainable AI architectures that could address the field's growing environmental footprint.",
       "effects": {
         "company": {
           "credits": "-20..-10",
@@ -57,6 +65,10 @@
     },
     {
       "label": "Invest in carbon offsets",
+      "details": "Maintain current energy usage patterns but purchase carbon credits and invest in environmental projects to offset the datacenter's emissions. Develop partnerships with conservation organizations and tree-planting initiatives while publicizing the company's commitment to carbon neutrality through offsets.",
+      "wallstreet_analysis": "Cost-effective compromise with modest upside. The relatively small investment in carbon offsets represents an efficient middle path that addresses environmental concerns without disrupting operations. The slight approval improvement and potential revenue increase from greener branding could benefit the bottom line, making this an economically rational response to environmental pressure.",
+      "ngo_analysis": "Incremental improvement with limitations. While carbon offsets reduce net climate impact and somewhat improve social stability through demonstrated environmental concern, they represent a partial solution that doesn't address the root cause of emissions. This approach acknowledges the problem but stops short of the transformative change needed for true sustainability in AI development.",
+      "researcher_analysis": "No meaningful capability impact. The offset approach maintains focus on the core technological development without diverting significant resources or attention to energy infrastructure. While this preserves research continuity, it misses potential innovation opportunities that could arise from deeper engagement with the energy efficiency challenge.",
       "effects": {
         "company": {
           "credits": "-10..-10",

@@ -5,6 +5,10 @@
   "choices": [
     {
       "label": "Impose strict controls",
+      "details": "Advocate for comprehensive regulatory frameworks that significantly limit AI model exports, restrict access to advanced hardware, and implement rigorous security reviews for cutting-edge research. Support classification of certain AI capabilities as national security assets with corresponding controls.",
+      "wallstreet_analysis": "Challenging regulatory environment with significant business constraints. The strict controls create meaningful cost, revenue, and valuation pressure through reduced market access and increased compliance burden. This approach represents a strategic pivot that prioritizes national security alignment over global market expansion, potentially creating competitive challenges but also unique partnership opportunities with defense and intelligence agencies.",
+      "ngo_analysis": "Critical stabilization framework with significant security benefits. The controls substantially improve social stability by addressing urgent national security concerns, while dramatically reducing cyber-bio risks through comprehensive oversight mechanisms. This approach acknowledges the genuine security implications of increasingly powerful AI systems and establishes proportionate safeguards for the most sensitive capabilities.",
+      "researcher_analysis": "Meaningful capability constraints across multiple domains. The strict regulations moderately slow progress in coding, hacking, bioweapons, and research taste capabilities by limiting information sharing and restricting certain applications. This approach represents a deliberate technical slowdown in service of security considerations, potentially creating lasting divergence between civilian and classified AI capability development paths.",
       "effects": {
         "company": {
           "credits": "-20..-10",
@@ -31,6 +35,10 @@
     },
     {
       "label": "Balance regulation",
+      "details": "Propose targeted regulatory measures that address the most critical security concerns while preserving innovation pathways. Develop a framework distinguishing between sensitive and non-sensitive AI applications, with proportionate controls for each category.",
+      "wallstreet_analysis": "Pragmatic middle-path strategy with modest growth potential. The balanced approach creates minimal cost pressure while enabling moderate revenue and valuation growth through continued market access. This represents a sophisticated positioning that acknowledges legitimate security concerns while advocating for nuanced rather than blanket restrictions, potentially appealing to both government stakeholders and growth-oriented investors.",
+      "ngo_analysis": "Constructive compromise framework with meaningful benefits. The balanced approach meaningfully improves social stability by addressing core security concerns while avoiding unnecessarily restrictive measures. This represents a mature governance model that distinguishes between different risk profiles rather than treating all AI capabilities as equally sensitive, potentially establishing sustainable oversight without choking beneficial innovation.",
+      "researcher_analysis": "Selective capability advancement with governance benefits. The balanced regulation enables modest improvements in coding, persuasion, and research taste capabilities while constraining the most sensitive applications. The modest alignment confidence improvement suggests this approach creates useful guidance for responsible capability development, channeling innovation toward beneficial rather than potentially destabilizing applications.",
       "effects": {
         "company": {
           "credits": "-10..0",
@@ -57,6 +65,10 @@
     },
     {
       "label": "Accelerate domestic chipplay",
+      "details": "Launch major initiatives to dramatically expand U.S.-based semiconductor manufacturing and AI hardware development. Invest heavily in building sovereign computing infrastructure while advocating for national champions in AI development as a matter of strategic importance.",
+      "wallstreet_analysis": "Strategic national investment with substantial growth potential. The significant infrastructure commitment creates moderate cost pressure but drives impressive valuation growth through privileged positioning in a critical national initiative. This represents a major bet on the increasing importance of AI to national security, potentially creating lasting competitive advantages through preferred access to advanced hardware and government contracts.",
+      "ngo_analysis": "Mixed technological sovereignty play. The domestic acceleration moderately reduces social stability through increased great power competition dynamics, while increasing cyber-bio risks through accelerated capability development. This approach prioritizes national advantage over global cooperation, potentially creating technological fragmentation that complicates governance efforts while stimulating arms-race dynamics.",
+      "researcher_analysis": "Significant capability acceleration in strategic domains. The domestic focus drives substantial improvements in coding, hacking, persuasion, robotics, and research taste capabilities through concentrated investment and reduced external constraints. While technically productive, this approach creates concerning tensions between national advantage and global governance that may complicate efforts to develop broadly beneficial AI systems.",
       "effects": {
         "company": {
           "credits": "-20..-10",

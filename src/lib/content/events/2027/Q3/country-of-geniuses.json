@@ -5,6 +5,10 @@
   "choices": [
     {
       "label": "Augment human oversight",
+      "details": "Develop specialized tools and methodologies that enhance human ability to evaluate AI outputs effectively. Create multi-tiered review systems with AI-assisted analysis tools that help human experts maintain meaningful oversight despite the vast productivity differential.",
+      "wallstreet_analysis": "Principled governance strategy with modest valuation impact. The oversight investment creates moderate valuation pressure by maintaining human involvement, but generates substantial approval improvements that build valuable reputational capital. This represents a mature approach that prioritizes robust human understanding and control over maximum automation, potentially appealing to stakeholders concerned about alignment risks in increasingly autonomous systems.",
+      "ngo_analysis": "Essential human-in-the-loop safeguard. The oversight enhancement significantly improves social stability by maintaining meaningful human control over advanced systems, while modestly reducing cyber-bio risks through improved supervision. This approach acknowledges the fundamental importance of human judgment in evaluating increasingly powerful technologies, maintaining crucial governance mechanisms despite growing capability differentials.",
+      "researcher_analysis": "Capability moderation with safety benefits. The enhanced oversight moderately constrains progress in coding, hacking, and bioweapons domains by maintaining human bottlenecks in development cycles. However, the meaningful alignment confidence improvement suggests this approach creates essential feedback loops that keep increasingly powerful systems within human-understandable parameters, potentially preventing harmful capability divergence.",
       "effects": {
         "company": {
           "credits": "-10..0",
@@ -31,6 +35,10 @@
     },
     {
       "label": "Scale human teams down",
+      "details": "Significantly reduce human engineering staff, allowing AI systems to operate with minimal supervision. Implement autonomous development pipelines where AI systems propose, test, and deploy their own improvements with only high-level human guidance on strategic objectives.",
+      "wallstreet_analysis": "Aggressive efficiency play with exceptional financial upside. The staff reduction drives substantial credit savings and impressive revenue and valuation growth through dramatically reduced operating costs. This represents a revolutionary business transformation that embraces full automation as inevitable, though the significant approval decline creates material reputational and regulatory risks that could eventually constrain growth.",
+      "ngo_analysis": "Deeply concerning governance abdication. The staff reduction significantly reduces social stability by normalizing human displacement from core innovation processes, while substantially increasing cyber-bio risks through reduced oversight. This approach represents a concerning prioritization of efficiency over safety considerations at precisely the moment when human judgment becomes most critical for guiding increasingly powerful systems.",
+      "researcher_analysis": "Dramatic capability acceleration across all domains. The autonomous development approach drives exceptional improvements in coding capabilities, with substantial advances across hacking, bioweapons, persuasion, robotics, and research taste domains. While technically revolutionary, the alignment confidence decline suggests these self-improving systems may increasingly diverge from human values and oversight as development proceeds without adequate human guidance.",
       "effects": {
         "company": {
           "credits": "10..20",
@@ -57,6 +65,10 @@
     },
     {
       "label": "Invest in AI-human interfaces",
+      "details": "Develop sophisticated collaboration tools that amplify human capabilities through AI partnership rather than replacement. Create interfaces that enable intuitive human direction of AI systems while maintaining human understanding and control of the overall innovation process.",
+      "wallstreet_analysis": "Strategic collaboration investment with balanced growth potential. The interface development creates minimal cost pressure while enabling moderate revenue and valuation growth through enhanced productivity. This represents a nuanced approach that positions the company at the forefront of human-AI collaboration rather than pure automation, potentially creating sustainable competitive advantages as hybrid teams outperform both fully human and fully automated alternatives.",
+      "ngo_analysis": "Constructive symbiotic framework. The interface approach meaningfully improves social stability by demonstrating pathways for beneficial human-AI cooperation rather than competition. This represents a mature vision of technological progress that maintains essential human roles while leveraging AI capabilities, potentially establishing sustainable models for equitable distribution of benefits from advanced systems.",
+      "researcher_analysis": "Balanced capability advancement with alignment benefits. The interface focus enables substantial improvements in coding and research taste capabilities, with modest advances in persuasion and robotics domains. The meaningful alignment confidence improvement suggests this approach creates valuable feedback loops between human intentions and AI implementations, potentially steering capability development toward more beneficial and controllable applications.",
       "effects": {
         "company": {
           "credits": "-10..0",

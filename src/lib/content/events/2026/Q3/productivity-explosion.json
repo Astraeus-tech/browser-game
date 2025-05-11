@@ -5,6 +5,10 @@
   "choices": [
     {
       "label": "Cap AI workload per human",
+      "details": "Implement strict limits on the amount of AI-generated output each human reviewer must oversee, establishing clear boundaries to prevent burnout. Create standardized workload metrics and transparent reporting systems while advocating for industry-wide adoption of similar standards.",
+      "wallstreet_analysis": "Principled human-centric approach with modest financial impact. The workload cap creates slight valuation pressure by constraining maximum theoretical output, though the substantial approval improvement builds valuable reputational capital. This represents a long-term sustainable growth strategy that acknowledges human factors as essential to quality control, though impatient investors may view it as leaving short-term gains on the table.",
+      "ngo_analysis": "Essential worker protection framework. The workload limits significantly improve social stability by directly addressing exploitative labor practices emerging in AI oversight roles. This approach acknowledges the fundamental importance of human wellbeing in technological systems, potentially establishing important precedents for ethical automation as AI capabilities continue advancing.",
+      "researcher_analysis": "Modest capability constraints with alignment benefits. The workload caps moderately slow progress in coding and robotics capabilities by limiting the volume of AI outputs that can be rapidly deployed. However, the substantial alignment confidence improvement suggests this human-centered approach may yield more reliable and socially beneficial capabilities in the long term by ensuring proper oversight of edge cases.",
       "effects": {
         "company": {
           "credits": "-10..0",
@@ -31,6 +35,10 @@
     },
     {
       "label": "Double down on automation",
+      "details": "Aggressively expand automation capabilities with minimal human oversight, focusing on developing self-checking systems and automated error detection. Accelerate deployment of autonomous workflows across the business while downplaying emerging concerns about human reviewer burnout.",
+      "wallstreet_analysis": "Aggressive growth maximization strategy. The automation-first approach delivers exceptional revenue and valuation improvements through dramatically increased output and reduced labor costs. While the approval decline represents a notable concern, markets typically reward technological leadership and efficiency gains over labor considerations in the short term, though potential regulatory backlash could eventually threaten this valuation premium.",
+      "ngo_analysis": "Deeply concerning labor exploitation pattern. The automation acceleration significantly reduces social stability by normalizing unsustainable oversight practices and potentially catalyzing widespread job displacement. The increased climate impact reflects the dramatically expanded computational resources required for this approach, representing a concerning prioritization of productivity over both human and environmental wellbeing.",
+      "researcher_analysis": "Dramatic capability acceleration across multiple domains. The intense automation focus drives exceptional improvements in coding capabilities, with meaningful advances in hacking, bioweapons, persuasion, robotics and research taste domains. While technically impressive, the alignment confidence decline suggests these rapidly developed capabilities may encounter increasing reliability and safety challenges that become harder to address as deployments scale.",
       "effects": {
         "company": {
           "credits": "-20..-10",
@@ -57,6 +65,10 @@
     },
     {
       "label": "Increase oversight staffing",
+      "details": "Substantially expand human reviewer teams and develop specialized training programs for AI oversight roles. Create career paths for human-in-the-loop positions while investing in tools that make review processes more efficient and effective.",
+      "wallstreet_analysis": "Balanced quality-focused investment with modest growth prospects. The significant staffing investment creates moderate revenue and valuation improvements by enhancing output quality and reliability, while the approval and security enhancements build valuable brand equity. This approach represents a middle path that preserves automation benefits while addressing the human oversight bottleneck through thoughtful scaling rather than exploitation.",
+      "ngo_analysis": "Responsible human-AI collaboration model. The staffing increases moderately improve social stability by creating sustainable oversight practices and meaningful employment opportunities amid automation. This approach demonstrates that technological advancement and human welfare can be complementary rather than competing priorities when properly balanced.",
+      "researcher_analysis": "Capability moderation with reliability benefits. The enhanced oversight structure moderately constrains capabilities in coding, hacking, and bioweapons domains by enforcing more rigorous quality standards. However, the substantial alignment confidence improvement suggests this approach may yield more reliable and controllable capabilities that better address real-world deployment challenges.",
       "effects": {
         "company": {
           "credits": "-20..-10",

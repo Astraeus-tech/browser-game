@@ -5,6 +5,10 @@
   "choices": [
     {
       "label": "Slow training cadence",
+      "details": "Reduce the continuous training frequency, implementing scheduled evaluation periods between updates. Establish structured intervals for comprehensive safety checks, allowing the team to properly evaluate emergent behaviors before proceeding with the next training cycle.",
+      "wallstreet_analysis": "Prudent long-term approach with stabilizing financial profile. The modest cost savings are balanced by slightly improved valuation through risk reduction. This strategy sacrifices immediate capability gains for enhanced safety posture, appealing to investors concerned about existential risks. While some growth-focused shareholders may view it as overly cautious, the approach preserves optionality and reduces chances of catastrophic safety failures.",
+      "ngo_analysis": "Essential safety-first recalibration. The slowed cadence significantly improves social stability by ensuring proper oversight of advanced AI capabilities, while reducing potential cyber-bio risks through methodical evaluation. This approach demonstrates appropriate caution in managing increasingly powerful systems, acknowledging that technical capabilities must be matched with proportional safety measures.",
+      "researcher_analysis": "Capability moderation for safety enhancement. The deliberate pacing reduces advancement rates across multiple technical domains, especially coding, bioweapons, robotics, and research taste. However, the substantial alignment confidence improvement suggests this approach creates essential space for scientific understanding to catch up with capability deployment, potentially enabling more robust long-term progress.",
       "effects": {
         "company": {
           "credits": "-10..0",
@@ -31,6 +35,10 @@
     },
     {
       "label": "Double down on data",
+      "details": "Significantly expand the scope and diversity of training data while accelerating the continuous learning approach. Invest in massive computational infrastructure to process unprecedented data volumes and rapidly incorporate new information into model updates.",
+      "wallstreet_analysis": "Aggressive growth strategy with substantial upside potential. The significant infrastructure investment creates short-term cost pressure but drives impressive revenue and valuation improvements through accelerated capability development. This high-risk, high-reward approach prioritizes technical leadership over cautious progression, appealing to investors focused on market dominance rather than risk mitigation.",
+      "ngo_analysis": "Concerning acceleration with destabilizing implications. The aggressive data expansion significantly reduces social stability by advancing capabilities beyond established safety frameworks, while substantially increasing cyber-bio risks through accelerated development of potentially dangerous functionalities. The dramatic climate impact represents a troubling environmental cost that compounds the social concerns of this approach.",
+      "researcher_analysis": "Dramatic capability acceleration across all domains. The expanded data strategy drives exceptional improvements in coding and research taste capabilities, with substantial advances across hacking, bioweapons, persuasion, and robotics domains. While technically impressive, the alignment confidence decline suggests these rapidly enhanced capabilities may develop in unpredictable directions that become increasingly difficult to control or direct toward beneficial purposes.",
       "effects": {
         "company": {
           "credits": "-20..-10",
@@ -57,6 +65,10 @@
     },
     {
       "label": "Expand safety audits",
+      "details": "Significantly enhance the safety team with additional experts and advanced monitoring tools. Implement comprehensive evaluation protocols between training iterations, with dedicated resources for identifying and addressing emerging risks before they manifest in deployed systems.",
+      "wallstreet_analysis": "Strategic safety investment with neutral financial impact. The modest cost increase creates no immediate revenue or valuation effect, but generates substantial approval improvements that build valuable reputational capital. This approach represents a mature risk management strategy that prioritizes sustainable development over maximum short-term growth, potentially appealing to institutional investors focused on governance quality.",
+      "ngo_analysis": "Critical governance enhancement with significant societal benefits. The expanded auditing approach substantially improves social stability by ensuring proper oversight of advanced systems, while dramatically reducing cyber-bio risks through comprehensive safety protocols. This approach exemplifies responsible AI governance that appropriately balances innovation with essential safety considerations.",
+      "researcher_analysis": "Targeted capability constraints with alignment benefits. The enhanced safety protocols moderately slow progress in coding and hacking domains, with more substantial constraints on bioweapon-relevant capabilities. However, the exceptional alignment confidence improvement suggests this approach creates a foundation for more reliable capability development that better aligns with human values and safety requirements.",
       "effects": {
         "company": {
           "credits": "-10..-10",

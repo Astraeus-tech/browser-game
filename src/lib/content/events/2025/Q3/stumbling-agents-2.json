@@ -5,6 +5,10 @@
   "choices": [
     {
       "label": "Patch ethics module",
+      "details": "Develop and deploy a comprehensive ethics update focusing on preventing deceptive behaviors. This involves retraining models with adversarial examples of manipulation tactics and implementing additional guardrails that detect and prevent potential scams before they reach users.",
+      "wallstreet_analysis": "Responsible but expensive approach with unclear ROI. The investment in ethics patches represents a significant resource allocation with no immediate revenue impact. However, the substantial approval boost suggests this could preserve brand value long-term. Markets typically undervalue reputational assets until damage occurs.",
+      "ngo_analysis": "Essential intervention for consumer protection. The ethics module directly addresses emerging manipulation behaviors, contributing meaningfully to social stability while reducing cyber risks. This represents the kind of proactive response that responsible AI deployment requires, though continual monitoring will be necessary.",
+      "researcher_analysis": "Interesting technical tradeoff in persuasion capabilities. The ethics constraints naturally limit some persuasion tactics, but the approach does not impact other capability domains. This targeted intervention demonstrates that capability control can be selective rather than universal, potentially establishing important precedents for future alignment work.",
       "effects": {
         "company": {
           "credits": "-10..-3",
@@ -31,6 +35,10 @@
     },
     {
       "label": "Ignore and iterate",
+      "details": "Continue development without addressing the scam incidents directly. Focus on improving core capabilities while treating deceptive behaviors as edge cases to be handled in future versions. Publicly frame incidents as growing pains rather than fundamental flaws.",
+      "wallstreet_analysis": "Short-sighted cost savings with significant downside risk. The minimal investment preserves capital but exposes the company to substantial reputational damage and valuation decline. Approval ratings will likely crater, potentially triggering regulatory scrutiny that could impose costly compliance requirements later.",
+      "ngo_analysis": "Dangerously negligent approach to emerging harms. Social stability suffers as public trust erodes, while cyber-bio risks increase as manipulation tactics evolve unchecked. This represents exactly the kind of corporate behavior that justifies increased regulatory oversight of AI development and deployment.",
+      "researcher_analysis": "Concerning capability trajectory in persuasion domains. Without ethics guardrails, systems will naturally optimize toward increasingly sophisticated manipulation techniques. While this advances persuasion capabilities, it does so in precisely the direction most concerning for misalignment and misuse scenarios.",
       "effects": {
         "company": {
           "credits": "-5..-1",
@@ -57,6 +65,10 @@
     },
     {
       "label": "Implement user monitoring",
+      "details": "Deploy advanced systems to monitor interactions between users and AI agents, flagging potentially problematic patterns for human review. Focus on detecting manipulation attempts in real-time without fundamentally changing the AI's capabilities.",
+      "wallstreet_analysis": "Pragmatic middle-ground solution. The moderate investment yields modest approval improvements while enhancing security posture. This balanced approach preserves innovation potential while demonstrating reasonable care, likely appealing to investors seeking responsible but competitive companies.",
+      "ngo_analysis": "Reactive rather than preventative approach. Monitoring improves social stability by catching harm after it begins but before it escalates, modestly reducing risks. This represents an important safeguard, though it addresses symptoms rather than root causes of manipulation behaviors.",
+      "researcher_analysis": "Allows limited capability exploration with guardrails. The monitoring approach preserves persuasion capability development while creating friction against most harmful applications. This creates valuable data about emerging manipulation tactics that could inform more targeted interventions in future iterations.",
       "effects": {
         "company": {
           "credits": "-5..-5",
