@@ -5,6 +5,10 @@
   "choices": [
     {
       "label": "Open-source core tooling",
+      "details": "Release the fundamental components of the AI coding pipeline as open-source software, allowing the broader community to inspect, improve, and build upon these tools. Maintain proprietary elements for enterprise offerings while fostering a community-driven ecosystem around the core technology.",
+      "wallstreet_analysis": "Strategic ecosystem play with compelling economics. While the upfront investment reduces immediate revenue, the open-source approach creates significant market expansion potential through widespread adoption. The improved valuation reflects investor recognition that establishing the industry standard could drive substantial long-term enterprise licensing opportunities with better margins than a fully proprietary approach.",
+      "ngo_analysis": "Democratizing access with positive social implications. The open-source strategy significantly improves social stability by reducing technology concentration and creating more equitable access to productivity tools. This approach helps address concerns about economic disruption by enabling broader participation in the AI-driven software development revolution.",
+      "researcher_analysis": "Dramatic acceleration in coding capabilities. Community collaboration drives rapid improvement cycles that substantially advance the state-of-the-art in automated programming. The modest research taste improvements come from diverse contributions identifying novel applications and optimization approaches that might have been overlooked in a closed development environment.",
       "effects": {
         "company": {
           "credits": "-20..-10",
@@ -31,6 +35,10 @@
     },
     {
       "label": "License proprietary stack",
+      "details": "Keep the entire AI coding system proprietary and develop a comprehensive licensing program targeting enterprise customers. Focus on creating premium features, dedicated support, and integration services that justify significant subscription fees from corporate clients.",
+      "wallstreet_analysis": "Classic high-margin software play. The proprietary approach generates immediate and substantial revenue and valuation growth through lucrative enterprise contracts. The licensing model creates recurring revenue streams with excellent margins, though the approval decline indicates potential long-term market resistance that could eventually constrain growth if competitors offer viable alternatives.",
+      "ngo_analysis": "Concerning concentration of technological power. The proprietary strategy modestly reduces social stability by limiting access to productivity-enhancing tools, potentially exacerbating economic inequality. While not creating immediate risks, this approach raises questions about technological gatekeeping in an area with broad economic implications.",
+      "researcher_analysis": "Moderate coding advances with persuasion side-effects. The proprietary development yields solid improvements in coding capabilities, though less dramatic than community-driven approaches. Interestingly, the market-focused strategy inadvertently advances persuasion capabilities as the company refines messaging and demonstrable value propositions to justify premium pricing.",
       "effects": {
         "company": {
           "credits": "10..20",
@@ -57,6 +65,10 @@
     },
     {
       "label": "Mandate code audits",
+      "details": "Implement rigorous human review processes for AI-generated code, requiring experienced engineers to approve all significant changes. Develop specialized tools to facilitate efficient auditing and invest in training programs to help engineers effectively oversee AI coding assistants.",
+      "wallstreet_analysis": "Quality-focused approach with balanced metrics. The audit mandate creates modest revenue and valuation growth by positioning the company as a premium, reliability-focused provider. The substantial approval improvement and security enhancements build brand value, attracting risk-averse enterprise customers in regulated industries willing to pay for demonstrated quality assurance.",
+      "ngo_analysis": "Responsible governance framework with social benefits. The human-in-the-loop approach improves social stability by maintaining employment pathways for software engineers while ensuring appropriate oversight of automated systems. The reduced cyber-bio risk stems from improved detection of potential vulnerabilities or unintended consequences before deployment.",
+      "researcher_analysis": "Temporary capability moderation for safety. The human audit requirement modestly constrains immediate progress across multiple capability domains, creating a more controlled development path. However, the significant alignment confidence improvement suggests this approach may enable more sustainable long-term progress by establishing proper verification methodologies and identifying failure modes early.",
       "effects": {
         "company": {
           "credits": "-10..-10",

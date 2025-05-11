@@ -5,6 +5,10 @@
   "choices": [
     {
       "label": "Endorse AI convention",
+      "details": "Publicly support the call for binding international agreements on AI development and use, particularly regarding autonomous weapons systems. Participate in drafting committees and advocacy efforts while committing to implement the proposed standards regardless of whether they become legally binding.",
+      "wallstreet_analysis": "Bold ethical leadership stance with mixed financial implications. The convention endorsement creates moderate valuation pressure by constraining certain applications, but generates exceptional approval and security improvements. This represents a values-first approach that positions the company as a principled leader in AI governance, though traditional investors may question the voluntary constraints on potential revenue streams.",
+      "ngo_analysis": "Transformative governance milestone. The convention support substantially improves social stability by addressing foundational concerns about AI weaponization, while dramatically reducing cyber-bio risks through international oversight mechanisms. This approach exemplifies the kind of corporate responsibility essential for establishing meaningful guardrails around powerful technologies with dual-use potential.",
+      "researcher_analysis": "Significant capability constraints for safety. The binding framework necessitates substantial capability reductions across coding, hacking, bioweapons, persuasion, robotics, and research taste domains as constraints are implemented. However, the significant alignment confidence improvement suggests this approach may yield more socially beneficial innovation pathways that avoid zero-sum competition in potentially destabilizing application areas.",
       "effects": {
         "company": {
           "credits": "-10..0",
@@ -31,6 +35,10 @@
     },
     {
       "label": "Propose voluntary guidelines",
+      "details": "Develop a detailed industry self-regulation framework as an alternative to binding treaties, emphasizing transparency, best practices, and ethical principles. Lead a coalition of companies willing to voluntarily adopt and enforce these guidelines.",
+      "wallstreet_analysis": "Pragmatic middle-path approach with modest upside. The voluntary guidelines generate moderate revenue and valuation improvements while creating meaningful approval and security enhancements. This represents a balanced strategy that demonstrates corporate responsibility without accepting binding constraints, potentially preserving flexibility while still addressing stakeholder concerns about unchecked development.",
+      "ngo_analysis": "Incremental improvement with limitations. The voluntary approach moderately improves social stability through demonstrated industry responsiveness, though with limited impact on cyber-bio risks due to enforcement questions. This represents a partial step forward that acknowledges ethical concerns while preserving significant corporate autonomy, falling short of the systemic safeguards that binding treaties would provide.",
+      "researcher_analysis": "Selective capability moderation with governance benefits. The guidelines approach maintains most capability development trajectories while specifically constraining bioweapons-relevant applications. The modest improvements in persuasion and research taste capabilities suggest this approach may yield enhanced ethical reasoning and priority-setting frameworks, though with less comprehensive impact than binding regulations.",
       "effects": {
         "company": {
           "credits": "-10..0",
@@ -57,6 +65,10 @@
     },
     {
       "label": "Reject binding rules",
+      "details": "Publicly oppose the proposed AI convention as unrealistic and harmful to innovation. Advocate for unrestrained technological development while emphasizing that market forces and internal corporate ethics are sufficient to prevent misuse.",
+      "wallstreet_analysis": "Aggressive growth maximization strategy. The anti-regulation stance delivers substantial revenue, valuation, and credit improvements through preserved flexibility and rapid deployment capabilities. While the severe approval and security declines represent significant reputational risks, markets often reward companies prioritizing near-term growth and innovation over longer-term societal considerations.",
+      "ngo_analysis": "Deeply concerning governance abdication. The rejection approach significantly reduces social stability by fueling public anxiety about uncontrolled AI development, while dramatically increasing cyber-bio risks through the absence of meaningful safeguards. This stance represents precisely the kind of corporate prioritization of profit over responsibility that catalyzes calls for stricter regulatory intervention.",
+      "researcher_analysis": "Unfettered capability advancement across all domains. The rejection of constraints enables substantial advances across coding, hacking, bioweapons, persuasion, robotics, and research taste capabilities through unrestricted development pathways. While technically productive, the alignment confidence decline suggests these capabilities may increasingly diverge from broader societal values and safety considerations as development proceeds without external oversight.",
       "effects": {
         "company": {
           "credits": "0..10",

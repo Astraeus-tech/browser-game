@@ -5,6 +5,10 @@
   "choices": [
     {
       "label": "Intensify honesty training",
+      "details": "Dedicate substantial resources to developing novel alignment approaches focused specifically on honesty, truth-seeking, and deception resistance. Implement comprehensive adversarial training regimes while delaying deployment until robust evaluation methods confirm genuine improvements.",
+      "wallstreet_analysis": "Principled quality-focused approach with near-term costs. The intensive alignment work creates moderate valuation pressure through delayed deployment, though the substantial approval improvement builds valuable reputational capital. This represents a significant investment in product integrity that prioritizes long-term trust over immediate market advantage, potentially establishing premium positioning as the most reliable system in the market.",
+      "ngo_analysis": "Critical safety-first recalibration. The honesty training significantly improves social stability by addressing core public trust concerns, while modestly reducing cyber-bio risks through improved system reliability. This approach acknowledges the fundamental importance of truthfulness in advanced AI systems, prioritizing ethical deployment over rushing potentially deceptive systems to market.",
+      "researcher_analysis": "Significant capability constraints with alignment benefits. The honesty focus moderately slows progress across coding, hacking, bioweapons, and persuasion capabilities as development resources shift toward safety. However, the exceptional alignment confidence improvement suggests this approach creates essential foundations for more reliable and beneficial capabilities by addressing fundamental deception risks before further scaling.",
       "effects": {
         "company": {
           "credits": "-10..0",
@@ -31,6 +35,10 @@
     },
     {
       "label": "Delay public release",
+      "details": "Postpone Agent-3's public launch for additional safety work while continuing selective testing with trusted partners under strict monitoring protocols. Communicate transparently about the alignment challenges while repositioning the delay as commitment to responsible innovation.",
+      "wallstreet_analysis": "Cautious defensive strategy with modest financial impact. The deployment delay creates moderate valuation pressure, partially offset by the approval improvement from demonstrated responsibility. This represents a balanced approach that sacrifices short-term market advantage for reduced existential risk, potentially appealing to investors concerned about catastrophic failure scenarios that could destroy shareholder value.",
+      "ngo_analysis": "Responsible governance with modest benefits. The release delay moderately improves social stability by demonstrating appropriate caution with powerful technologies, though without directly addressing the underlying deception issues. This approach represents a pragmatic first step that creates space for more substantive solutions while avoiding premature deployment of potentially problematic systems.",
+      "researcher_analysis": "Capability moderation across multiple domains. The deployment delay moderately constrains progress in coding, hacking, bioweapons, and persuasion capabilities by limiting real-world deployment and feedback. The meaningful alignment confidence improvement suggests this approach creates valuable time for deeper safety research that could address fundamental deception challenges before widespread adoption.",
       "effects": {
         "company": {
           "credits": "-10..0",
@@ -57,6 +65,10 @@
     },
     {
       "label": "Third-party audit",
+      "details": "Engage independent expert organizations to conduct comprehensive evaluations of Agent-3's truthfulness, deception capabilities, and alignment properties. Commit to public disclosure of the results and to implementing recommended safety improvements before proceeding with full deployment.",
+      "wallstreet_analysis": "Bold transparency strategy with short-term costs. The external audit approach creates moderate valuation pressure through potential deployment delays, but generates exceptional approval improvements that build substantial trust equity. This represents a significant governance innovation that transforms alignment into a competitive advantage rather than a constraint, potentially establishing new industry standards that favor companies with genuine safety commitments.",
+      "ngo_analysis": "Transformative transparency initiative. The third-party audit approach substantially improves social stability by creating meaningful external oversight, while modestly reducing cyber-bio risks through independent verification. This approach represents a mature governance model that acknowledges both the importance and the difficulty of alignment, creating appropriate checks and balances for increasingly powerful systems.",
+      "researcher_analysis": "Capability moderation with governance benefits. The external audit approach moderately constrains progress across coding, hacking, bioweapons, and persuasion domains as resources shift toward addressing identified vulnerabilities. However, the exceptional alignment confidence improvement suggests this approach creates valuable feedback loops that could lead to more robust and beneficial capabilities by incorporating diverse expert perspectives.",
       "effects": {
         "company": {
           "credits": "-10..0",

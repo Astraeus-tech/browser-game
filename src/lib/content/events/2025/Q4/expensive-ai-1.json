@@ -5,6 +5,10 @@
   "choices": [
     {
       "label": "Invest more capital",
+      "details": "Double down on the datacenter investment by accelerating funding, increasing capacity, and expanding the facility's infrastructure beyond the original plans. Address the budget overruns by committing additional resources to ensure the project reaches its full potential without compromise.",
+      "wallstreet_analysis": "High-risk capital allocation strategy. The massive additional investment creates significant financial exposure with no immediate revenue return. This represents a major bet on future capabilities that could either establish insurmountable competitive advantage or create severe financial strain if returns are delayed. Investors with high risk tolerance may appreciate the boldness, but most will question the concentration of resources.",
+      "ngo_analysis": "Alarming environmental footprint expansion. The increased investment directly translates to substantially higher energy consumption and climate impact, with social stability impacts as resources are diverted from other sectors. This represents precisely the kind of unconstrained technological development that environmental groups have long warned against.",
+      "researcher_analysis": "Unclear immediate capability benefits. While the additional computational resources could eventually enable more complex models, there's no guarantee that merely increasing scale will overcome current research bottlenecks. Without corresponding advances in training efficiency or algorithmic innovation, this represents a brute-force approach to capability development.",
       "effects": {
         "company": {
           "credits": "-50..-30",
@@ -31,6 +35,10 @@
     },
     {
       "label": "Optimize infrastructure",
+      "details": "Rather than expanding the datacenter, focus on maximizing the efficiency of the existing infrastructure through improved cooling systems, advanced chip designs, and software optimizations. Implement best practices from cloud computing to enhance utilization rates and reduce waste.",
+      "wallstreet_analysis": "Prudent operational efficiency play. This approach represents a more measured capital commitment focused on extracting maximum value from existing investments. While less flashy than expansion, the improved technological infrastructure creates sustainable competitive advantage through better economics and reduced operating costs. Markets typically undervalue such operational improvements until they materialize in margin expansion.",
+      "ngo_analysis": "Commendable sustainability pivot. The efficiency improvements directly reduce environmental impact while maintaining or improving technological capabilities. Social stability benefits from the responsible resource management, and the reduced energy consumption helps mitigate climate concerns. This represents the kind of technological stewardship that balances progress with responsibility.",
+      "researcher_analysis": "Significant coding capability enhancement. The focus on optimization necessarily drives improvements in software efficiency, algorithmic design, and computational techniques. These advances create durable capability improvements in coding domains that transfer across applications, potentially enabling more sophisticated models despite using fewer resources.",
       "effects": {
         "company": {
           "credits": "-20..-10",
@@ -57,6 +65,10 @@
     },
     {
       "label": "Seek public funding",
+      "details": "Position the datacenter as critical national infrastructure and lobby for government subsidies, tax breaks, and public investment. Frame the project as essential to national competitiveness and security, potentially offering limited oversight in exchange for financial support.",
+      "wallstreet_analysis": "Shrewd financial engineering. Converting a private capital burden to public funding represents a significant balance sheet victory, preserving company resources while still accessing computational benefits. The substantial credit influx could be redirected to other initiatives or returned to shareholders. However, investors should consider potential strings attached to government funding that may constrain future decision-making.",
+      "ngo_analysis": "Mixed social-environmental impact. While the public funding may improve social stability through job creation and national competitiveness narratives, the continued expansion without fundamental efficiency improvements maintains concerning climate impacts. The public-private partnership creates accountability questions that could either improve or worsen environmental outcomes depending on oversight quality.",
+      "researcher_analysis": "Limited direct capability impact. While securing funding ensures the datacenter's completion, it doesn't inherently advance technical capabilities beyond the original plan. The primary research impact would be indirect - preserving capital that could potentially fund more innovative research initiatives separate from the datacenter itself.",
       "effects": {
         "company": {
           "credits": "20..50",

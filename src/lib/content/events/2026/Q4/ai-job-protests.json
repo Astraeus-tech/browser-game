@@ -5,6 +5,10 @@
   "choices": [
     {
       "label": "Implement UBI trials",
+      "details": "Fund pilot programs testing universal basic income in communities heavily impacted by AI automation. Support research into large-scale implementation feasibility while positioning the company as actively addressing the societal impacts of technological change.",
+      "wallstreet_analysis": "Substantial ESG investment with uncertain financial returns. The significant UBI funding creates moderate valuation pressure through direct cost and dilution of focus, though the substantial approval improvement builds valuable reputational capital. This represents a major bet on social stability as a prerequisite for long-term business viability, though traditional investors may question the direct business relevance of such initiatives.",
+      "ngo_analysis": "Critical social stabilization effort. The UBI trials substantially improve social stability by directly addressing economic insecurity caused by technological displacement. This approach acknowledges the profound social responsibility that accompanies transformative technology development, potentially establishing important precedents for how companies can contribute to systemic adaptations during periods of disruptive change.",
+      "researcher_analysis": "Interesting political persuasion advancement. While not directly affecting most technical capabilities, the UBI initiative drives significant improvements in political persuasion techniques through public messaging, stakeholder engagement, and policy advocacy. This represents an important domain where AI capabilities increasingly intersect with social policy development, potentially creating novel applications in governance and economic systems design.",
       "effects": {
         "company": {
           "credits": "-30..-20",
@@ -53,7 +57,11 @@
           "robotics_embodied": "-10..0",
           "research_taste": "0..0"
         }
-      }
+      },
+      "details": "Support legislation prohibiting automated hiring and job displacement in government agencies and publicly-funded institutions. Advocate for human-centered public employment as an essential counterbalance to private sector automation.",
+      "wallstreet_analysis": "Defensive regulatory positioning with modest financial impact. The public sector limitation creates moderate revenue, valuation, and credit pressure through reduced government market access, though the approval improvement somewhat offsets these effects. This represents an acceptance of sector-specific constraints to preserve broader social license to operate, potentially preventing more restrictive regulations that could affect core business areas.",
+      "ngo_analysis": "Important sector-specific protection framework. The public sector restrictions moderately improve social stability by preserving essential employment pathways and demonstrating governmental commitment to human welfare. This approach creates a valuable policy experiment that could generate insights about balanced human-AI collaboration models while addressing immediate concerns about job displacement.",
+      "researcher_analysis": "Modest capability constraints in select domains. The public hiring restrictions moderately slow progress in coding and robotics capabilities by limiting applications in government contexts. The modest alignment confidence improvement suggests this approach creates useful space for reflection on appropriate implementation boundaries without significantly impeding core technological development."
     },
     {
       "label": "Offer retraining grants",
@@ -79,7 +87,11 @@
           "robotics_embodied": "0..0",
           "research_taste": "0..0"
         }
-      }
+      },
+      "details": "Establish a substantial fund to support education and skills development for workers displaced by AI automation. Create partnerships with educational institutions to develop specialized curricula focused on human-AI collaboration and oversight roles.",
+      "wallstreet_analysis": "Strategic workforce transition investment with balanced metrics. The significant retraining commitment creates moderate valuation pressure, though the substantial approval improvement builds valuable reputational capital. This represents a practical approach to addressing displacement concerns while potentially developing a pipeline of skilled workers for emerging AI-adjacent roles, creating both social and business benefits.",
+      "ngo_analysis": "Substantive adaptation support framework. The retraining initiative significantly improves social stability by creating viable economic pathways for displaced workers. This approach acknowledges the responsibility of technology companies to mitigate harmful impacts of their innovations while working constructively with affected communities to navigate technological transitions.",
+      "researcher_analysis": "Modest capability trade-offs with social benefits. The retraining focus moderately constrains coding capabilities as resources shift toward education rather than pure development. The modest persuasion improvements and alignment confidence gains suggest this approach helps better integrate human perspectives and needs into the capability development process, potentially yielding more socially beneficial applications."
     }
   ],
   "year": 2026,

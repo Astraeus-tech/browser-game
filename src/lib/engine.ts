@@ -69,6 +69,17 @@ export function applyChoice(state: GameState, choice: Choice): GameState {
   const { rng, nextSeed } = makeRng(state);
   const ranges = meterRanges as MeterRanges;
 
+  // Save current meters to history before applying the new choice
+  const currentMetersRecord = {
+    year: state.year,
+    quarter: state.quarter,
+    meters: {
+      company: { ...state.meters.company },
+      environment: { ...state.meters.environment },
+      ai_capability: { ...state.meters.ai_capability }
+    }
+  };
+  
   // clone meters
   const newMeters = {
     company: { ...state.meters.company },
@@ -132,6 +143,7 @@ export function applyChoice(state: GameState, choice: Choice): GameState {
     return {
       ...state,
       meters: newMeters,
+      metersHistory: [...state.metersHistory, currentMetersRecord],
       log: [...state.log, choice.label],
       seed: nextSeed,
       gameOver: endingData
@@ -146,6 +158,7 @@ export function applyChoice(state: GameState, choice: Choice): GameState {
       return {
         ...state,
         meters: newMeters,
+        metersHistory: [...state.metersHistory, currentMetersRecord],
         log: [...state.log, choice.label],
         seed: nextSeed,
         gameOver: endingData
@@ -157,6 +170,7 @@ export function applyChoice(state: GameState, choice: Choice): GameState {
     return {
       ...state,
       meters: newMeters,
+      metersHistory: [...state.metersHistory, currentMetersRecord],
       log: [...state.log, choice.label],
       seed: nextSeed,
       gameOver: draw
@@ -171,6 +185,7 @@ export function applyChoice(state: GameState, choice: Choice): GameState {
     year: newYear,
     quarter: newQuarter,
     meters: newMeters,
+    metersHistory: [...state.metersHistory, currentMetersRecord],
     log: [...state.log, choice.label],
     seed: nextSeed,
     gameOver: 'playing'

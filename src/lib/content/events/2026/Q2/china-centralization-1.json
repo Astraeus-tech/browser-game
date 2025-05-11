@@ -5,6 +5,10 @@
   "choices": [
     {
       "label": "Support state funding",
+      "details": "Explicitly endorse China's centralization initiative and pursue strategic partnerships with designated national research institutes. Align company messaging with government priorities while securing preferential access to state resources and data through demonstrated cooperation.",
+      "wallstreet_analysis": "Strategic regional play with solid financial upside. The state partnership approach generates substantial revenue and valuation growth through preferential market access and government contracts, though at the cost of global approval ratings. This represents a calculated bet on China's growing technological influence, though geopolitical tensions could eventually create complications for international operations.",
+      "ngo_analysis": "Concerning alignment with authoritarian centralization. The support for state control modestly reduces social stability by reinforcing concerning governance patterns, while potentially increasing cyber-bio risks through less transparent research structures. This approach raises questions about the growing influence of state actors over technological development pathways, with implications for global digital rights.",
+      "researcher_analysis": "Mixed capability impacts with political dimensions. The state funding support drives modest improvements in coding and hacking capabilities, with more substantial advances in persuasion techniques and research taste through concentrated resources. The notable political dimension suggests these capabilities may develop in directions shaped by strategic national interests rather than broader scientific consensus.",
       "effects": {
         "company": {
           "credits": "-10..0",
@@ -31,6 +35,10 @@
     },
     {
       "label": "Push for private sector collaboration",
+      "details": "Advocate for a hybrid model that preserves private sector innovation while accommodating government oversight. Form industry alliances to negotiate more flexible implementation of centralization policies while demonstrating willingness to address legitimate security concerns.",
+      "wallstreet_analysis": "Balanced stakeholder management with moderate upside. The collaborative approach generates modest revenue and valuation growth while creating meaningful approval improvements through demonstrated independence. This represents a middle path that acknowledges Chinese government authority while preserving some autonomy, potentially positioning the company favorably with both Western and Chinese stakeholders.",
+      "ngo_analysis": "Pragmatic engagement with governance realities. The collaboration strategy modestly improves social stability by seeking middle ground between innovation and oversight, while slightly reducing cyber-bio risks through increased transparency. This approach recognizes the practical necessity of engaging with policy realities while advocating for governance models that preserve some space for diverse development pathways.",
+      "researcher_analysis": "Capability moderation with diplomatic benefits. The collaboration focus moderately constrains coding capabilities while enabling modest persuasion advances through consensus-building strategies. The modest research taste constraints reflect the inherent limitations of development within negotiated frameworks, though the diplomatic skills developed may prove valuable in navigating complex governance landscapes.",
       "effects": {
         "company": {
           "credits": "-10..0",
@@ -57,6 +65,10 @@
     },
     {
       "label": "Advocate for open-source projects",
+      "details": "Launch initiatives promoting open-source AI development that transcends national boundaries while remaining diplomatically sensitive to Chinese concerns. Emphasize how transparency and global collaboration advance shared scientific goals without directly challenging centralization policies.",
+      "wallstreet_analysis": "Principled internationalist stance with modest financial profile. The open-source advocacy generates limited direct financial returns but creates moderate valuation and approval improvements through positive brand association. This represents a values-based positioning that may resonate with global stakeholders, though it requires careful navigation of geopolitical sensitivities to avoid regulatory backlash.",
+      "ngo_analysis": "Valuable counterbalance to centralization trends. The open-source approach significantly improves social stability by promoting inclusive technological development models that transcend national competition. This represents an important voice for scientific freedom and global cooperation at a time when geopolitical tensions threaten to fragment the AI research ecosystem.",
+      "researcher_analysis": "Capability trade-offs with alignment benefits. The open-source advocacy moderately constrains immediate coding capabilities but enables modest improvements in persuasion strategies and research taste through global idea exchange. The alignment confidence improvement suggests this approach may foster development pathways more aligned with diverse stakeholder perspectives rather than narrow national interests.",
       "effects": {
         "company": {
           "credits": "-10..0",

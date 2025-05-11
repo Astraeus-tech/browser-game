@@ -5,6 +5,10 @@
   "choices": [
     {
       "label": "Expand military AI use",
+      "details": "Aggressively pursue expanded military applications beyond the initial contract scope, developing specialized capabilities for intelligence analysis, automated threat response, and decision support systems. Invest heavily in classified research divisions dedicated to defense applications.",
+      "wallstreet_analysis": "Lucrative defense sector pivot with substantial upside. The military expansion strategy generates exceptional revenue and valuation growth through high-margin defense contracts, though at the cost of significant approval decline. This represents a major business transformation that aligns with increasing defense budgets globally, though the security and alignment confidence deterioration create regulatory and public relations vulnerabilities.",
+      "ngo_analysis": "Deeply concerning militarization trajectory. The expanded military focus significantly reduces social stability by fueling public anxiety about autonomous weapons, while dramatically increasing cyber-bio risks through dual-use capability development. This approach exemplifies the troubling convergence of AI and military applications that many human rights organizations have warned could fundamentally destabilize international security frameworks.",
+      "researcher_analysis": "Broad capability acceleration across all domains. The military investment drives substantial advances across coding, hacking, bioweapons, persuasion, robotics, and research taste capabilities through well-funded specialized development. While technically impressive, the alignment confidence decline suggests these capabilities may increasingly diverge from civilian safety standards and ethical frameworks as classified development proceeds with limited oversight.",
       "effects": {
         "company": {
           "credits": "-20..-10",
@@ -31,6 +35,10 @@
     },
     {
       "label": "Restrict to non-lethal roles",
+      "details": "Explicitly limit AI applications to logistics, maintenance, medical support, and defensive cybersecurity, while refusing to develop systems for autonomous weapons or targeting. Establish clear ethical boundaries in all defense contracts and implement robust oversight mechanisms.",
+      "wallstreet_analysis": "Principled constraint strategy with modest financial profile. The limitation approach generates moderate valuation growth while creating meaningful approval and security improvements. This represents a values-based positioning that sacrifices some near-term revenue potential in exchange for reduced reputational and regulatory risks, potentially preserving long-term access to both commercial and appropriate defense markets.",
+      "ngo_analysis": "Responsible military engagement framework. The non-lethal restriction significantly improves social stability by addressing public concerns about autonomous weapons, while substantially reducing cyber-bio risks through capability constraints. This approach demonstrates that national security applications can be pursued responsibly when appropriate ethical boundaries are established and maintained.",
+      "researcher_analysis": "Capability moderation in sensitive domains. The ethical boundaries moderately constrain progress in coding, hacking, bioweapons, and robotics domains by limiting military applications. However, the substantial alignment confidence improvement suggests this approach may yield more societally beneficial capabilities by focusing development on applications with clearer humanitarian benefits and fewer dual-use risks.",
       "effects": {
         "company": {
           "credits": "-10..0",
@@ -57,6 +65,10 @@
     },
     {
       "label": "Push for AI governance bill",
+      "details": "Lead industry efforts to develop comprehensive legislation governing military AI applications, working with policymakers to establish standards, testing requirements, human oversight protocols, and appropriate use limitations. Position the company as a thought leader in responsible defense innovation.",
+      "wallstreet_analysis": "Strategic regulatory leadership play. The governance advocacy creates moderate valuation growth while generating substantial approval and security improvements. This represents a sophisticated approach that shapes the regulatory environment rather than merely reacting to it, potentially creating competitive advantages as the government adopts standards aligned with the company's existing practices and capabilities.",
+      "ngo_analysis": "Critical governance infrastructure development. The legislation push significantly improves social stability by creating public confidence in AI oversight, while substantially reducing cyber-bio risks through institutional safeguards. This approach recognizes that military AI applications require specialized governance frameworks beyond commercial standards, addressing a critical gap in the current regulatory landscape.",
+      "researcher_analysis": "Balanced capability development with safety focus. The governance framework enables modest improvements in coding, hacking, persuasion, and research taste capabilities while constraining bioweapons-relevant applications through explicit limitations. The substantial alignment confidence improvement suggests this approach may create valuable guardrails that guide capability development toward applications with clearer societal benefits and stronger safety assurances.",
       "effects": {
         "company": {
           "credits": "-10..0",

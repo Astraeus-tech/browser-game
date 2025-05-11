@@ -5,6 +5,10 @@
   "choices": [
     {
       "label": "Sign AI arms treaty",
+      "details": "Actively support international agreements limiting AI capabilities for military applications, committing to binding verification mechanisms and oversight protocols. Agree to restrictions on certain research pathways and deployment scenarios while advocating for global cooperation on advanced AI governance.",
+      "wallstreet_analysis": "Bold ethical leadership stance with significant financial trade-offs. The treaty commitment creates substantial cost and valuation pressure through development constraints, but generates exceptional approval improvements that build immense reputational capital. This represents a historic governance innovation that sacrifices near-term competitive positioning for reduced existential risk, potentially preserving the long-term viability of markets themselves against catastrophic scenarios.",
+      "ngo_analysis": "Transformative international stabilization framework. The treaty approach dramatically improves social stability by providing essential governance for potentially destabilizing technologies, while substantially reducing cyber-bio risks through comprehensive oversight mechanisms. This approach acknowledges the genuine existential importance of managing advanced AI capabilities and establishes crucial guardrails before catastrophic capabilities emerge.",
+      "researcher_analysis": "Significant capability constraints across all domains. The treaty framework substantially slows progress in coding, hacking, bioweapons, persuasion, robotics, and research taste capabilities through explicit limitations and verification requirements. While technically restrictive, the meaningful alignment confidence improvement suggests this approach creates essential space for safety research to catch up with capability development, potentially enabling more beneficial technological trajectories.",
       "effects": {
         "company": {
           "credits": "-20..-10",
@@ -31,6 +35,10 @@
     },
     {
       "label": "Bolster cyber defenses",
+      "details": "Massively invest in defensive capabilities to protect AI systems and critical infrastructure from attack or compromise. Develop advanced security protocols, threat detection systems, and redundant safeguards while maintaining offensive capabilities as deterrence.",
+      "wallstreet_analysis": "Strategic security investment with balanced growth profile. The substantial defense commitment creates significant cost pressure but enables modest revenue and valuation growth through enhanced security positioning. This represents a sophisticated approach that addresses immediate geopolitical tensions through technological means rather than treaty constraints, potentially creating competitive advantages in secure AI applications with military and intelligence relevance.",
+      "ngo_analysis": "Unilateral security enhancement with mixed implications. The defensive focus modestly improves social stability by reducing immediate vulnerability concerns, while significantly reducing cyber-bio risks through enhanced security measures. However, this approach addresses symptoms rather than causes of the AI arms race dynamic, potentially enabling continued capability escalation within more secure but still competitive frameworks.",
+      "researcher_analysis": "Balanced capability advancement across multiple domains. The security focus drives substantial improvements in coding, hacking, bioweapons, persuasion, robotics, and research taste capabilities through both defensive innovations and maintained competitive development. The modest alignment confidence improvement suggests this approach provides some security benefits while continuing overall capability advancement, essentially making the race safer rather than slowing it.",
       "effects": {
         "company": {
           "credits": "-20..-10",
@@ -57,6 +65,10 @@
     },
     {
       "label": "Form multinational AI council",
+      "details": "Establish a global governance body comprising government representatives, industry leaders, and independent experts to coordinate AI development standards and oversee potentially dangerous capabilities. Create institutional mechanisms for information sharing, risk assessment, and conflict resolution.",
+      "wallstreet_analysis": "Balanced diplomatic approach with modest growth potential. The council formation creates minimal cost pressure while enabling moderate valuation growth through enhanced global legitimacy. This represents a sophisticated positioning that acknowledges geopolitical realities while avoiding the most restrictive treaty limitations, potentially creating a sustainable middle path that preserves innovation while managing the most concerning risks.",
+      "ngo_analysis": "Valuable governance infrastructure with meaningful benefits. The council approach significantly improves social stability by creating legitimate coordination mechanisms, while modestly reducing cyber-bio risks through enhanced oversight. This represents an important institutional innovation that acknowledges both the necessity of global coordination and the political challenges of binding treaties, creating practical governance that could evolve as technology and relationships develop.",
+      "researcher_analysis": "Selective capability advancement with guardrails. The council framework enables modest improvements across coding, hacking, persuasion, robotics, and research taste domains while specifically constraining bioweapon-relevant applications through coordinated oversight. The meaningful alignment confidence improvement suggests this approach creates valuable governance mechanisms that could guide capability development toward more beneficial applications while constraining the most dangerous uses.",
       "effects": {
         "company": {
           "credits": "-10..0",

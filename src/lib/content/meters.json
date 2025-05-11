@@ -1,23 +1,23 @@
 {
     "company": {
-      "credits": { "min": 30, "max": 70 },
-      "revenue": { "min": 30, "max": 70 },
-      "valuation": { "min": 30, "max": 70 },
-      "approval": { "min": 40, "max": 60 },
-      "security": { "min": 40, "max": 60 },
-      "alignment_confidence": { "min": 20, "max": 40 }
+      "credits": { "min": 30, "max": 60 },
+      "revenue": { "min": 30, "max": 60 },
+      "valuation": { "min": 30, "max": 60 },
+      "approval": { "min": 20, "max": 50 },
+      "security": { "min": 30, "max": 60 },
+      "alignment_confidence": { "min": 10, "max": 40 }
     },
     "environment": {
-      "social_stability": { "min": 50, "max": 90 },
-      "cyber_bio_risk": { "min": 30, "max": 70 },
-      "climate_load": { "min": 10, "max": 30 }
+      "social_stability": { "min": 40, "max": 70 },
+      "cyber_bio_risk": { "min": 30, "max": 60 },
+      "climate_load": { "min": 30, "max": 60 }
     },
     "ai_capability": {
-      "coding": { "min": 30, "max": 50 },
-      "hacking": { "min": 20, "max": 40 },
-      "bioweapons": { "min": 10, "max": 30 },
-      "politics_persuasion": { "min": 20, "max": 40 },
-      "robotics_embodied": { "min": 20, "max": 40 },
-      "research_taste": { "min": 30, "max": 50 }
+      "coding": { "min": 10, "max": 40 },
+      "hacking": { "min": 10, "max": 40 },
+      "bioweapons": { "min": 10, "max": 40 },
+      "politics_persuasion": { "min": 10, "max": 40 },
+      "robotics_embodied": { "min": 10, "max": 40 },
+      "research_taste": { "min": 10, "max": 40 }
     }
   }

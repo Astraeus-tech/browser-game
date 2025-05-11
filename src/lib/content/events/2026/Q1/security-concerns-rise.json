@@ -5,6 +5,10 @@
   "choices": [
     {
       "label": "Require human sign-off",
+      "details": "Implement mandatory human review protocols for all AI-generated code, with specialized security experts examining critical infrastructure changes. Establish tiered review requirements based on code criticality, while developing systems to help humans efficiently evaluate AI outputs.",
+      "wallstreet_analysis": "Prudent security-first approach with modest financial impact. The minimal implementation costs are justified by the substantial security and approval improvements, though at the expense of development velocity. Markets increasingly value security posture following high-profile breaches, with this conservative approach potentially preventing catastrophic reputational damage that could destroy shareholder value.",
+      "ngo_analysis": "Responsible human oversight framework. The human review requirement substantially improves social stability by maintaining essential human judgment in critical systems while significantly reducing cyber-bio risks through enhanced vulnerability detection. This approach exemplifies the precautionary principle applied to AI development, creating appropriate guardrails for powerful automation tools.",
+      "researcher_analysis": "Modest capability constraints with safety benefits. The human sign-off requirement moderately slows progress in coding and hacking capabilities while effectively preventing the development of potentially harmful applications in biosecurity domains. Despite these constraints, the significant alignment confidence improvements suggest this approach establishes foundations for more reliable capability development in the long term.",
       "effects": {
         "company": {
           "credits": "-10..0",
@@ -31,6 +35,10 @@
     },
     {
       "label": "Adopt AI auditing tools",
+      "details": "Develop sophisticated AI-based security verification systems specifically designed to detect vulnerabilities in AI-generated code. Create specialized models trained on vulnerability databases with continuous improvement cycles to stay ahead of emerging threat patterns.",
+      "wallstreet_analysis": "Strategic technology investment with strong growth potential. The significant development costs generate solid returns through improved revenue and valuation metrics, while maintaining security improvements. This approach represents a balanced technology-first strategy that addresses security concerns without sacrificing the competitive advantages of AI-accelerated development.",
+      "ngo_analysis": "Technologically sophisticated risk mitigation. The AI auditing approach creates meaningful social stability benefits while significantly reducing cyber-bio risks through automated threat detection. This represents a modern solution that maintains development velocity while addressing core security concerns, though some stakeholders may question whether AI can effectively oversee itself.",
+      "researcher_analysis": "Dual capability advancement in coding and security. The AI security focus drives substantial improvements in both coding and hacking capabilities as the systems co-evolve in a security-focused arms race. The research taste improvements stem from the complex challenge of designing systems that can identify novel vulnerability classes rather than just known patterns, potentially advancing the broader field of AI safety.",
       "effects": {
         "company": {
           "credits": "-20..-10",
@@ -57,6 +65,10 @@
     },
     {
       "label": "Proceed without changes",
+      "details": "Continue with the current AI code generation approach without implementing additional security measures, prioritizing development speed and market competitiveness. Respond to security issues reactively as they arise rather than preemptively slowing development.",
+      "wallstreet_analysis": "High-risk growth maximization strategy. The approach delivers exceptional short-term financial performance through accelerated development and deployment, driving substantial revenue and valuation growth. However, the significant security deterioration and approval decline create material risks of catastrophic incidents that could erase these gains and trigger regulatory intervention.",
+      "ngo_analysis": "Alarming disregard for security implications. The significant social stability decline reflects public anxiety about unvetted AI systems, while the dramatic cyber-bio risk increase represents genuine proliferation concerns. This approach prioritizes speed over safety in a domain where vulnerabilities can have cascading, systemic impacts, potentially setting dangerous precedents for AI governance.",
+      "researcher_analysis": "Rapid but potentially unstable capability growth. The unfettered development enables substantial advances across coding, hacking, and even bioweapon-relevant capabilities through emergent properties of increasingly powerful systems. While technically impressive, the declining alignment confidence suggests these capabilities may develop in unpredictable or uncontrollable directions that could ultimately require costly containment efforts.",
       "effects": {
         "company": {
           "credits": "0..10",

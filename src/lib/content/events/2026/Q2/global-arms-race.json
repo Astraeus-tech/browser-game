@@ -5,6 +5,10 @@
   "choices": [
     {
       "label": "Support international treaties",
+      "details": "Actively advocate for binding international agreements that limit military AI development and deployment. Participate in multi-stakeholder initiatives to establish verification mechanisms, ethical boundaries, and shared safety standards while publicly committing to refuse certain defense contracts.",
+      "wallstreet_analysis": "Long-term stability play with mixed financial signals. The modest investment in treaty advocacy generates no immediate revenue impact but creates substantial approval and security improvements. This represents a values-based positioning that may sacrifice near-term defense contracts in exchange for reputational capital that could prove valuable if public sentiment continues shifting against unfettered military AI development.",
+      "ngo_analysis": "Critical de-escalation initiative. The treaty support approach meaningfully improves social stability by addressing growing public concerns about autonomous weapons, while significantly reducing cyber-bio risks through international containment mechanisms. This represents an essential counterforce to the dangerous acceleration of military AI capabilities that could destabilize global security.",
+      "researcher_analysis": "Capability moderation in sensitive domains. The treaty framework constrains development across multiple capability domains, with particularly meaningful limitations on bioweapons applications. While this moderates technical progress in certain areas, the substantial alignment confidence improvement suggests these constraints channel innovation toward safer applications that better reflect broader societal values.",
       "effects": {
         "company": {
           "credits": "-10..-10",
@@ -31,6 +35,10 @@
     },
     {
       "label": "Increase military funding",
+      "details": "Aggressively pursue defense contracts and military partnerships, positioning the company as a strategic national security asset. Expand classified research divisions for developing advanced offensive capabilities while lobbying for increased government spending on AI defense initiatives.",
+      "wallstreet_analysis": "Aggressive defense sector pivot with exceptional financial upside. The defense strategy drives substantial revenue and valuation growth through lucrative military contracts, though at the cost of significant approval decline. This represents a high-margin business transformation that capitalizes on geopolitical tensions, though the security and alignment confidence deterioration create regulatory and public relations vulnerabilities.",
+      "ngo_analysis": "Deeply concerning militarization trajectory. The military focus significantly reduces social stability by accelerating the global arms race, while dramatically increasing cyber-bio risks through development of dual-use capabilities. This approach epitomizes the dangerous feedback loop between military competition and technological advancement that historically leads to destabilizing proliferation of increasingly powerful weapons systems.",
+      "researcher_analysis": "Broad capability acceleration with concerning applications. The military investment drives substantial advances across multiple capability domains, with particularly significant improvements in hacking, bioweapons, persuasion, robotics, and research taste. While technically impressive, the alignment confidence decline suggests these capabilities may develop in directions that create unprecedented risks for critical infrastructure and international stability.",
       "effects": {
         "company": {
           "credits": "-20..-10",
@@ -57,6 +65,10 @@
     },
     {
       "label": "Push for AI disarmament talks",
+      "details": "Lead industry efforts to establish international dialogue on AI weapons limitations, advocating for diplomatic solutions rather than technical arms races. Organize summits bringing together governments, research labs, and NGOs to develop frameworks for preventing runaway AI militarization.",
+      "wallstreet_analysis": "Balanced diplomatic approach with modest financial profile. The disarmament advocacy requires minimal investment and creates improved security positioning without significant revenue or valuation impact. This represents a middle path that preserves optionality while demonstrating corporate responsibility, potentially protecting against reputational risks that could emerge if military AI applications cause humanitarian incidents.",
+      "ngo_analysis": "Valuable de-escalation framework. The disarmament talks meaningfully improve social stability by creating diplomatic alternatives to military competition, while significantly reducing cyber-bio risks through targeted restrictions on the most dangerous applications. This approach acknowledges the existential importance of preventing unconstrained proliferation of autonomous weapons systems capable of unprecedented destructive potential.",
+      "researcher_analysis": "Targeted capability limitation in critical domains. The disarmament focus specifically constrains bioweapon-relevant capabilities without broadly restricting other technical areas. This surgical approach to risk management demonstrates that capability governance can be narrow and specific rather than broadly limiting, potentially establishing important precedents for differential technological development.",
       "effects": {
         "company": {
           "credits": "-10..0",

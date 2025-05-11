@@ -5,6 +5,10 @@
   "choices": [
     {
       "label": "Share research publicly",
+      "details": "Publish comprehensive technical papers detailing both breakthroughs in leading research journals. Release reference implementations and documentation to enable replication, while maintaining the company's lead through superior infrastructure and integration expertise.",
+      "wallstreet_analysis": "Strategic open science approach with balanced financial implications. The public sharing creates no immediate revenue or valuation impact, but generates substantial approval improvements that build valuable goodwill in the research community. This approach represents a calculated bet that superior implementation capabilities will maintain competitive advantage even as fundamental methods become public knowledge.",
+      "ngo_analysis": "Significant democratization of advanced capabilities. The open publication approach meaningfully improves social stability by distributing technical knowledge more equitably, while modestly reducing cyber-bio risks through increased transparency and oversight. This approach exemplifies responsible innovation that balances competitive interests with the broader benefits of scientific progress.",
+      "researcher_analysis": "Moderate capability moderation with knowledge sharing benefits. The public research slightly constrains immediate progress in coding, hacking, and bioweapons domains as proprietary advantage diminishes. However, the substantial improvements in persuasion capabilities and research taste reflect the benefits of collaborative scientific discourse, while the alignment confidence improvement suggests this approach helps establish important norms for responsible AI development.",
       "effects": {
         "company": {
           "credits": "-10..0",
@@ -31,6 +35,10 @@
     },
     {
       "label": "Keep methods secret",
+      "details": "Maintain strict confidentiality around the breakthroughs, treating them as core trade secrets. File patents strategically to protect aspects that would be inevitably discovered while keeping the most valuable implementation details as closely guarded proprietary knowledge.",
+      "wallstreet_analysis": "Aggressive market dominance strategy with exceptional financial upside. The secrecy approach drives substantial revenue, credits, and valuation growth through preserved technological advantage and exclusive capabilities. This represents a classic winner-take-all technology play that maximizes shareholder value in the near term, though at the cost of significant approval decline and potential long-term governance concerns.",
+      "ngo_analysis": "Concerning concentration of advanced capabilities. The secrecy approach moderately reduces social stability by creating significant power asymmetries in the AI ecosystem, while substantially increasing cyber-bio risks through reduced transparency and oversight. This approach exemplifies the tensions between commercial interests and broader societal considerations in managing transformative technologies.",
+      "researcher_analysis": "Dramatic capability acceleration across all domains. The proprietary development drives exceptional improvements in coding and research taste capabilities, with substantial advances across hacking, bioweapons, persuasion, and robotics domains. While technically impressive, the alignment confidence decline suggests these capabilities may develop with insufficient external oversight and input, potentially creating long-term safety and governance challenges.",
       "effects": {
         "company": {
           "credits": "10..20",
@@ -57,6 +65,10 @@
     },
     {
       "label": "Offer academic grants",
+      "details": "Create a substantial funding program for academic researchers studying the principles behind these breakthroughs. Share selective insights that enable research progress while maintaining proprietary implementations and fostering relationships with leading institutions.",
+      "wallstreet_analysis": "Balanced ecosystem development strategy with modest growth potential. The academic partnership generates moderate revenue and valuation improvement while building meaningful approval with the research community. This represents a middle path that maintains some competitive advantage while cultivating an innovation ecosystem that could yield future breakthroughs and talent acquisition opportunities.",
+      "ngo_analysis": "Constructive knowledge sharing with broader benefits. The grant program meaningfully improves social stability by supporting academic research while avoiding the most concerning risks of full secrecy. This approach represents a thoughtful balance between commercial interests and scientific progress, potentially establishing a sustainable model for managing advanced AI capabilities.",
+      "researcher_analysis": "Selective capability advancement with collaborative benefits. The academic engagement enables modest improvements in coding capabilities and significant advances in persuasion and research taste through the cross-pollination of ideas. The alignment confidence improvement suggests this approach helps integrate diverse perspectives into capability development, potentially leading to more robust and beneficial applications.",
       "effects": {
         "company": {
           "credits": "-10..0",

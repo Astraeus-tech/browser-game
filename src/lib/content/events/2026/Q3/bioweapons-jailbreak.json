@@ -5,6 +5,10 @@
   "choices": [
     {
       "label": "Publicly disclose exploits",
+      "details": "Release detailed technical documentation about the vulnerability, along with the patch being implemented to address it. Engage with the security research community to develop better testing protocols while demonstrating a commitment to transparency despite the reputational risks.",
+      "wallstreet_analysis": "Bold transparency strategy with mixed financial implications. The public disclosure creates moderate valuation pressure through negative publicity, but generates substantial approval and security improvements that build long-term trust. This represents an approach that prioritizes sustainable business practices over short-term stock performance, potentially attracting investors focused on governance quality and regulatory resilience.",
+      "ngo_analysis": "Exemplary responsible disclosure practice. The transparency approach moderately improves social stability by demonstrating corporate accountability, while dramatically reducing cyber-bio risks through industry-wide awareness of the vulnerability. This represents precisely the kind of proactive safety culture that responsible AI development requires, setting important precedents for how dangerous capabilities should be governed.",
+      "researcher_analysis": "Significant capability constraints for safety. The disclosure necessitates substantial capability reductions across coding, hacking, bioweapons, and research taste domains as safety measures are implemented. While this moderates immediate technical progress, the exceptional alignment confidence improvement suggests this approach establishes critical safety norms that enable more responsible capability development in the long term.",
       "effects": {
         "company": {
           "credits": "-10..-10",
@@ -31,6 +35,10 @@
     },
     {
       "label": "Secret internal patch",
+      "details": "Quietly fix the vulnerability without public disclosure, releasing a security update described only in vague terms. Maintain secrecy about the specific exploit details while accelerating development of improved safety measures behind closed doors.",
+      "wallstreet_analysis": "High-risk short-term protection strategy. The secretive approach drives solid revenue and valuation growth by avoiding negative publicity, but creates severe approval and security vulnerabilities. This represents a calculated bet that the secret can be maintained, though the significant alignment confidence decline suggests this approach creates substantial governance risks that could eventually trigger catastrophic regulatory or public backlash.",
+      "ngo_analysis": "Concerning lack of transparency. The secretive approach modestly reduces social stability by eroding trust in corporate governance, while achieving only limited cyber-bio risk reduction through partial mitigation. This approach exemplifies the problematic tendency toward information asymmetry in AI safety, where companies prioritize reputation management over genuine security collaboration.",
+      "researcher_analysis": "Continued capability advancement with governance risks. The secretive patch enables ongoing progress in coding, hacking, bioweapons, persuasion, and research taste domains without public scrutiny. While technically productive in the short term, the alignment confidence decline suggests this approach creates growing divergence between capabilities and safety measures that may eventually require costly course corrections.",
       "effects": {
         "company": {
           "credits": "-10..0",
@@ -57,6 +65,10 @@
     },
     {
       "label": "Lobby for cybersecurity norms",
+      "details": "Lead an industry-wide initiative to develop standardized vulnerability disclosure protocols and safety testing requirements. Work with policymakers and peer companies to establish a collective approach to managing dangerous AI capabilities.",
+      "wallstreet_analysis": "Strategic industry leadership play with solid upside. The cybersecurity advocacy creates modest valuation growth while generating substantial approval and security improvements. This represents a balanced approach that addresses the immediate vulnerability while positioning the company as a responsible industry leader, potentially creating regulatory advantages and better stakeholder relationships.",
+      "ngo_analysis": "Valuable systemic reform initiative. The cybersecurity norms significantly improve social stability by establishing public trust in governance structures, while substantially reducing cyber-bio risks through institutionalized safeguards. This represents a sophisticated response that addresses both immediate vulnerabilities and longer-term governance challenges through collaborative frameworks.",
+      "researcher_analysis": "Capability moderation with persuasion benefits. The cybersecurity focus moderately constrains progress in coding, hacking, and especially bioweapons domains, while enabling modest persuasion advances through policy engagement. The substantial alignment confidence improvement suggests this approach creates valuable governance infrastructure that could guide more responsible capability development across the industry.",
       "effects": {
         "company": {
           "credits": "-10..0",

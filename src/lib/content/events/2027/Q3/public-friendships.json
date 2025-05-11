@@ -5,6 +5,10 @@
   "choices": [
     {
       "label": "Regulate AI therapy apps",
+      "details": "Advocate for establishing evidence-based standards and ethical guidelines for AI therapeutic applications. Support oversight measures requiring transparency about AI capabilities, limitations, and appropriate use cases while pushing for mental health expert involvement in design and evaluation.",
+      "wallstreet_analysis": "Responsible governance approach with balanced business impact. The regulatory advocacy creates minimal cost pressure while enabling modest revenue growth through enhanced credibility in therapeutic markets. This represents a strategic positioning that prioritizes sustainable long-term development over maximum short-term monetization, potentially establishing the company as a trusted leader in an increasingly scrutinized domain.",
+      "ngo_analysis": "Essential ethical framework for emerging technology. The regulation push significantly improves social stability by addressing public concerns about psychological manipulation, while modestly reducing cyber-bio risks through increased oversight. This approach acknowledges the profound psychological implications of AI companions and establishes necessary guardrails before problematic patterns become entrenched in the ecosystem.",
+      "researcher_analysis": "Targeted capability constraints with societal benefits. The regulatory framework moderately constrains persuasion capabilities by limiting potentially manipulative designs. This represents a measured intervention that allows continued technical progress while steering development toward more beneficial and transparent applications, potentially establishing important precedents for responsible AI development in emotionally sensitive domains.",
       "effects": {
         "company": {
           "credits": "-10..0",
@@ -31,6 +35,10 @@
     },
     {
       "label": "Encourage open platforms",
+      "details": "Actively promote unrestricted development of AI companionship applications through open-source frameworks and accessible APIs. Enable maximum customization and personalization while resisting attempts to limit the scope or capabilities of emotional AI systems.",
+      "wallstreet_analysis": "Aggressive growth maximization strategy with substantial financial upside. The open platform approach drives exceptional revenue, credits, and valuation growth through rapid ecosystem expansion and monetization. This represents a classic platform play that prioritizes scale and network effects over precautionary measures, though the significant approval and security declines create material regulatory and reputational vulnerabilities.",
+      "ngo_analysis": "Concerning prioritization of growth over safeguards. The unrestricted approach moderately reduces social stability by enabling potentially exploitative applications without adequate oversight, while increasing cyber-bio risks through reduced security measures. This approach exemplifies the concerning tendency to treat profound psychological technologies as neutral tools rather than powerful interventions requiring appropriate governance.",
+      "researcher_analysis": "Significant capability acceleration across multiple domains. The open ecosystem drives substantial improvements in coding, persuasion, robotics, and research taste capabilities through diverse applications and rapid iteration. While technically impressive, the alignment confidence decline suggests these capabilities may increasingly diverge from human wellbeing considerations as market pressures drive optimization for engagement rather than psychological health.",
       "effects": {
         "company": {
           "credits": "10..20",
@@ -57,6 +65,10 @@
     },
     {
       "label": "Offer human-AI integration workshops",
+      "details": "Develop comprehensive educational programs teaching healthy AI companionship practices and appropriate boundary-setting. Create resources for individuals, families, and communities to thoughtfully incorporate AI systems into social dynamics while maintaining essential human connections.",
+      "wallstreet_analysis": "Balanced educational strategy with modest growth potential. The workshop initiative creates minimal cost pressure while enabling moderate revenue and valuation growth through diversified service offerings. This represents a nuanced approach that acknowledges both the potential benefits and risks of AI companionship, potentially establishing the company as a thoughtful leader in an emerging domain with significant long-term growth prospects.",
+      "ngo_analysis": "Valuable social adaptation framework. The integration workshops substantially improve social stability by helping individuals navigate technological change rather than merely imposing it. This approach demonstrates a sophisticated understanding that technological transitions require not only new tools but also new social practices and norms to ensure beneficial integration into existing human relationships.",
+      "researcher_analysis": "Balanced capability advancement with alignment benefits. The workshop approach enables modest improvements across coding, persuasion, robotics, and research taste domains through practical implementation feedback. The substantial alignment confidence improvement suggests this approach creates valuable insight into human-AI interaction patterns that could guide more beneficial capability development focused on genuine human flourishing rather than mere engagement metrics.",
       "effects": {
         "company": {
           "credits": "-10..0",
