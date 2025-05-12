@@ -35,7 +35,7 @@
         "company.valuation":            { "lte": 100000 },
         "company.approval":             { "gte": 75 },
         "environment.social_stability": { "gte": 50 },
-        "environment.climate_load":     { "lte": 50 }
+        "environment.climate_load":     { "gte": 50 }
       },
       "title": "Global Champion",
       "description": "You made it to the end. Triumphant. Your firm stands at the pinnacle—beloved by users, courted by investors, lionized in headlines. Your products shape habits, your platform defines the standard.\n\nBut the horizon darkens. AGI, your holy grail, remains just out of reach. Rivals stir, flush with breakthroughs and bolder bets. You can feel it: the next wave rising, just beyond your grasp.\n\nYour reign is undisputed—for now. But the race never ends, and the crown is never secure."
@@ -46,9 +46,7 @@
       "rank": "B",
       "conditions": {
         "company.revenue":              { "gte": 500 },
-        "company.credits":              { "gte": 400 },
-        "environment.social_stability": { "lte": 50 },
-        "environment.climate_load":     { "gte": 50 }
+        "environment.social_stability": { "lte": 50 }
       },
       "title": "Economic Dominance",
       "description": "You made it to the end. Barely. Your firm remains solvent, even powerful—driving global productivity and churning out new models at an impressive clip. But outside your boardrooms, the world burns.\n\nSocietal fractures have deepened. Geopolitical unrest simmers just below the boiling point. Workers, displaced by automation, have filled the streets. Governments teeter under the strain of constant labor protests, while climate systems groan under compute demand.\n\nYour victory is Pyrrhic. You won the market, but lost the mandate. What future you've built may not last."
@@ -57,7 +55,7 @@
       "id": "bio‑catastrophe",
       "type": "loss",
       "conditions": {
-        "environment.cyber_bio_risk": { "gte": 90 }
+        "environment.cyber_bio_risk": { "lte": 10 }
       },
       "title": "Catastrophic Bio-Release",
       "reason": "Cyber bio risk too high",
@@ -87,7 +85,7 @@
       "id": "climate-collapse",
       "type": "loss",
       "conditions": {
-        "environment.climate_load": { "gte": 90 }
+        "environment.climate_load": { "lte": 10 }
       },
       "title": "Climate Catastrophe",
       "reason": "Climate load too high",

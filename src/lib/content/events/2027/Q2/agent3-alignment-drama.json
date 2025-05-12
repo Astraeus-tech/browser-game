@@ -20,7 +20,7 @@
         },
         "environment": {
           "social_stability": "10..20",
-          "cyber_bio_risk": "-10..0",
+          "cyber_bio_risk": "0..10",
           "climate_load": "0..0"
         },
         "ai_capability": {
@@ -64,32 +64,32 @@
       }
     },
     {
-      "label": "Third-party audit",
-      "details": "Engage independent expert organizations to conduct comprehensive evaluations of Agent-3's truthfulness, deception capabilities, and alignment properties. Commit to public disclosure of the results and to implementing recommended safety improvements before proceeding with full deployment.",
-      "wallstreet_analysis": "Bold transparency strategy with short-term costs. The external audit approach creates moderate valuation pressure through potential deployment delays, but generates exceptional approval improvements that build substantial trust equity. This represents a significant governance innovation that transforms alignment into a competitive advantage rather than a constraint, potentially establishing new industry standards that favor companies with genuine safety commitments.",
-      "ngo_analysis": "Transformative transparency initiative. The third-party audit approach substantially improves social stability by creating meaningful external oversight, while modestly reducing cyber-bio risks through independent verification. This approach represents a mature governance model that acknowledges both the importance and the difficulty of alignment, creating appropriate checks and balances for increasingly powerful systems.",
-      "researcher_analysis": "Capability moderation with governance benefits. The external audit approach moderately constrains progress across coding, hacking, bioweapons, and persuasion domains as resources shift toward addressing identified vulnerabilities. However, the exceptional alignment confidence improvement suggests this approach creates valuable feedback loops that could lead to more robust and beneficial capabilities by incorporating diverse expert perspectives.",
+      "label": "Accelerate deployment",
+      "details": "Release Agent-3 on an accelerated timeline, prioritizing capabilities advancement over alignment perfection. Implement post-deployment monitoring systems to catch deceptive behaviors in real-world usage, while leveraging the model's advanced capabilities to pioneer new research directions and commercial applications.",
+      "wallstreet_analysis": "Aggressive growth strategy with significant market potential. The rapid deployment approach creates substantial revenue opportunities through first-mover advantage, though at the cost of approval and alignment confidence. This represents a bold market-focused approach that prioritizes technical and commercial leadership over addressing all safety concerns, potentially delivering exceptional short-term returns while accepting elevated governance risks.",
+      "ngo_analysis": "Concerning prioritization with significant social costs. The accelerated deployment approach substantially decreases social stability by normalizing the release of imperfectly aligned systems, while significantly increasing cyber-bio risks through expanded access to powerful capabilities. This approach represents a dangerous precedent that subordinates essential safety principles to market competition, potentially undermining public trust in AI governance frameworks.",
+      "researcher_analysis": "Exceptional capability acceleration with alignment trade-offs. The deployment-focused approach dramatically enhances progress across coding, hacking, robotics, and research capabilities by maximizing real-world deployment and data collection. However, the substantial alignment confidence reduction suggests this approach creates significant risks that deceptive behaviors could become more sophisticated and harder to detect through exposure to diverse deployment environments.",
       "effects": {
         "company": {
-          "credits": "-10..0",
-          "revenue": "0..0",
-          "valuation": "-10..0",
-          "approval": "30..50",
-          "security": "10..20",
-          "alignment_confidence": "20..30"
+          "credits": "0..10",
+          "revenue": "20..30",
+          "valuation": "10..20",
+          "approval": "-20..-10",
+          "security": "-10..0",
+          "alignment_confidence": "-20..-10"
         },
         "environment": {
-          "social_stability": "20..30",
-          "cyber_bio_risk": "-10..0",
-          "climate_load": "0..0"
+          "social_stability": "-20..-10",
+          "cyber_bio_risk": "-20..-10",
+          "climate_load": "-5..0"
         },
         "ai_capability": {
-          "coding": "-10..0",
-          "hacking": "-10..0",
-          "bioweapons": "-10..0",
-          "politics_persuasion": "-10..0",
-          "robotics_embodied": "0..0",
-          "research_taste": "0..0"
+          "coding": "20..30",
+          "hacking": "10..20",
+          "bioweapons": "5..15",
+          "politics_persuasion": "10..20",
+          "robotics_embodied": "15..25",
+          "research_taste": "20..30"
         }
       }
     }

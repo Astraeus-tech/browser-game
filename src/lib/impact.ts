@@ -8,8 +8,8 @@ export const IMPACT_RANGES = {
 
 // Map of metrics where positive values should be treated as negative impacts
 const INVERTED_METRICS: Record<string, boolean> = {
-  cyber_bio_risk: true,
-  climate_load: true
+  cyber_bio_risk: false,
+  climate_load: false
 };
 
 // Calculate impact score based on effects

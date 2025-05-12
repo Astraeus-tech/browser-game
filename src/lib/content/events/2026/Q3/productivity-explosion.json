@@ -51,7 +51,7 @@
         "environment": {
           "social_stability": "-10..-30",
           "cyber_bio_risk": "0..0",
-          "climate_load": "10..20"
+          "climate_load": "-20..-10"
         },
         "ai_capability": {
           "coding": "30..50",

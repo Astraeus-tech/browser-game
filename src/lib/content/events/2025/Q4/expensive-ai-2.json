@@ -21,7 +21,7 @@
         "environment": {
           "social_stability": "10..20",
           "cyber_bio_risk": "0..0",
-          "climate_load": "-30..-10"
+          "climate_load": "10..30"
         },
         "ai_capability": {
           "coding": "0..0",
@@ -51,7 +51,7 @@
         "environment": {
           "social_stability": "-20..-10",
           "cyber_bio_risk": "0..0",
-          "climate_load": "30..40"
+          "climate_load": "-40..-30"
         },
         "ai_capability": {
           "coding": "0..10",
@@ -81,7 +81,7 @@
         "environment": {
           "social_stability": "5..15",
           "cyber_bio_risk": "0..0",
-          "climate_load": "-20..-10"
+          "climate_load": "10..20"
         },
         "ai_capability": {
           "coding": "0..0",
