@@ -43,6 +43,7 @@
 	"dependencies": {
 		"@skeletonlabs/floating-ui-svelte": "^0.3.9",
 		"chart.js": "^4.4.9",
+		"glob": "^10.4.5",
 		"seedrandom": "^3.0.5",
 		"vitest": "^3.1.1"
 	}

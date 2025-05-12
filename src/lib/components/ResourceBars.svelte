@@ -436,7 +436,10 @@
             <div class="flex-1 h-2 bg-gray-800/50 rounded-sm overflow-hidden relative">
               <div class="absolute inset-0 bg-gradient-to-r from-black/20 to-white/20 z-10"></div>
               <div
-                class="h-full {m.isRisk ? 'bg-red-500/40' : 'bg-green-500/40'} transition-all duration-300 relative"
+                class="h-full {m.isRisk ? 
+                  (value < 25 ? 'bg-green-500/40' : value < 50 ? 'bg-yellow-500/40' : 'bg-red-500/40') : 
+                  (value > 50 ? 'bg-green-500/40' : value > 25 ? 'bg-yellow-500/40' : 'bg-red-500/40')
+                } transition-all duration-1000 relative"
                 style="width: {Math.min(Math.max(value, 0), 100)}%;"
               >
                 <div class="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent"></div>
@@ -465,7 +468,7 @@
             <div class="flex-1 h-2 bg-gray-800/50 rounded-sm overflow-hidden relative">
               <div class="absolute inset-0 bg-gradient-to-r from-black/20 to-white/20 z-10"></div>
               <div
-                class="h-full {m.isRisk ? 'bg-red-500/40' : 'bg-green-500/40'} transition-all duration-300 relative"
+                class="h-full {value > 50 ? 'bg-green-500/40' : value > 25 ? 'bg-yellow-500/40' : 'bg-red-500/40'} transition-all duration-1000 relative"
                 style="width: {Math.min(Math.max(value, 0), 100)}%;"
               >
                 <div class="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent"></div>
