@@ -246,6 +246,14 @@
         >
           Start Over
         </button>
+        <a 
+          href="https://form.typeform.com/to/Ok2IMgF5" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="block w-full text-center px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded"
+        >
+          Provide Feedback
+        </a>
       {:else if selectedEvent}
         {#each selectedEvent.choices as c}
           <button
