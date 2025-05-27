@@ -54,6 +54,26 @@ export interface GameState {
   gameOver: 'playing' | Ending | null;
   currentEventId?: string;
 }
+
+export interface ScoreDetails {
+  total: number;
+  basePoints: {
+    progression: number;
+    company: number;
+    environment: number;
+    aiCapability: number;
+  };
+  bonuses?: { win?: number };
+  multipliers?: { rank?: number; outcome?: number };
+}
+
+export interface RunStats {
+  yearsSurvived: number;
+  quartersSurvivedThisYear: number;
+  totalQuartersElapsed: number;
+  eventsEncountered: number;
+}
+
 export type Ending = {
   id: string;
   type: 'win' | 'loss' | 'draw';
@@ -63,4 +83,6 @@ export type Ending = {
   reason?: string;
   conditions?: Record<string, { gte?: number; gt?: number; lte?: number; lt?: number; eq?: number }>;
   conditions_any?: Record<string, { gte?: number; gt?: number; lte?: number; lt?: number; eq?: number }>[];
+  scoreDetails?: ScoreDetails;
+  stats?: RunStats;
 };

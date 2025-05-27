@@ -1,4 +1,4 @@
-import type { GameState, Choice, MeterGroup, Ending, MeterRanges } from './types';
+import type { GameState, Choice, MeterGroup, Ending, MeterRanges, ScoreDetails, RunStats } from './types';
 import { makeRng } from './rng';
 import meterRanges from '$lib/content/meters.json';
 import endings from '$lib/content/endings.json';
@@ -51,6 +51,81 @@ function checkEnding(meters: any, year: number, quarter: number): { id: string }
   }
 
   return null;
+}
+
+// Helper function to calculate score and stats
+export function calculateEndingDetails(ending: Ending, finalState: GameState): Ending {
+  const { meters, year, quarter, log } = finalState;
+
+  // Calculate RunStats
+  const GAME_START_YEAR = 2025;
+  const GAME_START_QUARTER = 3;
+
+  let totalQuartersElapsed = (year - GAME_START_YEAR) * 4 + (quarter - GAME_START_QUARTER);
+  // If game ends in the same year/quarter it started, it's 1 quarter for calculation purposes
+  // or 0 if you prefer to say 0 quarters *completed*.
+  // Let's count it as 1 quarter if it ends in the start quarter.
+  if (year === GAME_START_YEAR && quarter === GAME_START_QUARTER) {
+    totalQuartersElapsed = 1;
+  }
+  // Ensure totalQuartersElapsed is at least 1 if any time has passed or it's the start quarter.
+  // If for some reason year/quarter is before game start, this will also make it 1.
+  else if (totalQuartersElapsed <= 0) {
+    totalQuartersElapsed = 1;
+  }
+
+  const stats: RunStats = {
+    yearsSurvived: year - GAME_START_YEAR,
+    quartersSurvivedThisYear: quarter,
+    totalQuartersElapsed: totalQuartersElapsed,
+    eventsEncountered: log.length
+  };
+
+  // Calculate ScoreDetails
+  const basePoints = {
+    progression: totalQuartersElapsed * 50, // 50 points per quarter
+    company: Math.max(0, meters.company.credits * 1) + // Ensure credits don't go negative for scoring
+             (meters.company.reputation || 0) * 10 +
+             (meters.company.innovation || 0) * 5 +
+             (meters.company.morale || 0) * 5,
+    environment: (meters.environment.stability || 0) * 10 +
+                 (meters.environment.public_opinion || 0) * 5 +
+                 (meters.environment.sustainability || 0) * 5,
+    aiCapability: (meters.ai_capability.alignment || 0) * 20 + // Weighted higher
+                  (meters.ai_capability.progress || 0) * 10 +
+                  (meters.ai_capability.sentience || 0) * 10 // Example values
+  };
+
+  const bonuses: { win?: number } = {};
+  if (ending.type === 'win') {
+    bonuses.win = 1000;
+  }
+
+  const multipliers: { rank?: number; outcome?: number } = {};
+  if (ending.rank === 'S') multipliers.rank = 2.0;
+  else if (ending.rank === 'A') multipliers.rank = 1.5;
+  else if (ending.rank === 'B') multipliers.rank = 1.2;
+
+  if (ending.type === 'loss') multipliers.outcome = 0.5;
+  else if (ending.type === 'draw') multipliers.outcome = 0.8;
+
+  let totalScore = Object.values(basePoints).reduce((sum, p) => sum + p, 0);
+  if (bonuses.win) totalScore += bonuses.win;
+  if (multipliers.rank) totalScore *= multipliers.rank;
+  if (multipliers.outcome) totalScore *= multipliers.outcome;
+
+  const scoreDetails: ScoreDetails = {
+    total: Math.round(totalScore),
+    basePoints,
+    bonuses: Object.keys(bonuses).length > 0 ? bonuses : undefined,
+    multipliers: Object.keys(multipliers).length > 0 ? multipliers : undefined,
+  };
+
+  return {
+    ...ending,
+    stats,
+    scoreDetails
+  };
 }
 
 // Centralize credit scaling logic
@@ -139,7 +214,9 @@ export function applyChoice(state: GameState, choice: Choice): GameState {
   // 2) check for hard losses immediately (before advancing time)
   const lossEnding = checkEnding(newMeters, state.year, state.quarter);
   if (lossEnding) {
-    const endingData = endings.find(e => e.id === lossEnding.id) as Ending;
+    let endingData = endings.find(e => e.id === lossEnding.id) as Ending;
+    const finalStateForCalc = { ...state, meters: newMeters, log: [...state.log, choice.label], seed: nextSeed };
+    endingData = calculateEndingDetails(endingData, finalStateForCalc); // Pass only final state
     return {
       ...state,
       meters: newMeters,
@@ -154,7 +231,9 @@ export function applyChoice(state: GameState, choice: Choice): GameState {
   if (state.year === 2027 && state.quarter === 4) {
     const finalEnding = checkEnding(newMeters, state.year, state.quarter);
     if (finalEnding) {
-      const endingData = endings.find(e => e.id === finalEnding.id) as Ending;
+      let endingData = endings.find(e => e.id === finalEnding.id) as Ending;
+      const finalStateForCalc = { ...state, meters: newMeters, log: [...state.log, choice.label], seed: nextSeed };
+      endingData = calculateEndingDetails(endingData, finalStateForCalc);
       return {
         ...state,
         meters: newMeters,
@@ -166,7 +245,9 @@ export function applyChoice(state: GameState, choice: Choice): GameState {
     }
   }
   if (state.year === 2027 && state.quarter === 4) {
-    const draw = endings.find(e => e.id === 'draw‑survival') as Ending;
+    let draw = endings.find(e => e.id === 'draw‑survival') as Ending; // Note the hyphen is a non-standard one.
+    const finalStateForCalc = { ...state, meters: newMeters, log: [...state.log, choice.label], seed: nextSeed };
+    draw = calculateEndingDetails(draw, finalStateForCalc);
     return {
       ...state,
       meters: newMeters,
