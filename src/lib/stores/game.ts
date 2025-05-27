@@ -1,7 +1,8 @@
 import { browser } from '$app/environment';
 import { writable } from 'svelte/store';
-import type { GameState, MeterGroup, Meters, MeterRanges } from '../types';
+import type { GameState, MeterGroup, Meters, MeterRanges, Ending } from '../types';
 import meterRanges from '$lib/content/meters.json';
+import { calculateEndingDetails } from '$lib/engine';
 
 function randInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -50,6 +51,16 @@ function createGameStore() {
       try {
         const parsed = JSON.parse(raw) as Partial<GameState>;
         initial = { ...defaultState, ...parsed };
+
+        // Patch for older saved games: if gameOver is an Ending but lacks scoreDetails, calculate them.
+        if (initial.gameOver && initial.gameOver !== 'playing' && !(initial.gameOver as Ending).scoreDetails) {
+         
+          const endingState = initial.gameOver as Ending;
+          // We need to provide the full GameState to calculateEndingDetails.
+          // The `initial` object here IS the full GameState loaded from localStorage.
+          initial.gameOver = calculateEndingDetails(endingState, initial as GameState);
+        }
+
       } catch {
         initial = defaultState;
       }

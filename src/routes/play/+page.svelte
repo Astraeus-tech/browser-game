@@ -1,36 +1,60 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { game, getDefaultState } from '$lib/stores/game';
-  import type { Event } from '$lib/types';
-  import { applyChoice, scaleCreditRange } from '$lib/engine';
+  import type { Event, Ending, GameState } from '$lib/types';
+  import { applyChoice, scaleCreditRange, calculateEndingDetails } from '$lib/engine';
   import { makeRng } from '$lib/rng';
   import ResourceBars from '$lib/components/ResourceBars.svelte';
+  import TypewriterText from '$lib/components/TypewriterText.svelte';
   import events from '$lib/content/events';
   import { browser } from '$app/environment';
   import { get } from 'svelte/store';
   import { calculateImpactScore, getImpactAssessment, getImpactColorClass } from '$lib/impact';
+  import { submitRunScore } from '$lib/db';
+  import { getDisplayName, setDisplayName as saveDisplayNameToStorage } from '$lib/player';
+  import DisplayNameModal from '$lib/components/DisplayNameModal.svelte';
+  import type { PageData } from './$types'; // Import PageData for the load function's return type
+  // getPlayerId is no longer strictly needed here for rank logic if server sends full leaderboard
+  // but keep if used elsewhere.
+  // import { getPlayerId } from '$lib/player'; 
 
-  console.clear();
+  export let data: PageData; // This prop receives data from the load function
 
   let currentEvents: Event[] = [];
   let selectedEvent: Event | null = null;
-  let overlayChoice: any = null; // This will store the currently selected choice for the overlay
+  let overlayChoice: any = null;
   let expandedSections = {
     wallstreet: false,
     ngo: false,
     researcher: false
   };
+  let showDisplayNameModal = false;
+  let pendingGameStateForScoreSubmission: GameState | null = null;
+  // currentPlayerId might still be useful if you want to highlight based on a persistent ID
+  // but for ranking based on current score and display name, it's less critical now.
+  // let currentPlayerId: string | null = null; 
 
-  // Impact assessment ranges - easy to modify if needed
-  const IMPACT_RANGES = {
-    NEUTRAL: { min: 0, max: 5 },
-    SLIGHT: { min: 5, max: 10 },
-    MODERATE: { min: 10, max: 25 },
-    STRONG: { min: 25, max: Infinity }
-  };
+  // Simplified leaderboard state - only populated after game ends
+  let leaderboard: Array<{ display_name: string; score: number }> = [];
+  let processedLeaderboard: Array<{ rank: number; display_name: string; score: number; isCurrentUser?: boolean }> = [];
+  let currentPlayerRankMessage: string | null = null;
+  let leaderboardError: string | null = null;
+  let isLoadingLeaderboard = false;
+
+  // Removed playerRankInfo, isFetchingPlayerRank, fetchPlayerRank function
+
+  function resetLeaderboardState() {
+    leaderboard = [];
+    processedLeaderboard = [];
+    currentPlayerRankMessage = null;
+    leaderboardError = null;
+    isLoadingLeaderboard = false;
+  }
 
   onMount(() => {
     pickEvent();
+    // currentPlayerId = getPlayerId(); // if needed
+    resetLeaderboardState(); // Ensure clean state on initial mount
   });
 
   function toggleSection(section: 'wallstreet' | 'ngo' | 'researcher') {
@@ -57,15 +81,12 @@
   }
 
   function pickEvent() {
-    console.log('STATE → year:', $game.year, 'quarter:', $game.quarter);
-    console.log('ALL EVENTS →', events);
 
     // Filter events by matching year and quarter from event properties
     currentEvents = (events as Event[]).filter(e =>
       e.year === $game.year && e.quarter === $game.quarter
     );
 
-    console.log('FILTERED EVENTS →', currentEvents.map(e => e.id));
 
     if (currentEvents.length) {
       const currentState = get(game);
@@ -75,7 +96,6 @@
         const savedEvent = currentEvents.find(e => e.id === currentState.currentEventId);
         if (savedEvent) {
           selectedEvent = savedEvent;
-          console.log('LOADED SAVED EVENT →', selectedEvent.id);
           return;
         }
       }
@@ -84,7 +104,6 @@
       const { rng, nextSeed } = makeRng($game);
       const idx = Math.floor(rng() * currentEvents.length);
       selectedEvent = currentEvents[idx];
-      console.log('SELECTED EVENT →', selectedEvent.id);
       
       // Check affordability on the new seed state before continuing
       const updatedState = { 
@@ -98,16 +117,27 @@
       );
       if (!hasAffordable) {
         // Trigger out-of-credits loss ending
-        game.set({
+        let endingData: Ending = {
+          id: 'out_of_credits',
+          type: 'loss',
+          title: 'Acquired at the Brink',
+          reason: 'Credits too low',
+          description: `Your runaway burn rate has drained every credit. As the final operations stall, Macrosoft swooped in with a surprise rescue acquisition—stripping you of the CEO title and subsuming your vision into their empire. Soon, your pioneering work will be relegated to corporate archives, another forgotten footnote in tech history.`
+        };
+        // Calculate score and stats for this ending
+        // We need the full GameState object for calculateEndingDetails
+        const finalGameStateForCalc: GameState = {
+          ...updatedState, // This already has updated year, quarter, meters, seed, log
+          gameOver: endingData // Temporarily set gameOver to the basic ending data
+        };
+        endingData = calculateEndingDetails(endingData, finalGameStateForCalc);
+
+        const finalStateToSet: GameState = {
           ...updatedState,
-          gameOver: {
-            id: 'out_of_credits',
-            type: 'loss',
-            title: 'Acquired at the Brink',
-            reason: 'Credits too low',
-            description: `Your runaway burn rate has drained every credit. As the final operations stall, Macrosoft swooped in with a surprise rescue acquisition—stripping you of the CEO title and subsuming your vision into their empire. Soon, your pioneering work will be relegated to corporate archives, another forgotten footnote in tech history.`
-          }
-        });
+          gameOver: endingData
+        };
+        game.set(finalStateToSet);
+        triggerScoreSubmission(finalStateToSet);
         return;
       }
       // Otherwise just update seed and continue
@@ -155,9 +185,10 @@
     const currentState = get(game);
     const nextState = applyChoice(currentState, choice);
 
-    // If the game is over (i.e., a win/loss condition was met), do not pick a new event
+    game.set(nextState);
+
     if (nextState.gameOver !== 'playing') {
-      game.set(nextState);
+      triggerScoreSubmission(nextState);
       return;
     }
 
@@ -179,7 +210,162 @@
 
   function startOver() {
     game.set(getDefaultState());
+    resetLeaderboardState();
     pickEvent();
+  }
+
+  // New function to fetch leaderboard after score submission
+  async function fetchLeaderboard() {
+    isLoadingLeaderboard = true;
+    leaderboardError = null;
+    
+    try {
+      console.log('[Frontend] Fetching fresh leaderboard after score submission');
+      const response = await fetch('/api/get-leaderboard');
+      const result = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to fetch leaderboard');
+      }
+      
+      if (result.error) {
+        leaderboardError = result.error;
+        leaderboard = [];
+      } else {
+        leaderboard = result.leaderboard || [];
+        leaderboardError = null;
+        console.log(`[Frontend] Successfully fetched ${leaderboard.length} scores`);
+      }
+    } catch (error: any) {
+      console.error('[Frontend] Error fetching leaderboard:', error);
+      leaderboardError = error.message || 'Failed to fetch leaderboard';
+      leaderboard = [];
+    } finally {
+      isLoadingLeaderboard = false;
+    }
+  }
+
+  // Renamed and refactored for clarity and to ensure proper awaiting of leaderboard fetch
+  async function submitScoreAndFetchLeaderboard(gameState: GameState, displayName?: string | null) {
+    console.log('[Frontend] Starting score submission...');
+    const success = await submitRunScore(gameState, displayName === null ? undefined : displayName);
+    console.log('[Frontend] Score submission result:', success);
+    
+    if (success) {
+      console.log('[Frontend] Score submitted successfully, fetching fresh leaderboard...');
+      // Fetch fresh leaderboard after successful score submission
+      await fetchLeaderboard();
+      console.log('[Frontend] Leaderboard fetch completed');
+    } else {
+      // Handle submission failure
+      console.error("Score submission failed. Leaderboard may not be up-to-date.");
+      leaderboardError = "Score submission failed";
+    }
+    return success;
+  }
+
+  async function triggerScoreSubmission(gameState: GameState) {
+    const existingDisplayName = getDisplayName();
+    if (!existingDisplayName) {
+      pendingGameStateForScoreSubmission = gameState;
+      showDisplayNameModal = true;
+    } else {
+      await submitScoreAndFetchLeaderboard(gameState, existingDisplayName);
+    }
+  }
+
+  async function handleNameSubmitted(event: CustomEvent<string>) {
+    const newDisplayName = event.detail;
+    saveDisplayNameToStorage(newDisplayName);
+    if (pendingGameStateForScoreSubmission) {
+      await submitScoreAndFetchLeaderboard(pendingGameStateForScoreSubmission, newDisplayName);
+    }
+    showDisplayNameModal = false;
+    pendingGameStateForScoreSubmission = null;
+  }
+
+  async function handleModalCancel() {
+    if (pendingGameStateForScoreSubmission) {
+      // Submit score as anonymous if modal is cancelled
+      await submitScoreAndFetchLeaderboard(pendingGameStateForScoreSubmission, undefined);
+    }
+    showDisplayNameModal = false;
+    pendingGameStateForScoreSubmission = null;
+  }
+
+  // Simplified reactive block for leaderboard processing
+  $: {
+    if (browser) {
+      const g = $game;
+      const gameOverState = g.gameOver;
+      const isEffectivelyGameOver = gameOverState && gameOverState !== 'playing';
+
+      if (isEffectivelyGameOver && leaderboard.length > 0) {
+        // Game is over and we have leaderboard data - process it
+        console.log('[Frontend] Game over AND leaderboard loaded - processing leaderboard');
+        
+        const currentRunEnding = gameOverState as Ending;
+        const scoreDetails = currentRunEnding.scoreDetails;
+
+        if (scoreDetails) {
+          const currentRunScore = scoreDetails.total;
+          const currentRunDisplayName = getDisplayName() || 'Anonymous';
+
+          const fullLeaderboard = leaderboard.map((entry, index) => ({
+            ...entry,
+            display_name: entry.display_name || 'Anonymous',
+            rank: index + 1,
+            isCurrentUser: false
+          }));
+
+          let playerEntryInList: (typeof fullLeaderboard[0]) | undefined = undefined;
+          for (const entry of fullLeaderboard) {
+            if (entry.score === currentRunScore && entry.display_name === currentRunDisplayName) {
+              entry.isCurrentUser = true;
+              playerEntryInList = entry;
+              break;
+            }
+          }
+
+          if (playerEntryInList) {
+            currentPlayerRankMessage = `Your rank: ${playerEntryInList.rank}`;
+            if (playerEntryInList.rank <= 10) {
+              processedLeaderboard = fullLeaderboard.slice(0, 10);
+            } else {
+              const top9 = fullLeaderboard.slice(0, 9);
+              processedLeaderboard = [...top9, playerEntryInList];
+            }
+          } else {
+            currentPlayerRankMessage = `Your score: ${currentRunScore}. Rank will show if on leaderboard.`;
+            processedLeaderboard = fullLeaderboard.slice(0, 10);
+            console.warn(`Current run (Score: ${currentRunScore}, Name: ${currentRunDisplayName}) not found in leaderboard.`);
+          }
+        }
+      } else if (isEffectivelyGameOver && isLoadingLeaderboard) {
+        // Game is over but still loading leaderboard
+        console.log('[Frontend] Game over but still loading leaderboard');
+        currentPlayerRankMessage = "Submitting score and fetching leaderboard...";
+        processedLeaderboard = [];
+      } else if (isEffectivelyGameOver && leaderboardError) {
+        // Game is over but there was an error fetching leaderboard
+        console.log('[Frontend] Game over but leaderboard error:', leaderboardError);
+        if (leaderboardError === 'Local mode: Leaderboard is disabled.') {
+          currentPlayerRankMessage = 'Local mode: Leaderboard is disabled.';
+        } else {
+          currentPlayerRankMessage = `Leaderboard error: ${leaderboardError}`;
+        }
+        processedLeaderboard = [];
+      } else if (isEffectivelyGameOver && !isLoadingLeaderboard && leaderboard.length === 0) {
+        // Game is over, not loading, no error, but no leaderboard data
+        console.log('[Frontend] Game over but no leaderboard data available');
+        currentPlayerRankMessage = "No leaderboard data available";
+        processedLeaderboard = [];
+      } else {
+        // Game not over or no leaderboard data yet - no logging needed
+        currentPlayerRankMessage = null;
+        processedLeaderboard = [];
+      }
+    }
   }
 </script>
 
@@ -199,7 +385,8 @@
       {/if}
       {#if $game.gameOver && $game.gameOver !== 'playing'}
         {#if $game.gameOver.type === 'win'}
-          <span class="text-green-400 font-bold order-2 sm:order-3">Victory! Rank:{$game.gameOver.rank}</span>
+          <!-- Display rank from currentPlayerRankMessage if available, or fallback -->
+          <span class="text-green-400 font-bold order-2 sm:order-3">Victory! {#if currentPlayerRankMessage}{currentPlayerRankMessage}{:else if $game.gameOver.rank}Rank:{$game.gameOver.rank}{/if}</span>
         {:else if $game.gameOver.type === 'draw'}
           <span class="text-yellow-400 font-bold order-2 sm:order-3">Draw</span>
         {:else}
@@ -221,18 +408,74 @@
           <h1 class="text-2xl font-bold text-yellow-300 mb-2">
             {$game.gameOver.title}
           </h1>
-          {#if $game.gameOver.type === 'loss' && $game.gameOver.reason}
-            <p class="text-gray-400 text-sm mb-2">{$game.gameOver.reason}</p>
-          {/if}
-          <p class="mb-4 whitespace-pre-line">{$game.gameOver.description}</p>
-          {#if $game.gameOver.rank}
-            <p class="italic text-sm text-green-400">Game Over – Rank: {$game.gameOver.rank}</p>
+          <p class="mb-4 whitespace-pre-line"><TypewriterText text={$game.gameOver.description} speed={12} /></p>
+
+          <!-- Score & Rank Section -->
+          <div class="my-4 p-3 bg-gray-800 rounded-md">
+            <h2 class="text-xl font-semibold text-blue-300 mb-2">Run Summary</h2>
+            {#if $game.gameOver.type === 'win'}
+              <p class="text-green-400 text-lg">Outcome: <span class="font-bold">Victory!</span></p>
+              <!-- Rank display here is now primarily from currentPlayerRankMessage inside leaderboard section -->
+            {:else if $game.gameOver.type === 'loss'}
+              <p class="text-red-400 text-lg">Outcome: <span class="font-bold">Defeat</span></p>
+              {#if $game.gameOver.reason}
+                <p class="text-gray-400 text-sm mb-2">Reason: {$game.gameOver.reason}</p>
+              {/if}
+            {:else if $game.gameOver.type === 'draw'}
+              <p class="text-yellow-400 text-lg">Outcome: <span class="font-bold">Stalemate</span></p>
+            {/if}
+            
+            {#if $game.gameOver.scoreDetails}
+              <p class="text-blue-300 mt-2">Total Score: <span class="font-bold text-xl">{$game.gameOver.scoreDetails.total}</span></p>
+              <div class="text-xs text-gray-400 mt-2 space-y-0.5">
+                <p>Progression: {$game.gameOver.scoreDetails.basePoints.progression} pts</p>
+                <p>Company Performance: {$game.gameOver.scoreDetails.basePoints.company} pts</p>
+                <p>Environmental Impact: {$game.gameOver.scoreDetails.basePoints.environment} pts</p>
+                <p>AI Advancement: {$game.gameOver.scoreDetails.basePoints.aiCapability} pts</p>
+                {#if $game.gameOver.scoreDetails.bonuses?.win}
+                  <p>Win Bonus: +{$game.gameOver.scoreDetails.bonuses.win} pts</p>
+                {/if}
+                {#if $game.gameOver.scoreDetails.multipliers?.rank}
+                  <p>Rank Multiplier: x{$game.gameOver.scoreDetails.multipliers.rank.toFixed(1)}</p>
+                {/if}
+                {#if $game.gameOver.scoreDetails.multipliers?.outcome}
+                  <p>Outcome Multiplier: x{$game.gameOver.scoreDetails.multipliers.outcome.toFixed(1)}</p>
+                {/if}
+              </div>
+            {/if}
+          </div>
+
+          <!-- Leaderboard Section -->
+          {#if currentPlayerRankMessage === 'Local mode: Leaderboard is disabled.'}
+            <!-- No leaderboard shown in local mode -->
+          {:else if processedLeaderboard && processedLeaderboard.length > 0}
+            <div class="my-6 p-3 bg-gray-800 rounded-md">
+              <h2 class="text-xl font-semibold text-purple-400 mb-3">Top Scores</h2>
+              {#if currentPlayerRankMessage && currentPlayerRankMessage !== 'Local mode: Leaderboard is disabled.'}
+                <p class="text-sm text-yellow-300 mb-2">{currentPlayerRankMessage}</p>
+              {/if}
+              <ol class="list-decimal list-inside space-y-1 text-sm">
+                {#each processedLeaderboard as entry}
+                  <li class="flex justify-between items-center px-2 py-1 rounded {entry.isCurrentUser ? 'bg-green-700 text-white' : ''}">
+                    <span>
+                      <span class="font-semibold {entry.isCurrentUser ? 'text-yellow-300' : 'text-gray-300'}">{entry.rank}. {entry.display_name}:</span> 
+                      <span class="{entry.isCurrentUser ? 'text-yellow-300' : 'text-green-300'}">{entry.score} pts</span>
+                    </span>
+                  </li>
+                {/each}
+              </ol>
+            </div>
+          {:else if leaderboardError && leaderboardError !== 'Local mode: Leaderboard is disabled.'}
+            <div class="my-6 p-3 bg-gray-800 rounded-md">
+              <h2 class="text-xl font-semibold text-red-400 mb-3">Leaderboard Error</h2>
+              <p class="text-sm text-red-300">Could not load top scores: {leaderboardError}</p>
+            </div>
           {/if}
         </div>
       {:else if selectedEvent}
         <div>
           <h1 class="text-lg mb-2">{selectedEvent.headline}</h1>
-          <p class="mb-4">{selectedEvent.description}</p>
+          <p class="mb-4"><TypewriterText text={selectedEvent.description} speed={12} /></p>
         </div>
       {:else}
         <p>No events loaded. Please check your content.</p>
@@ -436,5 +679,11 @@
       </div>
     </div>
   {/if}
+
+  <DisplayNameModal 
+    bind:isOpen={showDisplayNameModal} 
+    on:submitName={handleNameSubmitted} 
+    on:cancelSubmit={handleModalCancel} 
+  />
 </div>
 {/if}
