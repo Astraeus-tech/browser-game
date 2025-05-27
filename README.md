@@ -223,16 +223,6 @@ npm run build
 # Deploy these files to your hosting provider
 ```
 
-## 🧪 Testing
-
-```bash
-# Run tests
-npm run test
-
-# Run tests in watch mode
-npm run test:watch
-```
-
 ## 📝 Content Management
 
 ### Adding New Events
@@ -242,15 +232,37 @@ Events are stored in JSON files organized by year and quarter in `src/lib/conten
 ```json
 {
   "id": "unique-event-id",
-  "title": "Event Title",
-  "description": "Event description...",
+  "headline": "Event Headline",
+  "description": "Detailed event description that sets up the scenario and context for the player's decision...",
   "choices": [
     {
       "label": "Choice description",
+      "details": "Detailed explanation of what this choice entails and its immediate consequences...",
+      "wallstreet_analysis": "Analysis from a financial/investor perspective on this choice...",
+      "ngo_analysis": "Analysis from an environmental/social responsibility perspective...",
+      "researcher_analysis": "Analysis from a technical/research perspective on capability implications...",
       "effects": {
-        "company": { "credits": "10..20" },
-        "environment": { "social_stability": "-5..5" },
-        "ai_capability": { "coding": "0..10" }
+        "company": {
+          "credits": "10..20",
+          "revenue": "0..5",
+          "valuation": "0..0",
+          "approval": "-5..5",
+          "security": "0..0",
+          "alignment_confidence": "0..0"
+        },
+        "environment": {
+          "social_stability": "-5..5",
+          "cyber_bio_risk": "0..10",
+          "climate_load": "-10..0"
+        },
+        "ai_capability": {
+          "coding": "0..10",
+          "hacking": "0..0",
+          "bioweapons": "0..0",
+          "politics_persuasion": "0..0",
+          "robotics_embodied": "0..0",
+          "research_taste": "0..0"
+        }
       }
     }
   ],
@@ -259,13 +271,6 @@ Events are stored in JSON files organized by year and quarter in `src/lib/conten
 }
 ```
 
-### Environment Update Script
-
-Use the included script to batch update event environment effects:
-
-```bash
-node update-environment.js
-```
 
 ## 🤝 Contributing
 
@@ -279,25 +284,6 @@ node update-environment.js
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🆘 Troubleshooting
 
-### Common Issues
-
-**Game not loading**: Check browser console for errors and ensure all environment variables are set correctly.
-
-**Database connection issues**: Verify your Supabase credentials and ensure the scores table exists.
-
-**Build failures**: Ensure you're using Node.js v18+ and all dependencies are installed.
-
-**Type errors**: Run `npm run check` to identify TypeScript issues.
-
-### Getting Help
-
-- Check the browser console for error messages
-- Verify environment variable configuration
-- Ensure database schema matches requirements
-- Review the game logs for debugging information
-
----
 
 **Ready to shape humanity's future?** Start the game and see if you can navigate the path to beneficial superintelligence! 🤖✨
