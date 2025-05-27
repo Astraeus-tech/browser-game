@@ -11,30 +11,25 @@
     </header>
     
     <div class="px-6 py-8 bg-green-950 border-b border-gray-700 overflow-y-auto">
-      <h2 class="text-xl mb-4 text-yellow-300">Lead Humanity's Future</h2>
+      <h2 class="text-xl mb-4 text-yellow-300">Open-source browser game</h2>
       
-      <p class="mb-4">The year is 2025. You're the CEO of a promising AI startup on the brink of creating the most powerful artificial intelligence in history.</p>
+      <p class="mb-4">Singularity Run is a free, non-commercial, open-source browser game about the future of AI. We created this game as a fun way to explore the future of AI and the challenges we will face, and to raise awareness about the importance of responsible AI development.</p>
+      <p class="mb-4">We welcome any feedback, suggestions, or contributions to the game. You can find the code on GitHub, and we're open to pull requests.</p>
       
-      <p class="mb-4">Every decision you make will impact your company's success, the global environment, and the development of AI capabilities. Will you prioritize profits, pursue responsible innovation, or find a balance between competing interests?</p>
+      <p class="mb-4"><a href="https://github.com/Singularity-Run/browser-game" class="text-blue-400 hover:text-blue-300">You can find the Github repository here: https://github.com/Singularity-Run/browser-game</a>.</p>
       
       <div class="my-6 px-4 py-4 bg-gray-800 rounded-md border-l-4 border-green-500">
-        <h3 class="text-lg mb-2 text-green-400">Your Objective</h3>
-        <p>Navigate the complex landscape of AI development while balancing:</p>
-        <ul class="list-disc ml-6 mt-2 space-y-1">
-          <li>Corporate interests and financial success</li>
-          <li>Advancement of AI capabilities</li>
-          <li>Impact on social stability and security</li>
-        </ul>
+        <h3 class="text-lg mb-2 text-green-400">Disclaimer</h3>
+        <p>The game is loosely based on the whitepaper AI 2027:<br><a href="https://ai-2027.com/" class="text-blue-400 hover:text-blue-300"> https://ai-2027.com/</a></p> 
+
+        <p>Although we have received permission to use the concepts from the original whitepaper, this project is developed independently and is not endorsed by or affiliated with the original authors.</p>
+
       </div>
-      
-      <p class="italic text-sm text-green-300 mb-6">Can you reach the technological singularity without destroying the world—or your company?</p>
-      
-      <div class="text-xs text-red-400 mb-2 uppercase">Warning: Choices have consequences. Your decisions will shape the future.</div>
     </div>
     
     <footer class="px-6 py-4 bg-gray-800 border-t border-gray-700">
       <a href="/play" class="block w-full px-4 py-3 bg-green-700 hover:bg-green-600 rounded text-center text-lg font-bold">
-        Start Singularity Run
+       Go to game
       </a>
       <div class="text-xs text-center mt-3 text-gray-400">
         Strategic decisions await. The future is in your hands.
