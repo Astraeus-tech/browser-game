@@ -51,7 +51,7 @@ export interface GameState {
   }>;
   log: string[];
   seed: number;
-  gameOver: 'playing' | Ending | null;
+  gameOver: 'intro' | 'playing' | Ending | null;
   currentEventId?: string;
 }
 

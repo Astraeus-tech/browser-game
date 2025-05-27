@@ -35,7 +35,7 @@ export function getDefaultState(): GameState {
     metersHistory: [],
     log: [],
     seed: Date.now(),
-    gameOver: 'playing',
+    gameOver: 'intro',
     currentEventId: undefined
   };
 }
@@ -53,7 +53,7 @@ function createGameStore() {
         initial = { ...defaultState, ...parsed };
 
         // Patch for older saved games: if gameOver is an Ending but lacks scoreDetails, calculate them.
-        if (initial.gameOver && initial.gameOver !== 'playing' && !(initial.gameOver as Ending).scoreDetails) {
+        if (initial.gameOver && initial.gameOver !== 'playing' && initial.gameOver !== 'intro' && !(initial.gameOver as Ending).scoreDetails) {
          
           const endingState = initial.gameOver as Ending;
           // We need to provide the full GameState to calculateEndingDetails.
