@@ -52,7 +52,10 @@
   }
 
   onMount(() => {
-    pickEvent();
+    // Only pick event if we're in playing state
+    if ($game.gameOver === 'playing') {
+      pickEvent();
+    }
     // currentPlayerId = getPlayerId(); // if needed
     resetLeaderboardState(); // Ensure clean state on initial mount
   });
@@ -208,10 +211,19 @@
     }
   }
 
+  function startGame() {
+    // Transition from intro to playing state
+    game.update(state => ({
+      ...state,
+      gameOver: 'playing'
+    }));
+    pickEvent();
+  }
+
   function startOver() {
     game.set(getDefaultState());
     resetLeaderboardState();
-    pickEvent();
+    // Don't pick event here since we start in intro state
   }
 
   // New function to fetch leaderboard after score submission
@@ -298,7 +310,7 @@
     if (browser) {
       const g = $game;
       const gameOverState = g.gameOver;
-      const isEffectivelyGameOver = gameOverState && gameOverState !== 'playing';
+      const isEffectivelyGameOver = gameOverState && gameOverState !== 'playing' && gameOverState !== 'intro';
 
       if (isEffectivelyGameOver && leaderboard.length > 0) {
         // Game is over and we have leaderboard data - process it
@@ -374,7 +386,11 @@
   <div class="w-full max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl 2xl:max-w-3xl bg-gray-900 border-4 border-gray-700 rounded-lg shadow-lg flex flex-col overflow-hidden">
     <header class="flex flex-wrap items-center bg-gray-800 px-4 py-2 border-b border-gray-700">
       <h1 class="text-lg font-bold mr-auto">Singularity Run</h1>
-      <div class="text-xs order-3 w-full mt-1 sm:mt-0 sm:w-auto sm:order-2 sm:mr-auto">Year: {$game.year} – Q{$game.quarter}</div>
+      {#if $game.gameOver !== 'intro'}
+        <div class="text-xs order-3 w-full mt-1 sm:mt-0 sm:w-auto sm:order-2 sm:mr-auto">Year: {$game.year} – Q{$game.quarter}</div>
+      {:else}
+        <div class="text-xs ml-auto">The AI Strategy Game</div>
+      {/if}
       {#if $game.gameOver === 'playing' && $game.log.length > 0}
         <button
           on:click={startOver}
@@ -383,7 +399,7 @@
           Abandon Run
         </button>
       {/if}
-      {#if $game.gameOver && $game.gameOver !== 'playing'}
+      {#if $game.gameOver && $game.gameOver !== 'playing' && $game.gameOver !== 'intro'}
         {#if $game.gameOver.type === 'win'}
           <!-- Display rank from currentPlayerRankMessage if available, or fallback -->
           <span class="text-green-400 font-bold order-2 sm:order-3">Victory! {#if currentPlayerRankMessage}{currentPlayerRankMessage}{:else if $game.gameOver.rank}Rank:{$game.gameOver.rank}{/if}</span>
@@ -394,16 +410,41 @@
         {/if}
       {/if}
     </header>
-    <div class="px-4 py-2 border-b border-gray-700 overflow-x-auto">
-      <ResourceBars
-        company={$game.meters.company}
-        environment={$game.meters.environment}
-        ai_capability={$game.meters.ai_capability}
-        metersHistory={$game.metersHistory}
-      />
-    </div>
-    <div class="h-64 md:h-80 p-4 bg-green-950 border-b border-gray-700 overflow-y-auto flex flex-col justify-between">
-      {#if $game.gameOver && $game.gameOver !== 'playing'}
+    {#if $game.gameOver !== 'intro'}
+      <div class="px-4 py-2 border-b border-gray-700 overflow-x-auto">
+        <ResourceBars
+          company={$game.meters.company}
+          environment={$game.meters.environment}
+          ai_capability={$game.meters.ai_capability}
+          metersHistory={$game.metersHistory}
+        />
+      </div>
+    {/if}
+    <div class="{$game.gameOver === 'intro' ? 'h-[32rem] md:h-[36rem]' : 'h-64 md:h-80'} p-4 bg-green-950 border-b border-gray-700 overflow-y-auto flex flex-col justify-between">
+      {#if $game.gameOver === 'intro'}
+        <!-- Landing page content -->
+        <div>
+          <h2 class="text-xl mb-4 text-yellow-300">Lead Humanity's Future</h2>
+          
+          <p class="mb-4">The year is 2025. You're the CEO of a promising AI startup on the brink of creating the most powerful artificial intelligence in history.</p>
+          
+          <p class="mb-4">Every decision you make will impact your company's success, the global environment, and the development of AI capabilities. Will you prioritize profits, pursue responsible innovation, or find a balance between competing interests?</p>
+          
+          <div class="my-6 px-4 py-4 bg-gray-800 rounded-md border-l-4 border-green-500">
+            <h3 class="text-lg mb-2 text-green-400">Your Objective</h3>
+            <p>Navigate the complex landscape of AI development while balancing:</p>
+            <ul class="list-disc ml-6 mt-2 space-y-1">
+              <li>Corporate interests and financial success</li>
+              <li>Advancement of AI capabilities</li>
+              <li>Impact on social stability and security</li>
+            </ul>
+          </div>
+          
+          <p class="italic text-sm text-green-300 mb-6">Can you reach the technological singularity without destroying the world—or your company?</p>
+          
+          <div class="text-xs text-red-400 mb-2 uppercase">Warning: Choices have consequences. Your decisions will shape the future.</div>
+        </div>
+      {:else if $game.gameOver && $game.gameOver !== 'playing'}
         <div>
           <h1 class="text-2xl font-bold text-yellow-300 mb-2">
             {$game.gameOver.title}
@@ -482,7 +523,17 @@
       {/if}
     </div>
     <footer class="px-4 py-2 bg-gray-800 border-t border-gray-700">
-      {#if $game.gameOver && $game.gameOver !== 'playing'}
+      {#if $game.gameOver === 'intro'}
+        <button
+          class="w-full px-4 py-3 bg-green-700 hover:bg-green-600 rounded text-center text-lg font-bold"
+          on:click={startGame}
+        >
+          Start Singularity Run
+        </button>
+        <div class="text-xs text-center mt-3 text-gray-400">
+          Strategic decisions await. The future is in your hands.
+        </div>
+      {:else if $game.gameOver && $game.gameOver !== 'playing'}
         <button
           class="w-full mb-2 px-4 py-2 bg-green-700 hover:bg-green-600 rounded"
           on:click={startOver}

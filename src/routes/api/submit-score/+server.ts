@@ -11,9 +11,9 @@ export async function POST({ request }) {
 
   const typedGameState = gameState as GameState;
 
-  if (typedGameState.gameOver === 'playing' || !typedGameState.gameOver) {
-    console.warn('[API] Attempted to submit score for a game that is still playing or has no gameOver state.');
-    return json({ error: 'Game is still playing or has no gameOver state' }, { status: 400 });
+  if (typedGameState.gameOver === 'playing' || typedGameState.gameOver === 'intro' || !typedGameState.gameOver) {
+    console.warn('[API] Attempted to submit score for a game that is still playing, in intro, or has no gameOver state.');
+    return json({ error: 'Game is still playing, in intro, or has no gameOver state' }, { status: 400 });
   }
 
   const endingDetails = typedGameState.gameOver as Ending;

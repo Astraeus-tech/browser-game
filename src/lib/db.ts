@@ -15,8 +15,8 @@ export async function submitRunScore(gameState: GameState, displayNameFromModal?
   // Proceed with remote submission only if databaseMode === 'remote'
   console.log('Database mode is \'remote\'. Attempting database submission.');
 
-  if (gameState.gameOver === 'playing' || !gameState.gameOver) {
-    console.warn('Attempted to submit score for a game that is still playing or has no gameOver state.');
+  if (gameState.gameOver === 'playing' || gameState.gameOver === 'intro' || !gameState.gameOver) {
+    console.warn('Attempted to submit score for a game that is still playing, in intro, or has no gameOver state.');
     return false;
   }
 
