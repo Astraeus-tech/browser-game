@@ -45,7 +45,53 @@
   }
 
   onMount(() => {
-    // Only pick event if we're in playing state
+    // Early corruption detection: Check if game state is valid
+    if (browser && $game.gameOver === 'playing') {
+      // Validate that we have essential game state properties
+      const isValidGameState = (
+        $game.year && 
+        $game.quarter && 
+        $game.meters &&
+        $game.meters.company &&
+        $game.meters.environment &&
+        $game.meters.ai_capability
+      );
+      
+      if (!isValidGameState) {
+        console.warn('Corrupted game state detected on mount. Clearing localStorage and resetting...');
+        try {
+          localStorage.removeItem('game');
+          const freshState = getDefaultState();
+          game.set(freshState);
+          alert('We detected corrupted game data and have reset it. Please start a new game.');
+        } catch (error) {
+          console.error('Error during early corruption recovery:', error);
+          window.location.reload();
+        }
+        return;
+      }
+      
+      // Check if events exist for current year/quarter before trying to pick
+      const availableEvents = (events as Event[]).filter(e =>
+        e.year === $game.year && e.quarter === $game.quarter
+      );
+      
+      if (availableEvents.length === 0) {
+        console.warn('No events available for current year/quarter. Resetting game state...');
+        try {
+          localStorage.removeItem('game');
+          const freshState = getDefaultState();
+          game.set(freshState);
+          alert('We found an issue with your game progress and have reset it. Please start a new game.');
+        } catch (error) {
+          console.error('Error during event validation recovery:', error);
+          window.location.reload();
+        }
+        return;
+      }
+    }
+    
+    // Only pick event if we're in playing state and validation passed
     if ($game.gameOver === 'playing') {
       pickEvent();
     }
@@ -144,7 +190,32 @@
       await game.set(updatedState);
     } else {
       selectedEvent = null;
-      console.warn('No events matched the current state.');
+      console.warn('No events matched the current state. This might be due to corrupted localStorage.');
+      
+      // Auto-recovery: If game is in playing state but no events found, reset to intro
+      if ($game.gameOver === 'playing') {
+        console.log('Auto-recovery: Corrupted game state detected. Clearing localStorage and resetting...');
+        
+        try {
+          // Clear localStorage to remove corrupted data
+          localStorage.removeItem('game');
+          console.log('Cleared corrupted localStorage');
+          
+          // Reset to fresh intro state
+          const freshState = getDefaultState();
+          await game.set(freshState);
+          
+          // Show user-friendly notification
+          alert('We detected an issue with your saved game data and have reset it. Please start a new game.');
+          
+          console.log('Successfully reset to intro state');
+        } catch (error) {
+          console.error('Error during auto-recovery:', error);
+          // Fallback: reload the page to ensure clean state
+          console.log('Fallback: Reloading page to ensure clean state');
+          window.location.reload();
+        }
+      }
     }
   }
 
@@ -539,7 +610,14 @@
           <p class="mb-4"><TypewriterText text={selectedEvent.description} speed={12} /></p>
         </div>
       {:else}
-        <p>No events loaded. Please check your content.</p>
+        {#if $game.gameOver === 'playing'}
+          <div class="text-center">
+            <p class="text-yellow-400 mb-4">⚠️ Checking game data...</p>
+            <p class="text-sm text-gray-400">If you see this message, we're automatically fixing any data issues. The page will refresh shortly.</p>
+          </div>
+        {:else}
+          <p>No events loaded. Please check your content.</p>
+        {/if}
       {/if}
     </div>
     <footer class="px-4 py-2 bg-gray-800 border-t border-gray-700">
