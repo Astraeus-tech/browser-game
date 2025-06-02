@@ -14,9 +14,8 @@
   import { getDisplayName, setDisplayName as saveDisplayNameToStorage } from '$lib/player';
   import DisplayNameModal from '$lib/components/DisplayNameModal.svelte';
   import type { PageData } from './$types'; // Import PageData for the load function's return type
-  // getPlayerId is no longer strictly needed here for rank logic if server sends full leaderboard
-  // but keep if used elsewhere.
-  // import { getPlayerId } from '$lib/player'; 
+  import { submitGameChoice, startServerGame, endServerGame, isServerAuthoritative } from '$lib/gameClient';
+  import { getPlayerId } from '$lib/player';
 
   export let data: PageData; // This prop receives data from the load function
 
@@ -30,23 +29,17 @@
   };
   let showDisplayNameModal = false;
   let pendingGameStateForScoreSubmission: GameState | null = null;
-  // currentPlayerId might still be useful if you want to highlight based on a persistent ID
-  // but for ranking based on current score and display name, it's less critical now.
-  // let currentPlayerId: string | null = null; 
+  let currentPlayerId: string | null = null;
 
-  // Simplified leaderboard state - only populated after game ends
-  let leaderboard: Array<{ display_name: string; score: number }> = [];
-  let processedLeaderboard: Array<{ rank: number; display_name: string; score: number; isCurrentUser?: boolean }> = [];
-  let currentPlayerRankMessage: string | null = null;
+  // Simple leaderboard state
+  let leaderboard: Array<{ rank: number; display_name: string; score: number; isCurrentUser?: boolean }> = [];
+  let playerRank: number | null = null;
   let leaderboardError: string | null = null;
   let isLoadingLeaderboard = false;
 
-  // Removed playerRankInfo, isFetchingPlayerRank, fetchPlayerRank function
-
   function resetLeaderboardState() {
     leaderboard = [];
-    processedLeaderboard = [];
-    currentPlayerRankMessage = null;
+    playerRank = null;
     leaderboardError = null;
     isLoadingLeaderboard = false;
   }
@@ -56,8 +49,12 @@
     if ($game.gameOver === 'playing') {
       pickEvent();
     }
-    // currentPlayerId = getPlayerId(); // if needed
+    currentPlayerId = getPlayerId();
     resetLeaderboardState(); // Ensure clean state on initial mount
+    
+    // Pre-fetch leaderboard for instant display when game ends
+    console.log('[Frontend] Pre-fetching leaderboard for instant display...');
+    fetchLeaderboard().catch(err => console.warn('Pre-fetch leaderboard failed:', err));
   });
 
   function toggleSection(section: 'wallstreet' | 'ngo' | 'researcher') {
@@ -83,7 +80,7 @@
     };
   }
 
-  function pickEvent() {
+  async function pickEvent() {
 
     // Filter events by matching year and quarter from event properties
     currentEvents = (events as Event[]).filter(e =>
@@ -139,12 +136,12 @@
           ...updatedState,
           gameOver: endingData
         };
-        game.set(finalStateToSet);
+        await game.set(finalStateToSet);
         triggerScoreSubmission(finalStateToSet);
         return;
       }
       // Otherwise just update seed and continue
-      game.set(updatedState);
+      await game.set(updatedState);
     } else {
       selectedEvent = null;
       console.warn('No events matched the current state.');
@@ -180,44 +177,105 @@
     resetExpandedSections();
   }
 
-  function choose(label: string) {
+  async function choose(label: string) {
     if (!selectedEvent) return;
     const choice = selectedEvent.choices.find((c) => c.label === label);
     if (!choice) return;
 
     const currentState = get(game);
-    const nextState = applyChoice(currentState, choice);
+    const choiceIndex = selectedEvent.choices.indexOf(choice);
 
-    game.set(nextState);
+    // Use server-authoritative choice submission if available
+    if (isServerAuthoritative()) {
+      console.log('Submitting choice to server for validation...');
+      const response = await submitGameChoice({
+        eventId: selectedEvent.id,
+        choiceIndex,
+        choiceLabel: label,
+        currentState
+      });
 
-    if (nextState.gameOver !== 'playing') {
-      triggerScoreSubmission(nextState);
-      return;
+      if (!response.success) {
+        console.error('Server rejected choice:', response.error);
+        alert(`Choice rejected: ${response.error}`);
+        return;
+      }
+
+      if (!response.gameState) {
+        console.error('Server did not return updated game state');
+        return;
+      }
+
+      const nextState = response.gameState;
+      await game.set(nextState);
+      
+      if (nextState.gameOver !== 'playing') {
+        // End the server game when the game is over
+        await endServerGame(nextState);
+        triggerScoreSubmission(nextState);
+        return;
+      }
+
+      // Clear the currentEventId when advancing to new quarter/year
+      if (nextState.year !== currentState.year || nextState.quarter !== currentState.quarter) {
+        nextState.currentEventId = undefined;
+        await game.set(nextState);
+      }
+
+      await pickEvent();
+    } else {
+      // Local mode - use original logic
+      const nextState = applyChoice(currentState, choice);
+      await game.set(nextState);
+
+      if (nextState.gameOver !== 'playing') {
+        triggerScoreSubmission(nextState);
+        return;
+      }
+
+      // Clear the currentEventId when advancing to new quarter/year
+      if (nextState.year !== currentState.year || nextState.quarter !== currentState.quarter) {
+        nextState.currentEventId = undefined;
+      }
+
+      await game.set(nextState);
+      await pickEvent();
     }
-
-    // Clear the currentEventId when advancing to new quarter/year
-    if (nextState.year !== currentState.year || nextState.quarter !== currentState.quarter) {
-      nextState.currentEventId = undefined;
-    }
-
-    game.set(nextState);
-    pickEvent();
   }
 
-  function confirmChoice() {
+  async function confirmChoice() {
     if (overlayChoice) {
-      choose(overlayChoice.label);
+      await choose(overlayChoice.label);
       closeOverlay();
     }
   }
 
-  function startGame() {
-    // Transition from intro to playing state
-    game.update(state => ({
-      ...state,
-      gameOver: 'playing'
-    }));
-    pickEvent();
+  async function startGame() {
+    const currentState = get(game);
+    
+    // Use server-authoritative game start if in remote mode
+    if (import.meta.env.VITE_DATABASE_MODE === 'remote') {
+      console.log('Starting server-authoritative game...');
+      const playingState = { ...currentState, gameOver: 'playing' as const };
+      
+      const response = await startServerGame(playingState);
+      if (!response.success) {
+        console.error('Failed to start server game:', response.error);
+        alert(`Failed to start game: ${response.error}`);
+        return;
+      }
+      
+      await game.set(playingState);
+      console.log('Server-authoritative game started successfully');
+    } else {
+      // Local mode - transition from intro to playing state
+      await game.update(state => ({
+        ...state,
+        gameOver: 'playing'
+      }));
+    }
+    
+    await pickEvent();
   }
 
   function startOver() {
@@ -226,14 +284,19 @@
     // Don't pick event here since we start in intro state
   }
 
-  // New function to fetch leaderboard after score submission
+  // Simplified leaderboard fetch using player ID
   async function fetchLeaderboard() {
     isLoadingLeaderboard = true;
     leaderboardError = null;
     
     try {
-      console.log('[Frontend] Fetching fresh leaderboard after score submission');
-      const response = await fetch('/api/get-leaderboard');
+      const playerId = getPlayerId();
+      let url = '/api/leaderboard-with-rank';
+      if (playerId) {
+        url += `?playerId=${encodeURIComponent(playerId)}`;
+      }
+      
+      const response = await fetch(url);
       const result = await response.json();
       
       if (!response.ok) {
@@ -243,46 +306,70 @@
       if (result.error) {
         leaderboardError = result.error;
         leaderboard = [];
+        playerRank = null;
       } else {
+        // Combine top 10 with player entry if not in top 10
         leaderboard = result.leaderboard || [];
+        playerRank = result.playerRank;
+        
+        // If player is not in top 10, add their entry at the bottom
+        if (result.playerEntry && result.playerRank > 10) {
+          leaderboard = [...leaderboard, result.playerEntry];
+        }
+        
         leaderboardError = null;
-        console.log(`[Frontend] Successfully fetched ${leaderboard.length} scores`);
+        console.log(`[Frontend] Fetched leaderboard, player rank: ${playerRank}`);
       }
     } catch (error: any) {
       console.error('[Frontend] Error fetching leaderboard:', error);
       leaderboardError = error.message || 'Failed to fetch leaderboard';
       leaderboard = [];
+      playerRank = null;
     } finally {
       isLoadingLeaderboard = false;
     }
   }
 
-  // Renamed and refactored for clarity and to ensure proper awaiting of leaderboard fetch
-  async function submitScoreAndFetchLeaderboard(gameState: GameState, displayName?: string | null) {
+  // Submit score first, then fetch leaderboard
+  async function submitScoreAndFetchLeaderboard(displayName?: string | null) {
     console.log('[Frontend] Starting score submission...');
-    const success = await submitRunScore(gameState, displayName === null ? undefined : displayName);
-    console.log('[Frontend] Score submission result:', success);
     
-    if (success) {
-      console.log('[Frontend] Score submitted successfully, fetching fresh leaderboard...');
-      // Fetch fresh leaderboard after successful score submission
-      await fetchLeaderboard();
-      console.log('[Frontend] Leaderboard fetch completed');
-    } else {
-      // Handle submission failure
-      console.error("Score submission failed. Leaderboard may not be up-to-date.");
+    try {
+      // Force save game state first
+      await game.forceSave();
+      
+      // Submit score to server (server calculates score from game state)
+      const success = await submitRunScore(displayName === null ? undefined : displayName);
+      
+      if (success) {
+        console.log('[Frontend] Score submitted successfully, fetching leaderboard...');
+        // Fetch updated leaderboard
+        await fetchLeaderboard();
+        console.log('[Frontend] Leaderboard updated with new score');
+      } else {
+        leaderboardError = "Score submission failed";
+        console.error('[Frontend] Score submission failed');
+      }
+      
+      return success;
+    } catch (error: any) {
+      console.error("Score submission failed:", error);
       leaderboardError = "Score submission failed";
+      return false;
     }
-    return success;
   }
 
   async function triggerScoreSubmission(gameState: GameState) {
+    // Handle name submission or submit score immediately
     const existingDisplayName = getDisplayName();
     if (!existingDisplayName) {
       pendingGameStateForScoreSubmission = gameState;
       showDisplayNameModal = true;
+      // Show empty leaderboard while waiting for name
+      await fetchLeaderboard();
     } else {
-      await submitScoreAndFetchLeaderboard(gameState, existingDisplayName);
+      // Submit score and fetch leaderboard
+      await submitScoreAndFetchLeaderboard(existingDisplayName);
     }
   }
 
@@ -290,7 +377,8 @@
     const newDisplayName = event.detail;
     saveDisplayNameToStorage(newDisplayName);
     if (pendingGameStateForScoreSubmission) {
-      await submitScoreAndFetchLeaderboard(pendingGameStateForScoreSubmission, newDisplayName);
+      // Submit score and fetch leaderboard
+      await submitScoreAndFetchLeaderboard(newDisplayName);
     }
     showDisplayNameModal = false;
     pendingGameStateForScoreSubmission = null;
@@ -298,87 +386,15 @@
 
   async function handleModalCancel() {
     if (pendingGameStateForScoreSubmission) {
-      // Submit score as anonymous if modal is cancelled
-      await submitScoreAndFetchLeaderboard(pendingGameStateForScoreSubmission, undefined);
+      // Submit score as anonymous
+      await submitScoreAndFetchLeaderboard(undefined);
     }
     showDisplayNameModal = false;
     pendingGameStateForScoreSubmission = null;
   }
 
-  // Simplified reactive block for leaderboard processing
-  $: {
-    if (browser) {
-      const g = $game;
-      const gameOverState = g.gameOver;
-      const isEffectivelyGameOver = gameOverState && gameOverState !== 'playing' && gameOverState !== 'intro';
-
-      if (isEffectivelyGameOver && leaderboard.length > 0) {
-        // Game is over and we have leaderboard data - process it
-        console.log('[Frontend] Game over AND leaderboard loaded - processing leaderboard');
-        
-        const currentRunEnding = gameOverState as Ending;
-        const scoreDetails = currentRunEnding.scoreDetails;
-
-        if (scoreDetails) {
-          const currentRunScore = scoreDetails.total;
-          const currentRunDisplayName = getDisplayName() || 'Anonymous';
-
-          const fullLeaderboard = leaderboard.map((entry, index) => ({
-            ...entry,
-            display_name: entry.display_name || 'Anonymous',
-            rank: index + 1,
-            isCurrentUser: false
-          }));
-
-          let playerEntryInList: (typeof fullLeaderboard[0]) | undefined = undefined;
-          for (const entry of fullLeaderboard) {
-            if (entry.score === currentRunScore && entry.display_name === currentRunDisplayName) {
-              entry.isCurrentUser = true;
-              playerEntryInList = entry;
-              break;
-            }
-          }
-
-          if (playerEntryInList) {
-            currentPlayerRankMessage = `Your rank: ${playerEntryInList.rank}`;
-            if (playerEntryInList.rank <= 10) {
-              processedLeaderboard = fullLeaderboard.slice(0, 10);
-            } else {
-              const top9 = fullLeaderboard.slice(0, 9);
-              processedLeaderboard = [...top9, playerEntryInList];
-            }
-          } else {
-            currentPlayerRankMessage = `Your score: ${currentRunScore}. Rank will show if on leaderboard.`;
-            processedLeaderboard = fullLeaderboard.slice(0, 10);
-            console.warn(`Current run (Score: ${currentRunScore}, Name: ${currentRunDisplayName}) not found in leaderboard.`);
-          }
-        }
-      } else if (isEffectivelyGameOver && isLoadingLeaderboard) {
-        // Game is over but still loading leaderboard
-        console.log('[Frontend] Game over but still loading leaderboard');
-        currentPlayerRankMessage = "Submitting score and fetching leaderboard...";
-        processedLeaderboard = [];
-      } else if (isEffectivelyGameOver && leaderboardError) {
-        // Game is over but there was an error fetching leaderboard
-        console.log('[Frontend] Game over but leaderboard error:', leaderboardError);
-        if (leaderboardError === 'Local mode: Leaderboard is disabled.') {
-          currentPlayerRankMessage = 'Local mode: Leaderboard is disabled.';
-        } else {
-          currentPlayerRankMessage = `Leaderboard error: ${leaderboardError}`;
-        }
-        processedLeaderboard = [];
-      } else if (isEffectivelyGameOver && !isLoadingLeaderboard && leaderboard.length === 0) {
-        // Game is over, not loading, no error, but no leaderboard data
-        console.log('[Frontend] Game over but no leaderboard data available');
-        currentPlayerRankMessage = "No leaderboard data available";
-        processedLeaderboard = [];
-      } else {
-        // Game not over or no leaderboard data yet - no logging needed
-        currentPlayerRankMessage = null;
-        processedLeaderboard = [];
-      }
-    }
-  }
+  // Simple reactive check - no complex processing needed since API handles everything
+  $: isGameOver = browser && $game.gameOver && $game.gameOver !== 'playing' && $game.gameOver !== 'intro';
 </script>
 
 {#if browser}
@@ -401,8 +417,7 @@
       {/if}
       {#if $game.gameOver && $game.gameOver !== 'playing' && $game.gameOver !== 'intro'}
         {#if $game.gameOver.type === 'win'}
-          <!-- Display rank from currentPlayerRankMessage if available, or fallback -->
-          <span class="text-green-400 font-bold order-2 sm:order-3">Victory! {#if currentPlayerRankMessage}{currentPlayerRankMessage}{:else if $game.gameOver.rank}Rank:{$game.gameOver.rank}{/if}</span>
+          <span class="text-green-400 font-bold order-2 sm:order-3">Victory! {#if playerRank}Rank: {playerRank}{/if}</span>
         {:else if $game.gameOver.type === 'draw'}
           <span class="text-yellow-400 font-bold order-2 sm:order-3">Draw</span>
         {:else}
@@ -487,16 +502,16 @@
           </div>
 
           <!-- Leaderboard Section -->
-          {#if currentPlayerRankMessage === 'Local mode: Leaderboard is disabled.'}
+          {#if leaderboardError === 'Local mode: Leaderboard disabled'}
             <!-- No leaderboard shown in local mode -->
-          {:else if processedLeaderboard && processedLeaderboard.length > 0}
+          {:else if leaderboard && leaderboard.length > 0}
             <div class="my-6 p-3 bg-gray-800 rounded-md">
               <h2 class="text-xl font-semibold text-purple-400 mb-3">Top Scores</h2>
-              {#if currentPlayerRankMessage && currentPlayerRankMessage !== 'Local mode: Leaderboard is disabled.'}
-                <p class="text-sm text-yellow-300 mb-2">{currentPlayerRankMessage}</p>
+              {#if playerRank}
+                <p class="text-sm text-yellow-300 mb-2">Your rank: {playerRank}</p>
               {/if}
-              <ol class="list-decimal list-inside space-y-1 text-sm">
-                {#each processedLeaderboard as entry}
+              <ol class="space-y-1 text-sm">
+                {#each leaderboard as entry}
                   <li class="flex justify-between items-center px-2 py-1 rounded {entry.isCurrentUser ? 'bg-green-700 text-white' : ''}">
                     <span>
                       <span class="font-semibold {entry.isCurrentUser ? 'text-yellow-300' : 'text-gray-300'}">{entry.rank}. {entry.display_name}:</span> 
@@ -506,7 +521,12 @@
                 {/each}
               </ol>
             </div>
-          {:else if leaderboardError && leaderboardError !== 'Local mode: Leaderboard is disabled.'}
+          {:else if isLoadingLeaderboard}
+            <div class="my-6 p-3 bg-gray-800 rounded-md">
+              <h2 class="text-xl font-semibold text-blue-400 mb-3">Loading...</h2>
+              <p class="text-sm text-gray-300">Fetching leaderboard...</p>
+            </div>
+          {:else if leaderboardError}
             <div class="my-6 p-3 bg-gray-800 rounded-md">
               <h2 class="text-xl font-semibold text-red-400 mb-3">Leaderboard Error</h2>
               <p class="text-sm text-red-300">Could not load top scores: {leaderboardError}</p>

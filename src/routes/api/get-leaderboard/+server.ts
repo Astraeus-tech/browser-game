@@ -1,5 +1,7 @@
 import { json } from '@sveltejs/kit';
-import { supabase } from '$lib/supabaseClient';
+import { db } from '$lib/db/index.js';
+import { scores } from '$lib/db/schema.js';
+import { desc } from 'drizzle-orm';
 import type { RequestHandler } from './$types';
 
 export const GET: RequestHandler = async () => {
@@ -17,21 +19,15 @@ export const GET: RequestHandler = async () => {
   console.log('[api/get-leaderboard] Fetching fresh leaderboard after game end');
   
   try {
-    // Fetch top 100 scores, ordered by score descending, then by timestamp for tie-breaking
-    const { data: leaderboard, error } = await supabase
-      .from('scores')
-      .select('display_name, score')
-      .order('score', { ascending: false })
-      .order('run_ts', { ascending: false })
-      .limit(100);
-
-    if (error) {
-      console.error('[api/get-leaderboard] Error fetching leaderboard:', error);
-      return json({
-        leaderboard: [],
-        error: error.message
-      }, { status: 500 });
-    }
+    // Fetch top 15 scores using Drizzle ORM, ordered by score descending, then by timestamp for tie-breaking
+    const leaderboard = await db
+      .select({
+        display_name: scores.display_name,
+        score: scores.score
+      })
+      .from(scores)
+      .orderBy(desc(scores.score), desc(scores.run_ts))
+      .limit(15);
 
     console.log(`[api/get-leaderboard] Successfully fetched ${leaderboard?.length || 0} scores`);
     

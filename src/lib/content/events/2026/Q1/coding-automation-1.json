@@ -73,7 +73,6 @@
         "company": {
           "credits": "-10..-10",
           "revenue": "0..10",
-          "valuation": "0..10",
           "approval": "10..30",
           "security": "10..20",
           "alignment_confidence": "10..20"
