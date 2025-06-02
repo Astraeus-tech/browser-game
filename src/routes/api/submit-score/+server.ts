@@ -42,12 +42,21 @@ export async function POST({ request }) {
     const gameData = await ServerGameManager.getMostRecentCompletedGame(playerId);
     
     if (!gameData) {
-      return json({ error: 'No completed game found for score submission' }, { status: 404 });
+      console.warn('[API] No completed game found, checking for any recent game for this player...');
+      // Fallback: try to get the most recent active game state as well
+      const activeGameData = await ServerGameManager.getGameState(playerId);
+      if (activeGameData && activeGameData.gameState.gameOver !== 'playing' && activeGameData.gameState.gameOver !== 'intro') {
+        console.log('[API] Found active game with ended state, using it for score calculation');
+        typedGameState = activeGameData.gameState;
+        gameId = activeGameData.gameId;
+      } else {
+        return json({ error: 'No completed game found for score submission' }, { status: 404 });
+      }
+    } else {
+      typedGameState = gameData.gameState;
+      gameId = gameData.gameId; // Get the game_id for linking (will be present for new runs)
+      console.log('[API] Loading completed game state for score calculation, gameId:', gameId);
     }
-
-    typedGameState = gameData.gameState;
-    gameId = gameData.gameId; // Get the game_id for linking (will be present for new runs)
-    console.log('[API] Loading completed game state for score calculation, gameId:', gameId);
     
   } catch (e: any) {
     console.error('[API] Error loading completed game state:', e);

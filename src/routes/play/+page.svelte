@@ -10,7 +10,7 @@
   import { browser } from '$app/environment';
   import { get } from 'svelte/store';
   import { calculateImpactScore, getImpactAssessment, getImpactColorClass } from '$lib/impact';
-  import { submitRunScore } from '$lib/db';
+  import { submitRunScore, endGameAndSubmitScore } from '$lib/db';
   import { getDisplayName, setDisplayName as saveDisplayNameToStorage } from '$lib/player';
   import DisplayNameModal from '$lib/components/DisplayNameModal.svelte';
   import type { PageData } from './$types'; // Import PageData for the load function's return type
@@ -183,6 +183,8 @@
           gameOver: endingData
         };
         await game.set(finalStateToSet);
+        
+        // Game ended due to out of credits - use atomic submission
         triggerScoreSubmission(finalStateToSet);
         return;
       }
@@ -281,8 +283,7 @@
       await game.set(nextState);
       
       if (nextState.gameOver !== 'playing') {
-        // End the server game when the game is over
-        await endServerGame(nextState);
+        // Game ended - use atomic submission for server mode
         triggerScoreSubmission(nextState);
         return;
       }
@@ -383,9 +384,14 @@
         leaderboard = result.leaderboard || [];
         playerRank = result.playerRank;
         
-        // If player is not in top 10, add their entry at the bottom
-        if (result.playerEntry && result.playerRank > 10) {
-          leaderboard = [...leaderboard, result.playerEntry];
+        // If player is not in top 10, add their entry at the bottom with proper styling
+        if (result.playerEntry && result.playerRank && result.playerRank > 10) {
+          // Ensure the player entry has the correct isCurrentUser flag
+          const playerEntryWithFlag = {
+            ...result.playerEntry,
+            isCurrentUser: true
+          };
+          leaderboard = [...leaderboard, playerEntryWithFlag];
         }
         
         leaderboardError = null;
@@ -430,6 +436,35 @@
     }
   }
 
+  // Atomic end game and submit score, then fetch leaderboard
+  async function endGameAndSubmitScoreAndFetchLeaderboard(finalGameState: GameState, displayName?: string | null) {
+    console.log('[Frontend] Starting atomic game end + score submission...');
+    
+    try {
+      // Force save game state first
+      await game.forceSave();
+      
+      // Atomically end game and submit score
+      const success = await endGameAndSubmitScore(finalGameState, displayName === null ? undefined : displayName);
+      
+      if (success) {
+        console.log('[Frontend] Game ended and score submitted successfully, fetching leaderboard...');
+        // Fetch updated leaderboard
+        await fetchLeaderboard();
+        console.log('[Frontend] Leaderboard updated with new score');
+      } else {
+        leaderboardError = "Game end and score submission failed";
+        console.error('[Frontend] Game end and score submission failed');
+      }
+      
+      return success;
+    } catch (error: any) {
+      console.error("Game end and score submission failed:", error);
+      leaderboardError = "Game end and score submission failed";
+      return false;
+    }
+  }
+
   async function triggerScoreSubmission(gameState: GameState) {
     // Handle name submission or submit score immediately
     const existingDisplayName = getDisplayName();
@@ -439,8 +474,12 @@
       // Show empty leaderboard while waiting for name
       await fetchLeaderboard();
     } else {
-      // Submit score and fetch leaderboard
-      await submitScoreAndFetchLeaderboard(existingDisplayName);
+      // Use atomic approach for server mode, legacy approach for local mode
+      if (isServerAuthoritative()) {
+        await endGameAndSubmitScoreAndFetchLeaderboard(gameState, existingDisplayName);
+      } else {
+        await submitScoreAndFetchLeaderboard(existingDisplayName);
+      }
     }
   }
 
@@ -448,8 +487,12 @@
     const newDisplayName = event.detail;
     saveDisplayNameToStorage(newDisplayName);
     if (pendingGameStateForScoreSubmission) {
-      // Submit score and fetch leaderboard
-      await submitScoreAndFetchLeaderboard(newDisplayName);
+      // Use atomic approach for server mode, legacy approach for local mode
+      if (isServerAuthoritative()) {
+        await endGameAndSubmitScoreAndFetchLeaderboard(pendingGameStateForScoreSubmission, newDisplayName);
+      } else {
+        await submitScoreAndFetchLeaderboard(newDisplayName);
+      }
     }
     showDisplayNameModal = false;
     pendingGameStateForScoreSubmission = null;
@@ -457,8 +500,12 @@
 
   async function handleModalCancel() {
     if (pendingGameStateForScoreSubmission) {
-      // Submit score as anonymous
-      await submitScoreAndFetchLeaderboard(undefined);
+      // Use atomic approach for server mode, legacy approach for local mode
+      if (isServerAuthoritative()) {
+        await endGameAndSubmitScoreAndFetchLeaderboard(pendingGameStateForScoreSubmission, undefined);
+      } else {
+        await submitScoreAndFetchLeaderboard(undefined);
+      }
     }
     showDisplayNameModal = false;
     pendingGameStateForScoreSubmission = null;
