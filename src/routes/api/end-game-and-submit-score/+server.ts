@@ -41,39 +41,36 @@ export const POST: RequestHandler = async ({ request }) => {
 
     const gameId = currentGameData.gameId;
 
-    // Perform the atomic transaction: end game + submit score
-    const result = await db.transaction(async (tx) => {
-      // 1. End the game using ServerGameManager
-      await ServerGameManager.endGame(gameId, playerId, finalGameState as GameState);
+    // First end the game outside of transaction (since ServerGameManager uses its own transactions)
+    await ServerGameManager.endGame(gameId, playerId, finalGameState as GameState);
 
-      // 2. Calculate score on server for security
-      const endingDetails = finalGameState.gameOver as Ending;
-      const endingWithScore = calculateEndingDetails(endingDetails, finalGameState as GameState);
-      
-      if (!endingWithScore.scoreDetails) {
-        throw new Error('Score calculation failed');
-      }
+    // Calculate score on server for security
+    const endingDetails = finalGameState.gameOver as Ending;
+    const endingWithScore = calculateEndingDetails(endingDetails, finalGameState as GameState);
+    
+    if (!endingWithScore.scoreDetails) {
+      return json({ error: 'Score calculation failed' }, { status: 500 });
+    }
 
-      const score = endingWithScore.scoreDetails.total;
+    const score = endingWithScore.scoreDetails.total;
 
-      // 3. Insert the score into database with game_id link
-      const insertedData = await tx
-        .insert(scores)
-        .values({
-          player_id: playerId,
-          game_id: gameId,
-          score: score,
-          display_name: displayName,
-        })
-        .returning();
+    // Insert the score into database with game_id link
+    const insertedData = await db
+      .insert(scores)
+      .values({
+        player_id: playerId,
+        game_id: gameId,
+        score: score,
+        display_name: displayName,
+      })
+      .returning();
 
-      return {
-        success: true,
-        gameId,
-        submittedScore: insertedData[0],
-        calculatedScore: score
-      };
-    });
+    const result = {
+      success: true,
+      gameId,
+      submittedScore: insertedData[0],
+      calculatedScore: score
+    };
 
     console.log('[API] Game ended and score submitted successfully:', { 
       playerId, 
