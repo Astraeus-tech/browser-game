@@ -1,58 +1,99 @@
+/**
+ * Submit Score API Endpoint
+ * 
+ * IMPORTANT: Game State Handling by Mode
+ * 
+ * Remote Mode (VITE_DATABASE_MODE=remote):
+ * - Server loads the authoritative game state from gameActions table
+ * - Client only sends playerId and displayName
+ * - This prevents score manipulation and ensures data integrity
+ * 
+ * Local Mode (VITE_DATABASE_MODE≠remote):
+ * - Client sends the game state along with playerId and displayName
+ * - Server uses the client-provided game state for scoring
+ * - Used for offline/local development scenarios
+ */
+
 import { json } from '@sveltejs/kit';
-import { supabase } from '$lib/supabaseClient'; // This now uses private env vars
+import { db } from '$lib/db/index.js';
+import { scores } from '$lib/db/schema.js';
+import { ServerGameManager } from '$lib/db/serverGame.js';
+import { calculateEndingDetails } from '$lib/engine.js';
 import type { GameState, Ending } from '$lib/types';
 
 export async function POST({ request }) {
-  const { gameState, playerId, displayName } = await request.json();
+  const databaseMode = import.meta.env.VITE_DATABASE_MODE;
+  
+  const { playerId, displayName } = await request.json();
 
-  if (!gameState || !playerId) {
-    return json({ error: 'Missing gameState or playerId' }, { status: 400 });
+  if (!playerId) {
+    return json({ error: 'Missing playerId' }, { status: 400 });
   }
 
-  const typedGameState = gameState as GameState;
+  if (!displayName) {
+    return json({ error: 'Missing displayName' }, { status: 400 });
+  }
+
+  let typedGameState: GameState;
+  let gameId: string | null = null;
+
+  // Get the most recent completed game state for this player
+  try {
+    const gameData = await ServerGameManager.getMostRecentCompletedGame(playerId);
+    
+    if (!gameData) {
+      return json({ error: 'No completed game found for score submission' }, { status: 404 });
+    }
+
+    typedGameState = gameData.gameState;
+    gameId = gameData.gameId; // Get the game_id for linking (will be present for new runs)
+    console.log('[API] Loading completed game state for score calculation, gameId:', gameId);
+    
+  } catch (e: any) {
+    console.error('[API] Error loading completed game state:', e);
+    return json({ error: 'Database error loading game state: ' + e.message }, { status: 500 });
+  }
 
   if (typedGameState.gameOver === 'playing' || typedGameState.gameOver === 'intro' || !typedGameState.gameOver) {
-    console.warn('[API] Attempted to submit score for a game that is still playing, in intro, or has no gameOver state.');
-    return json({ error: 'Game is still playing, in intro, or has no gameOver state' }, { status: 400 });
+    console.warn('[API] Game is not completed - cannot submit score.');
+    return json({ error: 'Game is not completed' }, { status: 400 });
   }
 
   const endingDetails = typedGameState.gameOver as Ending;
-  if (!endingDetails.scoreDetails) {
-    console.warn('[API] Attempted to submit score, but scoreDetails are missing from gameOver state.');
-    return json({ error: 'Missing scoreDetails in gameOver state' }, { status: 400 });
+  
+  // Calculate score on server for security (recalculate even if client provided it)
+  const endingWithScore = calculateEndingDetails(endingDetails, typedGameState);
+  
+  if (!endingWithScore.scoreDetails) {
+    console.error('[API] Score calculation failed');
+    return json({ error: 'Score calculation failed' }, { status: 500 });
   }
 
-  const score = endingDetails.scoreDetails.total;
-
-  const objectToInsert = {
-    player_id: playerId,
-    score: score,
-    display_name: displayName,
-    // Optional fields you might have commented out:
-    // run_duration_quarters: endingDetails.stats?.totalQuartersElapsed,
-    // ending_id: endingDetails.id,
-    // final_year: typedGameState.year,
-    // final_quarter: typedGameState.quarter,
-  };
-
-
+  const score = endingWithScore.scoreDetails.total;
 
   try {
-    const { data, error } = await supabase
-      .from('scores')
-      .insert(objectToInsert) // Use the logged object
-      .select(); // .select() can be useful to get the inserted row back, or just for confirmation
+    // Insert the score into database with game_id link (null for legacy data)
+    const insertedData = await db
+      .insert(scores)
+      .values({
+        player_id: playerId,
+        game_id: gameId, // Will be null for legacy runs, UUID for new runs
+        score: score,
+        display_name: displayName,
+      })
+      .returning();
 
-    if (error) {
-      console.error('[API] Error submitting score to Supabase:', error);
-      return json({ error: 'Supabase error: ' + error.message }, { status: 500 });
-    }
-
-    console.log('[API] Score submitted successfully:', { playerId, score, displayName, insertedData: data });
-    return json({ success: true, message: 'Score submitted successfully', submittedScore: data?.[0] }, { status: 200 });
+    console.log('[API] Score calculated and submitted successfully:', { playerId, gameId, score, displayName });
+    return json({ 
+      success: true, 
+      message: 'Score calculated and submitted successfully', 
+      submittedScore: insertedData[0],
+      calculatedScore: score,
+      gameId: gameId
+    }, { status: 200 });
 
   } catch (e: any) {
     console.error('[API] Exception during score submission:', e);
-    return json({ error: 'Server exception: ' + e.message }, { status: 500 });
+    return json({ error: 'Database error: ' + e.message }, { status: 500 });
   }
 } 

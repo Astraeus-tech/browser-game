@@ -2,29 +2,17 @@
 import { getPlayerId, getDisplayName } from './player';
 import type { GameState, Ending } from './types';
 
-export async function submitRunScore(gameState: GameState, displayNameFromModal?: string): Promise<boolean> {
+export async function submitRunScore(displayNameFromModal?: string): Promise<boolean> {
   const databaseMode = import.meta.env.VITE_DATABASE_MODE;
 
   // Default to local mode if VITE_DATABASE_MODE is not explicitly 'remote'
   if (databaseMode !== 'remote') {
     console.log(`Database mode is '${databaseMode || 'undefined/not set'}'. Running in local mode: Skipping database submission.`);
-    // Optionally, you could store the score locally here if needed for local-only leaderboards
     return true; // Simulate successful submission
   }
 
   // Proceed with remote submission only if databaseMode === 'remote'
   console.log('Database mode is \'remote\'. Attempting database submission.');
-
-  if (gameState.gameOver === 'playing' || gameState.gameOver === 'intro' || !gameState.gameOver) {
-    console.warn('Attempted to submit score for a game that is still playing, in intro, or has no gameOver state.');
-    return false;
-  }
-
-  const endingDetails = gameState.gameOver as Ending;
-  if (!endingDetails.scoreDetails) {
-    console.warn('Attempted to submit score, but scoreDetails are missing from gameOver state.');
-    return false;
-  }
 
   const playerId = getPlayerId();
   if (!playerId) {
@@ -34,16 +22,18 @@ export async function submitRunScore(gameState: GameState, displayNameFromModal?
 
   // Use displayNameFromModal if provided (from the modal input), otherwise get from localStorage
   const displayName = displayNameFromModal || getDisplayName();
+  if (!displayName) {
+    console.warn('Display name not found, cannot submit score.');
+    return false;
+  }
 
-  // We only need to send the gameState and playerId to the backend.
-  // The backend will extract score and other details.
   try {
     const response = await fetch('/api/submit-score', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ gameState, playerId, displayName }),
+      body: JSON.stringify({ playerId, displayName }),
     });
 
     const result = await response.json();
@@ -53,6 +43,9 @@ export async function submitRunScore(gameState: GameState, displayNameFromModal?
       return false;
     } else {
       console.log('Score submitted successfully via API:', result.message);
+      if (result.calculatedScore) {
+        console.log('Server calculated score:', result.calculatedScore);
+      }
       return true;
     }
   } catch (e) {
