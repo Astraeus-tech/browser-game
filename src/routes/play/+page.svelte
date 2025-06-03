@@ -16,6 +16,7 @@
   import type { PageData } from './$types'; // Import PageData for the load function's return type
   import { submitGameChoice, startServerGame, endServerGame, isServerAuthoritative } from '$lib/gameClient';
   import { getPlayerId } from '$lib/player';
+  import { secureGameClient } from '$lib/secureGameClient';
 
   export let data: PageData; // This prop receives data from the load function
 
@@ -127,12 +128,21 @@
   }
 
   async function pickEvent() {
+    // Only use local event picking if not using secure client
+    if (secureGameClient.hasActiveSession()) {
+      // Server handles event selection, just find the current event for display
+      const currentState = get(game);
+      if (currentState.currentEventId) {
+        const currentEvent = (events as Event[]).find(e => e.id === currentState.currentEventId);
+        selectedEvent = currentEvent || null;
+      }
+      return;
+    }
 
-    // Filter events by matching year and quarter from event properties
+    // Fallback to local event picking (for backwards compatibility)
     currentEvents = (events as Event[]).filter(e =>
       e.year === $game.year && e.quarter === $game.quarter
     );
-
 
     if (currentEvents.length) {
       const currentState = get(game);
@@ -255,62 +265,37 @@
     const choice = selectedEvent.choices.find((c) => c.label === label);
     if (!choice) return;
 
-    const currentState = get(game);
     const choiceIndex = selectedEvent.choices.indexOf(choice);
 
-    // Use server-authoritative choice submission if available
-    if (isServerAuthoritative()) {
-      console.log('Submitting choice to server for validation...');
-      const response = await submitGameChoice({
-        eventId: selectedEvent.id,
-        choiceIndex,
-        choiceLabel: label,
-        currentState
-      });
+    // Always use secure client for choice processing
+    console.log('Processing choice with secure server validation...');
+    const response = await secureGameClient.makeChoice(choiceIndex);
 
-      if (!response.success) {
-        console.error('Server rejected choice:', response.error);
-        alert(`Choice rejected: ${response.error}`);
-        return;
-      }
+    if (!response.success) {
+      console.error('Server rejected choice:', response.error);
+      alert(`Choice rejected: ${response.error}`);
+      return;
+    }
 
-      if (!response.gameState) {
-        console.error('Server did not return updated game state');
-        return;
-      }
+    if (!response.gameState) {
+      console.error('Server did not return updated game state');
+      return;
+    }
 
-      const nextState = response.gameState;
-      await game.set(nextState);
-      
-      if (nextState.gameOver !== 'playing') {
-        // Game ended - use atomic submission for server mode
-        triggerScoreSubmission(nextState);
-        return;
-      }
+    const nextState = response.gameState;
+    await game.set(nextState);
+    
+    if (response.gameEnded) {
+      // Game ended - scores are automatically submitted by server
+      await fetchLeaderboard(); // Just fetch updated leaderboard
+      return;
+    }
 
-      // Clear the currentEventId when advancing to new quarter/year
-      if (nextState.year !== currentState.year || nextState.quarter !== currentState.quarter) {
-        nextState.currentEventId = undefined;
-        await game.set(nextState);
-      }
-
-      await pickEvent();
+    // Game continues - set next event
+    if (response.nextEvent) {
+      selectedEvent = response.nextEvent;
     } else {
-      // Local mode - use original logic
-      const nextState = applyChoice(currentState, choice);
-      await game.set(nextState);
-
-      if (nextState.gameOver !== 'playing') {
-        triggerScoreSubmission(nextState);
-        return;
-      }
-
-      // Clear the currentEventId when advancing to new quarter/year
-      if (nextState.year !== currentState.year || nextState.quarter !== currentState.quarter) {
-        nextState.currentEventId = undefined;
-      }
-
-      await game.set(nextState);
+      // Fallback to pickEvent if no next event provided
       await pickEvent();
     }
   }
@@ -323,34 +308,31 @@
   }
 
   async function startGame() {
-    const currentState = get(game);
+    // Always use secure client for new games to ensure server-side validation
+    const displayName = getDisplayName() || 'Anonymous';
+    console.log('Starting secure server game with display name:', displayName);
     
-    // Use server-authoritative game start if in remote mode
-    if (import.meta.env.VITE_DATABASE_MODE === 'remote') {
-      console.log('Starting server-authoritative game...');
-      const playingState = { ...currentState, gameOver: 'playing' as const };
-      
-      const response = await startServerGame(playingState);
-      if (!response.success) {
-        console.error('Failed to start server game:', response.error);
-        alert(`Failed to start game: ${response.error}`);
-        return;
-      }
-      
-      await game.set(playingState);
-      console.log('Server-authoritative game started successfully');
-    } else {
-      // Local mode - transition from intro to playing state
-      await game.update(state => ({
-        ...state,
-        gameOver: 'playing'
-      }));
+    const response = await secureGameClient.startGame(displayName);
+    if (!response.success) {
+      console.error('Failed to start secure game:', response.error);
+      alert(`Failed to start game: ${response.error}`);
+      return;
     }
     
-    await pickEvent();
+    if (response.gameState) {
+      console.log('Setting game state:', response.gameState);
+      await game.set(response.gameState);
+      selectedEvent = response.currentEvent || null;
+      console.log('Secure game started successfully, selected event:', selectedEvent?.id);
+    } else {
+      console.error('No game state returned from server');
+      alert('Server did not return game state');
+    }
   }
 
   function startOver() {
+    // Clear secure session if active
+    secureGameClient.clearSession();
     game.set(getDefaultState());
     resetLeaderboardState();
     // Don't pick event here since we start in intro state
@@ -466,7 +448,13 @@
   }
 
   async function triggerScoreSubmission(gameState: GameState) {
-    // Handle name submission or submit score immediately
+    // If using secure client, scores are already submitted automatically
+    if (secureGameClient.hasActiveSession()) {
+      await fetchLeaderboard();
+      return;
+    }
+    
+    // Legacy score submission for non-secure games
     const existingDisplayName = getDisplayName();
     if (!existingDisplayName) {
       pendingGameStateForScoreSubmission = gameState;
@@ -513,6 +501,78 @@
 
   // Simple reactive check - no complex processing needed since API handles everything
   $: isGameOver = browser && $game.gameOver && $game.gameOver !== 'playing' && $game.gameOver !== 'intro';
+
+  // Reactive handler to fix invalid game states
+  let isFixingInvalidState = false;
+  $: if (browser && $game.gameOver === 'playing' && !selectedEvent && !isFixingInvalidState) {
+    console.warn('Detected invalid game state: playing but no selectedEvent. Attempting to fix...');
+    fixInvalidGameState();
+  }
+
+  async function fixInvalidGameState() {
+    // Prevent multiple simultaneous fix attempts
+    if (isFixingInvalidState) {
+      return;
+    }
+    isFixingInvalidState = true;
+    
+    try {
+      const currentState = get(game);
+      
+      // If using secure client, try to restore the current event
+      if (secureGameClient.hasActiveSession()) {
+        console.log('Secure session active - attempting to restore current event...');
+        
+        // Try to get current game status from server
+        const statusResponse = await secureGameClient.getGameStatus();
+        if (statusResponse.success && statusResponse.gameState) {
+          console.log('Successfully retrieved game state from server');
+          const gameState = statusResponse.gameState;
+          await game.set(gameState);
+          
+          // Try to load the current event
+          if (gameState.currentEventId) {
+            const events = await import('$lib/content/events');
+            const currentEvent = (events.default as Event[]).find(e => e.id === gameState.currentEventId);
+            if (currentEvent) {
+              selectedEvent = currentEvent;
+              console.log('Successfully restored current event:', currentEvent.id);
+              return;
+            }
+          }
+        }
+        
+        // If server approach failed, clear the secure session and reset
+        console.warn('Server game state recovery failed, clearing session and resetting...');
+        secureGameClient.clearSession();
+      }
+      
+      // For non-secure games or failed secure recovery, try to pick an event
+      try {
+        await pickEvent();
+        if (selectedEvent) {
+          console.log('Successfully picked new event for current state');
+          return;
+        }
+      } catch (error) {
+        console.error('Failed to pick event:', error);
+      }
+      
+      // If all else fails, reset to intro state
+      console.warn('Unable to fix game state, resetting to intro...');
+      const freshState = getDefaultState();
+      await game.set(freshState);
+      selectedEvent = null;
+      resetLeaderboardState();
+      
+    } catch (error) {
+      console.error('Error during game state fix attempt:', error);
+      // Last resort: reload the page
+      window.location.reload();
+    } finally {
+      isFixingInvalidState = false;
+    }
+  }
 </script>
 
 {#if browser}
@@ -659,8 +719,13 @@
       {:else}
         {#if $game.gameOver === 'playing'}
           <div class="text-center">
-            <p class="text-yellow-400 mb-4">⚠️ Checking game data...</p>
-            <p class="text-sm text-gray-400">If you see this message, we're automatically fixing any data issues. The page will refresh shortly.</p>
+            {#if isFixingInvalidState}
+              <p class="text-blue-400 mb-4">🔄 Restoring game state...</p>
+              <p class="text-sm text-gray-400">Synchronizing with server, please wait a moment.</p>
+            {:else}
+              <p class="text-yellow-400 mb-4">⚠️ Loading game data...</p>
+              <p class="text-sm text-gray-400">Preparing your next decision...</p>
+            {/if}
           </div>
         {:else}
           <p>No events loaded. Please check your content.</p>
