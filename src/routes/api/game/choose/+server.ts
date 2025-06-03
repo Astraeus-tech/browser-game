@@ -9,6 +9,7 @@ import { makeRng } from '$lib/rng';
 import { applyChoice } from '$lib/engine';
 
 export const POST: RequestHandler = async ({ request }) => {
+  const startTime = performance.now();
   try {
     const { gameId, playerId, choiceIndex } = await request.json();
 
@@ -16,7 +17,7 @@ export const POST: RequestHandler = async ({ request }) => {
       return json({ error: 'gameId, playerId, and choiceIndex are required' }, { status: 400 });
     }
 
-    // Get current game state from server
+    // Get current game state from server (single optimized query)
     const gameData = await ServerGameManager.getGameState(playerId);
     if (!gameData) {
       return json({ error: 'Game not found or unauthorized' }, { status: 404 });
@@ -153,6 +154,9 @@ export const POST: RequestHandler = async ({ request }) => {
       }
     }
 
+    const totalTime = performance.now() - startTime;
+    console.log(`[PERF] Choice processing - Total: ${totalTime.toFixed(2)}ms`);
+    
     return json(finalResponse);
 
   } catch (error) {

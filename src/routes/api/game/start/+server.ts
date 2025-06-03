@@ -8,6 +8,7 @@ import type { Event, GameState } from '$lib/types';
 import { makeRng } from '$lib/rng';
 
 export const POST: RequestHandler = async ({ request }) => {
+  const startTime = performance.now();
   try {
     const { displayName } = await request.json();
 
@@ -20,13 +21,8 @@ export const POST: RequestHandler = async ({ request }) => {
     
     // Initialize default game state
     const initialGameState = getDefaultState();
-    
-    // Start the game on the server
-    const gameId = await ServerGameManager.startGame(playerId, initialGameState, {
-      settings: { displayName, startedAt: Date.now() }
-    });
 
-    // Select the first event for the current year/quarter
+    // Select the first event for the current year/quarter BEFORE starting game
     const availableEvents = (events as Event[]).filter(e =>
       e.year === initialGameState.year && e.quarter === initialGameState.quarter
     );
@@ -40,28 +36,29 @@ export const POST: RequestHandler = async ({ request }) => {
     const eventIndex = Math.floor(rng() * availableEvents.length);
     const selectedEvent = availableEvents[eventIndex];
 
-    // Update game state with selected event and new seed
-    const updatedGameState: GameState = {
+    // Create the complete initial game state with event already selected
+    const completeInitialGameState: GameState = {
       ...initialGameState,
       seed: nextSeed,
       currentEventId: selectedEvent.id,
       gameOver: 'playing' // Set to playing mode
     };
 
-    // Save the updated state
-    await ServerGameManager.updateGameState(gameId, playerId, updatedGameState, {
-      type: 'choice',
-      data: {
-        eventId: selectedEvent.id,
-        eventSelected: true
-      }
+    // Start the game on the server with the complete state (single DB operation)
+    const dbStartTime = performance.now();
+    const gameId = await ServerGameManager.startGame(playerId, completeInitialGameState, {
+      settings: { displayName, startedAt: Date.now() }
     });
+    const dbEndTime = performance.now();
+
+    const totalTime = performance.now() - startTime;
+    console.log(`[PERF] Game start - Total: ${totalTime.toFixed(2)}ms, DB: ${(dbEndTime - dbStartTime).toFixed(2)}ms`);
 
     return json({
       success: true,
       gameId,
       playerId,
-      gameState: updatedGameState
+      gameState: completeInitialGameState
     });
 
   } catch (error) {

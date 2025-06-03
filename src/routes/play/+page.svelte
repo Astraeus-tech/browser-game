@@ -308,8 +308,19 @@
   }
 
   async function startGame() {
-    // Always use secure client for new games to ensure server-side validation
-    const displayName = getDisplayName() || 'Anonymous';
+    // Check if player has a display name first
+    const existingDisplayName = getDisplayName();
+    if (!existingDisplayName) {
+      // No display name - show modal to get one before starting game
+      showDisplayNameModal = true;
+      return;
+    }
+    
+    // Start the secure game with the display name
+    await startSecureGame(existingDisplayName);
+  }
+
+  async function startSecureGame(displayName: string) {
     console.log('Starting secure server game with display name:', displayName);
     
     const response = await secureGameClient.startGame(displayName);
@@ -474,16 +485,21 @@
   async function handleNameSubmitted(event: CustomEvent<string>) {
     const newDisplayName = event.detail;
     saveDisplayNameToStorage(newDisplayName);
+    
     if (pendingGameStateForScoreSubmission) {
-      // Use atomic approach for server mode, legacy approach for local mode
+      // This is for post-game score submission (legacy flow)
       if (isServerAuthoritative()) {
         await endGameAndSubmitScoreAndFetchLeaderboard(pendingGameStateForScoreSubmission, newDisplayName);
       } else {
         await submitScoreAndFetchLeaderboard(newDisplayName);
       }
+      pendingGameStateForScoreSubmission = null;
+    } else {
+      // This is for pre-game name collection - start the game now
+      await startSecureGame(newDisplayName);
     }
+    
     showDisplayNameModal = false;
-    pendingGameStateForScoreSubmission = null;
   }
 
   async function handleModalCancel() {

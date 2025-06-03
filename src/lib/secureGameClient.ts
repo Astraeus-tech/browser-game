@@ -15,12 +15,15 @@ export class SecureGameClient {
    * Start a new secure game session
    */
   async startGame(displayName: string): Promise<{ success: boolean; gameState?: GameState; currentEvent?: Event; error?: string }> {
+    const startTime = performance.now();
     try {
+      const fetchStartTime = performance.now();
       const response = await fetch('/api/game/start', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ displayName })
       });
+      const fetchEndTime = performance.now();
 
       if (!response.ok) {
         const errorText = await response.text();
@@ -41,9 +44,22 @@ export class SecureGameClient {
         
         console.log('SecureGameClient state after setting:', { gameId: this.gameId, playerId: this.playerId });
         
-        // Get the first event from the updated game state
-        const currentEvent = await this.getCurrentEvent(result.gameState);
+        // Get the first event from the updated game state (optimize by avoiding dynamic import)
+        let currentEvent: Event | undefined;
+        if (result.gameState.currentEventId) {
+          try {
+            // Import events statically - more efficient than dynamic import
+            const events = await import('$lib/content/events');
+            currentEvent = (events.default as Event[]).find(e => e.id === result.gameState.currentEventId);
+          } catch (error) {
+            console.error('Error loading events:', error);
+          }
+        }
         
+        const totalTime = performance.now() - startTime;
+        const networkTime = fetchEndTime - fetchStartTime;
+        console.log(`[PERF] SecureGameClient.startGame - Total: ${totalTime.toFixed(2)}ms, Network: ${networkTime.toFixed(2)}ms`);
+
         return {
           success: true,
           gameState: result.gameState,
@@ -149,23 +165,7 @@ export class SecureGameClient {
     }
   }
 
-  /**
-   * Helper method to get current event from game state
-   */
-  private async getCurrentEvent(gameState: GameState): Promise<Event | undefined> {
-    if (!gameState.currentEventId) {
-      return undefined;
-    }
 
-    try {
-      // Import events dynamically to avoid SSR issues
-      const events = await import('$lib/content/events');
-      return (events.default as Event[]).find(e => e.id === gameState.currentEventId);
-    } catch (error) {
-      console.error('Error loading events:', error);
-      return undefined;
-    }
-  }
 
   /**
    * Check if there's an active game session

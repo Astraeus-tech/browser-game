@@ -1,4 +1,4 @@
-import { eq, desc, and, isNull, isNotNull } from 'drizzle-orm';
+import { eq, desc, and, isNull, isNotNull, sql } from 'drizzle-orm';
 import { v4 as uuidv4 } from 'uuid';
 import type { GameState } from '../types';
 import { db } from './index';
@@ -107,7 +107,7 @@ export class ServerGameManager {
   }
 
   /**
-   * Update game state with an action - single insert operation
+   * Update game state with an action - optimized for performance
    */
   static async updateGameState(
     gameId: string, 
@@ -115,14 +115,14 @@ export class ServerGameManager {
     newGameState: GameState, 
     action: GameAction
   ): Promise<void> {
-    // Get current sequence number for this game
-    const lastAction = await db.select({ sequence_number: gameActions.sequence_number })
+    // Get current sequence number for this game using coalesce for better performance
+    const result = await db.select({ 
+      max_sequence: sql<number>`COALESCE(MAX(${gameActions.sequence_number}), 0)` 
+    })
       .from(gameActions)
-      .where(eq(gameActions.game_id, gameId))
-      .orderBy(desc(gameActions.sequence_number))
-      .limit(1);
+      .where(eq(gameActions.game_id, gameId));
 
-    const nextSequence = lastAction.length ? lastAction[0].sequence_number + 1 : 1;
+    const nextSequence = (result[0]?.max_sequence || 0) + 1;
 
     // Insert new action with complete game state
     await db.insert(gameActions).values({
@@ -142,14 +142,14 @@ export class ServerGameManager {
    * End a game - mark all actions for this game as ended
    */
   static async endGame(gameId: string, playerId: string, finalGameState: GameState): Promise<void> {
-    // Get the current sequence number
-    const lastAction = await db.select({ sequence_number: gameActions.sequence_number })
+    // Get the current sequence number using optimized query
+    const result = await db.select({ 
+      max_sequence: sql<number>`COALESCE(MAX(${gameActions.sequence_number}), 0)` 
+    })
       .from(gameActions)
-      .where(eq(gameActions.game_id, gameId))
-      .orderBy(desc(gameActions.sequence_number))
-      .limit(1);
+      .where(eq(gameActions.game_id, gameId));
 
-    const nextSequence = lastAction.length ? lastAction[0].sequence_number + 1 : 1;
+    const nextSequence = (result[0]?.max_sequence || 0) + 1;
 
     // Create final 'end' action
     await db.insert(gameActions).values({
