@@ -1,18 +1,14 @@
 import { browser } from '$app/environment';
 
-const PLAYER_ID_KEY = 'player_id';
 const DISPLAY_NAME_KEY = 'display_name';
 
+/**
+ * Simple localStorage display name storage for good UX
+ * Server handles all player identity internally
+ */
+
 export function getPlayerId(): string | null {
-  if (!browser) {
-    return null; // crypto.randomUUID and localStorage are browser-only
-  }
-  let id = localStorage.getItem(PLAYER_ID_KEY);
-  if (!id) {
-    id = crypto.randomUUID();
-    localStorage.setItem(PLAYER_ID_KEY, id);
-  }
-  return id;
+  return null; // Server handles player identity
 }
 
 export function getDisplayName(): string | null {
