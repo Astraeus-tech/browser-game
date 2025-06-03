@@ -37,12 +37,17 @@
   let leaderboardError: string | null = null;
   let isLoadingLeaderboard = false;
 
+  // Game count state - now comes from server-side load function
+  let gameCount: number = data.gameCount || 0;
+
   function resetLeaderboardState() {
     leaderboard = [];
     playerRank = null;
     leaderboardError = null;
     isLoadingLeaderboard = false;
   }
+
+
 
   onMount(() => {
     // Simple initialization - server is source of truth
@@ -55,6 +60,8 @@
     // Pre-fetch leaderboard for instant display when game ends
     console.log('[Frontend] Pre-fetching leaderboard for instant display...');
     fetchLeaderboard().catch(err => console.warn('Pre-fetch leaderboard failed:', err));
+    
+    // Game count is now provided by server-side load function, no fetch needed
   });
 
   function toggleSection(section: 'wallstreet' | 'ngo' | 'researcher') {
@@ -539,7 +546,12 @@
 <div class="flex items-center justify-center bg-black min-h-screen font-mono text-green-300">
   <div class="w-full max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl 2xl:max-w-3xl bg-gray-900 border-4 border-gray-700 rounded-lg shadow-lg flex flex-col overflow-hidden">
     <header class="flex flex-wrap items-center bg-gray-800 px-4 py-2 border-b border-gray-700">
-      <h1 class="text-lg font-bold mr-auto">Singularity Run</h1>
+      <h1 class="text-lg font-bold mr-auto">
+        Singularity Run 
+        {#if gameCount > 0}
+          <span class="text-xs font-normal text-gray-400">(# games played: {gameCount.toLocaleString()})</span>
+        {/if}
+      </h1>
       {#if $game.gameOver !== 'intro'}
         <div class="text-xs order-3 w-full mt-1 sm:mt-0 sm:w-auto sm:order-2 sm:mr-auto">Year: {$game.year} – Q{$game.quarter}</div>
       {:else}
