@@ -4,9 +4,9 @@ import { ServerGameManager } from '$lib/db/serverGame';
 import { db } from '$lib/db/index';
 import { scores } from '$lib/db/schema';
 import events from '$lib/content/events';
-import type { Event, GameState } from '$lib/types';
+import type { Event, GameState, Ending } from '$lib/types';
 import { makeRng } from '$lib/rng';
-import { applyChoice } from '$lib/engine';
+import { applyChoice, scaleCreditRange, calculateEndingDetails } from '$lib/engine';
 
 export const POST: RequestHandler = async ({ request }) => {
   const startTime = performance.now();
@@ -134,23 +134,72 @@ export const POST: RequestHandler = async ({ request }) => {
           currentEventId: nextEvent.id
         };
 
-        // Save updated state
-        await ServerGameManager.updateGameState(gameData.gameId, playerId, newState, {
-          type: 'choice',
-          data: {
-            choiceIndex,
-            choiceLabel: selectedChoice.label,
-            eventId: currentEvent.id,
-            nextEventId: nextEvent.id
-          }
+        // Check if player can afford any choice in the next event
+        const credits = newState.meters.company.credits;
+        const hasAffordableChoice = nextEvent.choices.some(choice => {
+          if (!choice.effects.company?.credits) return true; // Free choices are always affordable
+          const [scaledCost] = scaleCreditRange(choice.effects.company.credits, newState.year, newState.quarter);
+          const choiceCost = scaledCost < 0 ? Math.abs(scaledCost) : 0;
+          return credits >= choiceCost;
         });
 
-        finalResponse = {
-          success: true,
-          gameState: newState,
-          gameEnded: false,
-          nextEvent
-        };
+        if (!hasAffordableChoice) {
+          // Player can't afford any choice - trigger out-of-credits loss ending
+          let lossEnding: Ending = {
+            id: 'out_of_credits',
+            type: 'loss',
+            title: 'Acquired at the Brink',
+            reason: 'Credits too low',
+            description: `Your runaway burn rate has drained every credit. As the final operations stall, Macrosoft swooped in with a surprise rescue acquisition—stripping you of the CEO title and subsuming your vision into their empire. Soon, your pioneering work will be relegated to corporate archives, another forgotten footnote in tech history.`
+          };
+
+          // Calculate score and stats for this ending
+          const finalGameStateForCalc = {
+            ...newState,
+            gameOver: lossEnding
+          };
+          lossEnding = calculateEndingDetails(lossEnding, finalGameStateForCalc);
+
+          newState = { ...newState, gameOver: lossEnding };
+          
+          const displayName = gameData.metadata?.settings?.displayName || 'Anonymous';
+          
+          await db.insert(scores).values({
+            player_id: playerId,
+            game_id: gameData.gameId,
+            score: lossEnding.scoreDetails?.total || 0,
+            display_name: displayName
+          });
+
+          await ServerGameManager.endGame(gameData.gameId, playerId, newState);
+
+          finalResponse = {
+            success: true,
+            gameState: newState,
+            gameEnded: true,
+            finalScore: lossEnding.scoreDetails?.total || 0,
+            ending: lossEnding
+          };
+        } else {
+          // Player can afford at least one choice - continue game
+          // Save updated state
+          await ServerGameManager.updateGameState(gameData.gameId, playerId, newState, {
+            type: 'choice',
+            data: {
+              choiceIndex,
+              choiceLabel: selectedChoice.label,
+              eventId: currentEvent.id,
+              nextEventId: nextEvent.id
+            }
+          });
+
+          finalResponse = {
+            success: true,
+            gameState: newState,
+            gameEnded: false,
+            nextEvent
+          };
+        }
       }
     }
 
