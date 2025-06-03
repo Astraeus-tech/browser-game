@@ -56,16 +56,13 @@ export class ServerGameManager {
   }
 
   /**
-   * Get current game state for a player - simple latest action query
+   * Get current game state for a player - optimized to avoid marking actions as ended
    */
   static async getGameState(playerId: string): Promise<{ gameId: string; gameState: GameState; metadata?: GameMetadata } | null> {
-    // Get latest action for this player where game hasn't ended
+    // Get latest action for this player
     const latestAction = await db.select()
       .from(gameActions)
-      .where(and(
-        eq(gameActions.player_id, playerId),
-        isNull(gameActions.game_ended_at) // Only active games
-      ))
+      .where(eq(gameActions.player_id, playerId))
       .orderBy(desc(gameActions.sequence_number))
       .limit(1);
 
@@ -73,24 +70,13 @@ export class ServerGameManager {
 
     const action = latestAction[0];
     
-    // Get metadata from the start action for this game
-    let metadata: GameMetadata | undefined;
-    if (action.action_type === 'start') {
-      metadata = (action.action_data as any).metadata;
-    } else {
-      // For non-start actions, get metadata from the original start action
-      const startAction = await db.select()
-        .from(gameActions)
-        .where(and(
-          eq(gameActions.game_id, action.game_id),
-          eq(gameActions.action_type, 'start')
-        ))
-        .limit(1);
-      
-      if (startAction.length) {
-        metadata = (startAction[0].action_data as any).metadata;
-      }
+    // If the latest action is 'end', the game is over - return null for active games
+    if (action.action_type === 'end') {
+      return null;
     }
+    
+    // Get metadata from action_data (cached in all actions)
+    const metadata = (action.action_data as any).metadata;
 
     return {
       gameId: action.game_id,
@@ -103,12 +89,12 @@ export class ServerGameManager {
    * Get most recent completed game state for a player - for score submission
    */
   static async getMostRecentCompletedGame(playerId: string): Promise<{ gameId: string; gameState: GameState; metadata?: GameMetadata } | null> {
-    // Get latest action for this player where game HAS ended
+    // Get latest action for this player where action type is 'end'
     const latestAction = await db.select()
       .from(gameActions)
       .where(and(
         eq(gameActions.player_id, playerId),
-        isNotNull(gameActions.game_ended_at) // Only completed games
+        eq(gameActions.action_type, 'end') // Only completed games
       ))
       .orderBy(desc(gameActions.created_at))
       .limit(1);
@@ -125,70 +111,86 @@ export class ServerGameManager {
   }
 
   /**
-   * Update game state with an action - optimized for performance
+   * Update game state with an action - simplified without game_ended_at tracking
    */
   static async updateGameState(
     gameId: string, 
     playerId: string, 
     newGameState: GameState, 
-    action: GameAction
+    action: GameAction,
+    metadata?: GameMetadata
   ): Promise<void> {
-    // Get current sequence number for this game using coalesce for better performance
+    // Get current sequence number using optimized indexed query
+    const seqStartTime = performance.now();
     const result = await db.select({ 
       max_sequence: sql<number>`COALESCE(MAX(${gameActions.sequence_number}), 0)` 
     })
       .from(gameActions)
       .where(eq(gameActions.game_id, gameId));
+    const seqTime = performance.now() - seqStartTime;
 
     const nextSequence = (result[0]?.max_sequence || 0) + 1;
 
+    // Cache metadata in action_data for performance
+    const actionDataWithMetadata = {
+      ...action.data,
+      metadata: metadata
+    };
+
     // Insert new action with complete game state
+    const insertStartTime = performance.now();
     await db.insert(gameActions).values({
       id: uuidv4(),
       player_id: playerId,
       game_id: gameId,
       action_type: action.type,
-      action_data: action.data,
+      action_data: actionDataWithMetadata,
       full_game_state: newGameState,
       sequence_number: nextSequence,
-      game_ended_at: null, // Still active
+      game_ended_at: null, // Not used for tracking anymore
       created_at: new Date()
     });
+    const insertTime = performance.now() - insertStartTime;
+    
+    console.log(`[PERF] updateGameState - Sequence query: ${seqTime.toFixed(2)}ms, Insert: ${insertTime.toFixed(2)}ms`);
   }
 
   /**
-   * End a game - mark all actions for this game as ended
+   * End a game - MUCH faster without mass UPDATE operation
    */
-  static async endGame(gameId: string, playerId: string, finalGameState: GameState): Promise<void> {
-    // Get the current sequence number using optimized query
+  static async endGame(gameId: string, playerId: string, finalGameState: GameState, metadata?: GameMetadata): Promise<void> {
+    const endTime = new Date();
+    
+    // Get sequence number for final action
+    const seqStartTime = performance.now();
     const result = await db.select({ 
       max_sequence: sql<number>`COALESCE(MAX(${gameActions.sequence_number}), 0)` 
     })
       .from(gameActions)
       .where(eq(gameActions.game_id, gameId));
+    const seqTime = performance.now() - seqStartTime;
 
     const nextSequence = (result[0]?.max_sequence || 0) + 1;
 
-    // Create final 'end' action
+    // Create final 'end' action - this alone marks the game as ended
+    const insertStartTime = performance.now();
     await db.insert(gameActions).values({
       id: uuidv4(),
       player_id: playerId,
       game_id: gameId,
       action_type: 'end',
-      action_data: { endedAt: Date.now() },
+      action_data: { endedAt: Date.now(), metadata },
       full_game_state: finalGameState,
       sequence_number: nextSequence,
-      game_ended_at: new Date(), // Mark as ended
-      created_at: new Date()
+      game_ended_at: endTime,
+      created_at: endTime
     });
+    const insertTime = performance.now() - insertStartTime;
 
-    // Mark all previous actions for this game as ended
-    await db.update(gameActions)
-      .set({ game_ended_at: new Date() })
-      .where(and(
-        eq(gameActions.game_id, gameId),
-        isNull(gameActions.game_ended_at)
-      ));
+    // NO MORE EXPENSIVE UPDATE OPERATION!
+    // The presence of an 'end' action is sufficient to mark the game as completed
+    
+    console.log(`[PERF] endGame - Sequence: ${seqTime.toFixed(2)}ms, Insert: ${insertTime.toFixed(2)}ms, Update: ELIMINATED`);
   }
 
   /**
@@ -204,19 +206,22 @@ export class ServerGameManager {
   }
 
   /**
-   * Get all active games (for admin/debugging)
+   * Get all active games (for admin/debugging) - using new logic
    */
   static async getActiveGames(): Promise<any[]> {
-    const activeGames = await db.select()
+    // Get all games that don't have an 'end' action as their latest action
+    const allLatestActions = await db.select()
       .from(gameActions)
-      .where(isNull(gameActions.game_ended_at))
       .orderBy(desc(gameActions.created_at));
 
-    // Group by game_id and return latest action for each game
+    // Group by game_id and filter out games whose latest action is 'end'
     const gameMap = new Map();
-    for (const action of activeGames) {
-      if (!gameMap.has(action.game_id) || action.sequence_number > gameMap.get(action.game_id).sequence_number) {
-        gameMap.set(action.game_id, action);
+    for (const action of allLatestActions) {
+      if (!gameMap.has(action.game_id)) {
+        // Only include if latest action is not 'end'
+        if (action.action_type !== 'end') {
+          gameMap.set(action.game_id, action);
+        }
       }
     }
 

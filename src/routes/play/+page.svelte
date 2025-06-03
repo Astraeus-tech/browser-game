@@ -424,8 +424,7 @@
 
   async function handleNameSubmitted(event: CustomEvent<string>) {
     const newDisplayName = event.detail;
-    // Save display name to localStorage for future games
-    setDisplayName(newDisplayName);
+    // Note: No localStorage saving needed - server handles all player data
     
     if (pendingGameStateForScoreSubmission) {
       // This is for post-game score submission (legacy flow)

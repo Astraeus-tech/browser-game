@@ -18,7 +18,10 @@ export const POST: RequestHandler = async ({ request }) => {
     }
 
     // Get current game state from server (single optimized query)
+    const dbStartTime = performance.now();
     const gameData = await ServerGameManager.getGameState(playerId);
+    const dbTime = performance.now() - dbStartTime;
+    
     if (!gameData) {
       return json({ error: 'Game not found or unauthorized' }, { status: 404 });
     }
@@ -39,12 +42,16 @@ export const POST: RequestHandler = async ({ request }) => {
     const selectedChoice = currentEvent.choices[choiceIndex];
 
     // Apply choice effects using the existing game engine
+    const engineStartTime = performance.now();
     let newState = applyChoice(currentState, selectedChoice);
+    const engineTime = performance.now() - engineStartTime;
 
     // Check if game ended with this choice
     const isGameEnded = newState.gameOver !== 'playing';
 
     let finalResponse;
+    let saveStartTime = performance.now();
+    let saveTime = 0;
 
     if (isGameEnded) {
       // Calculate final score using existing ending calculation
@@ -55,6 +62,7 @@ export const POST: RequestHandler = async ({ request }) => {
       const displayName = gameData.metadata?.settings?.displayName || 'Anonymous';
       
       // Submit score to leaderboard using correct field names
+      const scoreInsertStart = performance.now();
       await db.insert(scores).values({
         player_id: playerId,
         game_id: gameData.gameId,
@@ -62,9 +70,15 @@ export const POST: RequestHandler = async ({ request }) => {
         display_name: displayName
         // run_ts will be set to now() by default
       });
+      const scoreInsertTime = performance.now() - scoreInsertStart;
 
       // Mark game as ended
-      await ServerGameManager.endGame(gameData.gameId, playerId, newState);
+      const endGameStart = performance.now();
+      await ServerGameManager.endGame(gameData.gameId, playerId, newState, gameData.metadata);
+      const endGameTime = performance.now() - endGameStart;
+      
+      saveTime = performance.now() - saveStartTime;
+      console.log(`[PERF] Game end - Score insert: ${scoreInsertTime.toFixed(2)}ms, End game: ${endGameTime.toFixed(2)}ms`);
 
       finalResponse = {
         success: true,
@@ -106,14 +120,21 @@ export const POST: RequestHandler = async ({ request }) => {
         
         const displayName = gameData.metadata?.settings?.displayName || 'Anonymous';
         
+        const scoreInsertStart2 = performance.now();
         await db.insert(scores).values({
           player_id: playerId,
           game_id: gameData.gameId,
           score: drawEnding.scoreDetails.total,
           display_name: displayName
         });
+        const scoreInsertTime2 = performance.now() - scoreInsertStart2;
 
-        await ServerGameManager.endGame(gameData.gameId, playerId, newState);
+        const endGameStart2 = performance.now();
+        await ServerGameManager.endGame(gameData.gameId, playerId, newState, gameData.metadata);
+        const endGameTime2 = performance.now() - endGameStart2;
+        
+        saveTime = performance.now() - saveStartTime;
+        console.log(`[PERF] Draw end - Score insert: ${scoreInsertTime2.toFixed(2)}ms, End game: ${endGameTime2.toFixed(2)}ms`);
 
         finalResponse = {
           success: true,
@@ -164,14 +185,21 @@ export const POST: RequestHandler = async ({ request }) => {
           
           const displayName = gameData.metadata?.settings?.displayName || 'Anonymous';
           
+          const scoreInsertStart3 = performance.now();
           await db.insert(scores).values({
             player_id: playerId,
             game_id: gameData.gameId,
             score: lossEnding.scoreDetails?.total || 0,
             display_name: displayName
           });
+          const scoreInsertTime3 = performance.now() - scoreInsertStart3;
 
-          await ServerGameManager.endGame(gameData.gameId, playerId, newState);
+          const endGameStart3 = performance.now();
+          await ServerGameManager.endGame(gameData.gameId, playerId, newState, gameData.metadata);
+          const endGameTime3 = performance.now() - endGameStart3;
+          
+          saveTime = performance.now() - saveStartTime;
+          console.log(`[PERF] Loss end - Score insert: ${scoreInsertTime3.toFixed(2)}ms, End game: ${endGameTime3.toFixed(2)}ms`);
 
           finalResponse = {
             success: true,
@@ -182,7 +210,7 @@ export const POST: RequestHandler = async ({ request }) => {
           };
         } else {
           // Player can afford at least one choice - continue game
-          // Save updated state
+          // Save updated state with cached metadata for performance
           await ServerGameManager.updateGameState(gameData.gameId, playerId, newState, {
             type: 'choice',
             data: {
@@ -191,7 +219,8 @@ export const POST: RequestHandler = async ({ request }) => {
               eventId: currentEvent.id,
               nextEventId: nextEvent.id
             }
-          });
+          }, gameData.metadata);
+          saveTime = performance.now() - saveStartTime;
 
           finalResponse = {
             success: true,
@@ -204,7 +233,7 @@ export const POST: RequestHandler = async ({ request }) => {
     }
 
     const totalTime = performance.now() - startTime;
-    console.log(`[PERF] Choice processing - Total: ${totalTime.toFixed(2)}ms`);
+    console.log(`[PERF] Choice processing - Total: ${totalTime.toFixed(2)}ms, DB Load: ${dbTime.toFixed(2)}ms, Engine: ${engineTime.toFixed(2)}ms, DB Save: ${saveTime.toFixed(2)}ms`);
     
     return json(finalResponse);
 
