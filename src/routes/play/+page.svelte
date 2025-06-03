@@ -11,11 +11,10 @@
   import { get } from 'svelte/store';
   import { calculateImpactScore, getImpactAssessment, getImpactColorClass } from '$lib/impact';
   import { submitRunScore, endGameAndSubmitScore } from '$lib/db';
-  import { getDisplayName, setDisplayName as saveDisplayNameToStorage } from '$lib/player';
+  import { getDisplayName, setDisplayName } from '$lib/player';
   import DisplayNameModal from '$lib/components/DisplayNameModal.svelte';
   import type { PageData } from './$types'; // Import PageData for the load function's return type
-  import { submitGameChoice, startServerGame, endServerGame, isServerAuthoritative } from '$lib/gameClient';
-  import { getPlayerId } from '$lib/player';
+  import { isServerAuthoritative } from '$lib/gameClient';
   import { secureGameClient } from '$lib/secureGameClient';
 
   export let data: PageData; // This prop receives data from the load function
@@ -30,7 +29,7 @@
   };
   let showDisplayNameModal = false;
   let pendingGameStateForScoreSubmission: GameState | null = null;
-  let currentPlayerId: string | null = null;
+
 
   // Simple leaderboard state
   let leaderboard: Array<{ rank: number; display_name: string; score: number; isCurrentUser?: boolean }> = [];
@@ -46,58 +45,12 @@
   }
 
   onMount(() => {
-    // Early corruption detection: Check if game state is valid
-    if (browser && $game.gameOver === 'playing') {
-      // Validate that we have essential game state properties
-      const isValidGameState = (
-        $game.year && 
-        $game.quarter && 
-        $game.meters &&
-        $game.meters.company &&
-        $game.meters.environment &&
-        $game.meters.ai_capability
-      );
-      
-      if (!isValidGameState) {
-        console.warn('Corrupted game state detected on mount. Clearing localStorage and resetting...');
-        try {
-          localStorage.removeItem('game');
-          const freshState = getDefaultState();
-          game.set(freshState);
-          alert('We detected corrupted game data and have reset it. Please start a new game.');
-        } catch (error) {
-          console.error('Error during early corruption recovery:', error);
-          window.location.reload();
-        }
-        return;
-      }
-      
-      // Check if events exist for current year/quarter before trying to pick
-      const availableEvents = (events as Event[]).filter(e =>
-        e.year === $game.year && e.quarter === $game.quarter
-      );
-      
-      if (availableEvents.length === 0) {
-        console.warn('No events available for current year/quarter. Resetting game state...');
-        try {
-          localStorage.removeItem('game');
-          const freshState = getDefaultState();
-          game.set(freshState);
-          alert('We found an issue with your game progress and have reset it. Please start a new game.');
-        } catch (error) {
-          console.error('Error during event validation recovery:', error);
-          window.location.reload();
-        }
-        return;
-      }
-    }
-    
-    // Only pick event if we're in playing state and validation passed
+    // Simple initialization - server is source of truth
     if ($game.gameOver === 'playing') {
       pickEvent();
     }
-    currentPlayerId = getPlayerId();
-    resetLeaderboardState(); // Ensure clean state on initial mount
+    
+    resetLeaderboardState();
     
     // Pre-fetch leaderboard for instant display when game ends
     console.log('[Frontend] Pre-fetching leaderboard for instant display...');
@@ -202,29 +155,18 @@
       await game.set(updatedState);
     } else {
       selectedEvent = null;
-      console.warn('No events matched the current state. This might be due to corrupted localStorage.');
+      console.warn('No events matched the current state.');
       
-      // Auto-recovery: If game is in playing state but no events found, reset to intro
+      // If game is in playing state but no events found, reset to intro
       if ($game.gameOver === 'playing') {
-        console.log('Auto-recovery: Corrupted game state detected. Clearing localStorage and resetting...');
+        console.log('No events available for current state, resetting to intro...');
         
         try {
-          // Clear localStorage to remove corrupted data
-          localStorage.removeItem('game');
-          console.log('Cleared corrupted localStorage');
-          
-          // Reset to fresh intro state
           const freshState = getDefaultState();
           await game.set(freshState);
-          
-          // Show user-friendly notification
-          alert('We detected an issue with your saved game data and have reset it. Please start a new game.');
-          
           console.log('Successfully reset to intro state');
         } catch (error) {
-          console.error('Error during auto-recovery:', error);
-          // Fallback: reload the page to ensure clean state
-          console.log('Fallback: Reloading page to ensure clean state');
+          console.error('Error during reset:', error);
           window.location.reload();
         }
       }
@@ -355,7 +297,11 @@
     leaderboardError = null;
     
     try {
-      const playerId = getPlayerId();
+      // Use server player ID if available (authoritative), no fallback needed
+      const playerId = secureGameClient.hasPlayerIdentity() 
+        ? secureGameClient.getPlayerId()
+        : null;
+      
       let url = '/api/leaderboard-with-rank';
       if (playerId) {
         url += `?playerId=${encodeURIComponent(playerId)}`;
@@ -400,14 +346,11 @@
     }
   }
 
-  // Submit score first, then fetch leaderboard
+  // Submit score first, then fetch leaderboard (legacy function for non-secure games)
   async function submitScoreAndFetchLeaderboard(displayName?: string | null) {
     console.log('[Frontend] Starting score submission...');
     
     try {
-      // Force save game state first
-      await game.forceSave();
-      
       // Submit score to server (server calculates score from game state)
       const success = await submitRunScore(displayName === null ? undefined : displayName);
       
@@ -429,14 +372,11 @@
     }
   }
 
-  // Atomic end game and submit score, then fetch leaderboard
+  // Atomic end game and submit score, then fetch leaderboard (legacy function for non-secure games)
   async function endGameAndSubmitScoreAndFetchLeaderboard(finalGameState: GameState, displayName?: string | null) {
     console.log('[Frontend] Starting atomic game end + score submission...');
     
     try {
-      // Force save game state first
-      await game.forceSave();
-      
       // Atomically end game and submit score
       const success = await endGameAndSubmitScore(finalGameState, displayName === null ? undefined : displayName);
       
@@ -460,7 +400,7 @@
 
   async function triggerScoreSubmission(gameState: GameState) {
     // If using secure client, scores are already submitted automatically
-    if (secureGameClient.hasActiveSession()) {
+    if (secureGameClient.hasPlayerIdentity()) {
       await fetchLeaderboard();
       return;
     }
@@ -484,7 +424,8 @@
 
   async function handleNameSubmitted(event: CustomEvent<string>) {
     const newDisplayName = event.detail;
-    saveDisplayNameToStorage(newDisplayName);
+    // Save display name to localStorage for future games
+    setDisplayName(newDisplayName);
     
     if (pendingGameStateForScoreSubmission) {
       // This is for post-game score submission (legacy flow)
@@ -504,15 +445,19 @@
 
   async function handleModalCancel() {
     if (pendingGameStateForScoreSubmission) {
-      // Use atomic approach for server mode, legacy approach for local mode
+      // This is for post-game score submission (legacy flow) - submit without name
       if (isServerAuthoritative()) {
         await endGameAndSubmitScoreAndFetchLeaderboard(pendingGameStateForScoreSubmission, undefined);
       } else {
         await submitScoreAndFetchLeaderboard(undefined);
       }
+      pendingGameStateForScoreSubmission = null;
+    } else {
+      // This is for pre-game name collection - start game with Anonymous
+      await startSecureGame('Anonymous');
     }
+    
     showDisplayNameModal = false;
-    pendingGameStateForScoreSubmission = null;
   }
 
   // Simple reactive check - no complex processing needed since API handles everything

@@ -20,7 +20,7 @@ export async function submitRunScore(displayNameFromModal?: string): Promise<boo
     return false;
   }
 
-  // Use displayNameFromModal if provided (from the modal input), otherwise get from localStorage
+  // Use displayNameFromModal if provided (from the modal input), no fallback needed
   const displayName = displayNameFromModal || getDisplayName();
   if (!displayName) {
     console.warn('Display name not found, cannot submit score.');
@@ -75,7 +75,7 @@ export async function endGameAndSubmitScore(finalGameState: GameState, displayNa
     return false;
   }
 
-  // Use displayNameFromModal if provided (from the modal input), otherwise get from localStorage
+  // Use displayNameFromModal if provided (from the modal input), no fallback needed
   const displayName = displayNameFromModal || getDisplayName();
   if (!displayName) {
     console.warn('Display name not found, cannot end game and submit score.');

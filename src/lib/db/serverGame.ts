@@ -72,7 +72,25 @@ export class ServerGameManager {
     if (!latestAction.length) return null;
 
     const action = latestAction[0];
-    const metadata = action.action_type === 'start' ? (action.action_data as any).metadata : undefined;
+    
+    // Get metadata from the start action for this game
+    let metadata: GameMetadata | undefined;
+    if (action.action_type === 'start') {
+      metadata = (action.action_data as any).metadata;
+    } else {
+      // For non-start actions, get metadata from the original start action
+      const startAction = await db.select()
+        .from(gameActions)
+        .where(and(
+          eq(gameActions.game_id, action.game_id),
+          eq(gameActions.action_type, 'start')
+        ))
+        .limit(1);
+      
+      if (startAction.length) {
+        metadata = (startAction[0].action_data as any).metadata;
+      }
+    }
 
     return {
       gameId: action.game_id,

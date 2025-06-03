@@ -42,6 +42,8 @@ export class SecureGameClient {
         this.gameId = result.gameId;
         this.playerId = result.playerId;
         
+
+        
         console.log('SecureGameClient state after setting:', { gameId: this.gameId, playerId: this.playerId });
         
         // Get the first event from the updated game state (optimize by avoiding dynamic import)
@@ -105,10 +107,10 @@ export class SecureGameClient {
       const result = await response.json();
 
       if (result.success) {
-        // If game ended, clear the session
+        // If game ended, clear only the game session, keep player identity
         if (result.gameEnded) {
           this.gameId = null;
-          this.playerId = null;
+          // Keep playerId for persistent identity across games
         }
 
         return {
@@ -171,17 +173,33 @@ export class SecureGameClient {
    * Check if there's an active game session
    */
   hasActiveSession(): boolean {
-    const hasSession = this.gameId !== null && this.playerId !== null;
+    const hasSession = this.gameId !== null;
     console.log('hasActiveSession check:', { gameId: this.gameId, playerId: this.playerId, hasSession });
     return hasSession;
   }
 
   /**
+   * Check if there's a persistent player identity
+   */
+  hasPlayerIdentity(): boolean {
+    return this.playerId !== null;
+  }
+
+  /**
+   * Get the current player ID (persistent across game sessions)
+   */
+  getPlayerId(): string | null {
+    return this.playerId;
+  }
+
+  /**
    * Clear the current session (for logout/reset)
+   * Only clears game session, keeps player identity persistent
    */
   clearSession(): void {
     this.gameId = null;
-    this.playerId = null;
+    // Don't clear playerId - player identity should persist across games
+    // this.playerId = null;
   }
 }
 
