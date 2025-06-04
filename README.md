@@ -12,6 +12,10 @@ An AI strategy game where you lead humanity's future as the CEO of an AI startup
 
 The game features a dynamic event system spanning from 2025 to 2027, with quarterly decision points that shape the narrative and determine multiple possible endings.
 
+### Game Architecture
+
+The game features server-authoritative gameplay with anti-cheat protection, persistent game states, and real-time score submission. All game logic is validated server-side to ensure fair play and consistent experiences across all players.
+
 ## 🚀 Quick Start
 
 ### Prerequisites
@@ -44,33 +48,35 @@ The game features a dynamic event system spanning from 2025 to 2027, with quarte
 
 ## 🔧 Environment Configuration
 
-The game supports both local and remote database modes and now uses **Drizzle ORM** for type-safe database operations with Supabase.
+The game uses **Drizzle ORM** for type-safe database operations with Supabase for persistent gameplay and leaderboards.
 
 ### For Development (.env.local)
 
 ```bash
-# Database Configuration (Supabase with Drizzle ORM)
+# Database Configuration (Postgres with Drizzle ORM)
+POSTGRES_PRISMA_URL=postgresql://postgres:[YOUR-PASSWORD]@db.[YOUR-PROJECT-REF].supabase.co:5432/postgres
+POSTGRES_URL_NON_POOLING=postgresql://postgres:[YOUR-PASSWORD]@db.[YOUR-PROJECT-REF].supabase.co:5432/postgres
+
+# Alternative: Supabase credentials (for fallback)
 SUPABASE_URL=your_supabase_project_url
 SUPABASE_ANON_KEY=your_supabase_anon_key
 
-# Alternative: Direct database URL (recommended for production)
-DATABASE_URL=postgresql://postgres:[YOUR-PASSWORD]@db.[YOUR-PROJECT-REF].supabase.co:5432/postgres
-
-# Database Mode (local/remote)
-VITE_DATABASE_MODE=local
+# Database Mode 
+VITE_DATABASE_MODE=remote
 ```
 
 ### For Production (.env.production)
 
 ```bash
-# Database Configuration (Supabase with Drizzle ORM)
+# Database Configuration (Postgres with Drizzle ORM)
+POSTGRES_PRISMA_URL=postgresql://postgres:[YOUR-PASSWORD]@db.[YOUR-PROJECT-REF].supabase.co:5432/postgres
+POSTGRES_URL_NON_POOLING=postgresql://postgres:[YOUR-PASSWORD]@db.[YOUR-PROJECT-REF].supabase.co:5432/postgres
+
+# Alternative: Supabase credentials (for fallback)
 SUPABASE_URL=your_supabase_project_url
 SUPABASE_ANON_KEY=your_supabase_anon_key
 
-# Direct database URL (recommended for production)
-DATABASE_URL=postgresql://postgres:[YOUR-PASSWORD]@db.[YOUR-PROJECT-REF].supabase.co:5432/postgres
-
-# Database Mode (local/remote)
+# Database Mode
 VITE_DATABASE_MODE=remote
 ```
 
@@ -78,21 +84,38 @@ VITE_DATABASE_MODE=remote
 
 | Variable | Description | Required | Default |
 |----------|-------------|----------|---------|
-| `DATABASE_URL` | Direct PostgreSQL connection string | Recommended for production | - |
-| `SUPABASE_URL` | Your Supabase project URL | Yes (if no DATABASE_URL) | - |
-| `SUPABASE_ANON_KEY` | Your Supabase anonymous key | Yes (if no DATABASE_URL) | - |
-| `VITE_DATABASE_MODE` | Database mode: `local` or `remote` | No | `local` |
+| `POSTGRES_PRISMA_URL` | PostgreSQL connection string for runtime | Recommended | - |
+| `POSTGRES_URL_NON_POOLING` | PostgreSQL connection string for migrations | Required for migrations | - |
+| `SUPABASE_URL` | Your Supabase project URL | Fallback option | - |
+| `SUPABASE_ANON_KEY` | Your Supabase anonymous key | Fallback option | - |
+| `VITE_DATABASE_MODE` | Database mode | No | `remote` |
 
 ## 🗄️ Database Setup with Drizzle ORM
 
 ### Why Drizzle ORM?
 
-This project now uses **Drizzle ORM** instead of direct Supabase client calls for several benefits:
+This project uses **Drizzle ORM** for several benefits:
 - **Type Safety**: Full TypeScript support with inferred types
 - **Performance**: Optimized queries and better connection pooling
 - **Developer Experience**: Intuitive query builder and schema management
 - **Migration Management**: Version-controlled database schema changes
 - **Supabase Compatible**: Works seamlessly with Supabase's PostgreSQL
+
+### Database Schema
+
+The game uses two main tables:
+
+1. **`scores`**: Stores player scores with ranking optimization
+   - `player_id`: UUID for player identification
+   - `game_id`: Links to specific game sessions
+   - `score`: Final game score
+   - `display_name`: Player's chosen display name
+   - `run_ts`: Timestamp of the game run
+
+2. **`game_actions`**: Server-authoritative game state management
+   - Stores complete game states and action history
+   - Enables anti-cheat validation and game replay
+   - Supports concurrent game sessions per player
 
 ### Supabase Configuration
 
@@ -103,26 +126,17 @@ This project now uses **Drizzle ORM** instead of direct Supabase client calls fo
    - Copy the connection string from the "Connection Pooler" section
    - Use "Transaction" mode for better compatibility with Drizzle
 
-3. **The scores table should already exist**, but if you need to recreate it:
-   ```sql
-   CREATE TABLE scores (
-     id BIGSERIAL PRIMARY KEY,
-     player_id UUID NOT NULL,
-     score INTEGER NOT NULL,
-     display_name TEXT,
-     run_ts TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-   );
-
-   -- Add indexes for performance
-   CREATE INDEX idx_scores_score ON scores(score DESC);
-   CREATE INDEX idx_scores_player_id ON scores(player_id);
-   CREATE INDEX idx_scores_run_ts ON scores(run_ts DESC);
+3. **Run database migrations**:
+   ```bash
+   npm run db:push  # For development
+   # OR
+   npm run db:migrate  # For production
    ```
 
 4. **Configure Row Level Security (RLS)**:
    ```sql
    ALTER TABLE scores ENABLE ROW LEVEL SECURITY;
+   ALTER TABLE game_actions ENABLE ROW LEVEL SECURITY;
 
    -- Allow public read access to scores
    CREATE POLICY "Allow public read access" ON scores
@@ -131,11 +145,13 @@ This project now uses **Drizzle ORM** instead of direct Supabase client calls fo
    -- Allow public insert access
    CREATE POLICY "Allow public insert access" ON scores
      FOR INSERT WITH CHECK (true);
+
+   -- Allow users to manage their own game sessions
+   CREATE POLICY "Users manage own games" ON game_actions
+     FOR ALL USING (true);
    ```
 
 ### Database Operations with Drizzle
-
-You can use the following npm scripts for database operations:
 
 ```bash
 # Generate migration files from schema changes
@@ -151,10 +167,98 @@ npm run db:push
 npm run db:studio
 ```
 
-### Database Modes
+### Database Configuration
 
-- **Local Mode** (`VITE_DATABASE_MODE=local`): Game runs without database connectivity. Scores are not persisted, and leaderboards are disabled.
-- **Remote Mode** (`VITE_DATABASE_MODE=remote`): Full functionality with score submission and leaderboards via Supabase using Drizzle ORM.
+The game requires a Supabase database connection for server-authoritative gameplay with full persistence, score tracking, and leaderboards.
+
+## 🎯 Game Structure & Mechanics
+
+### Core Game Loop
+
+1. **Quarterly Events**: Players face events each quarter from Q3 2025 through 2027
+2. **Choice Selection**: Each event presents 2-3 strategic choices with detailed analysis
+3. **Resource Management**: Choices affect 16 different meters across 3 categories
+4. **Progression**: Game advances through time with escalating complexity
+5. **Multiple Endings**: Different outcomes based on final meter states and decisions
+
+### Meter System
+
+The game tracks three categories of meters:
+
+#### Company Metrics
+- **Credits**: Financial resources for operations
+- **Revenue**: Income generation capability  
+- **Valuation**: Company market value
+- **Approval**: Public and investor confidence
+- **Security**: Cybersecurity and data protection
+- **Alignment Confidence**: Trust in AI safety measures
+
+#### Environment Metrics  
+- **Social Stability**: Societal cohesion and order
+- **Cyber/Bio Risk**: Technological and biological threats
+- **Climate Load**: Environmental impact and sustainability
+
+#### AI Capability Metrics
+- **Coding**: Programming and software development capability
+- **Hacking**: Cybersecurity and intrusion capabilities
+- **Bioweapons**: Biological threat potential (monitored for safety)
+- **Politics/Persuasion**: Influence and communication capabilities
+- **Robotics/Embodied**: Physical world interaction capabilities
+- **Research Taste**: Scientific research and discovery capabilities
+
+### Event System
+
+Events are stored as JSON files organized by year and quarter:
+
+```
+src/lib/content/events/
+├── 2025/
+│   ├── Q3/  # Game start period
+│   └── Q4/
+├── 2026/
+│   ├── Q1/
+│   ├── Q2/
+│   ├── Q3/
+│   └── Q4/
+└── 2027/
+    ├── Q1/
+    ├── Q2/
+    ├── Q3/
+    └── Q4/  # Potential game end
+```
+
+Each event includes:
+- **Narrative description** setting up the scenario
+- **Multiple choice options** with detailed consequences
+- **Expert analysis** from Wall Street, NGO, and researcher perspectives
+- **Meter effects** specified as ranges (e.g., "10..20" credits)
+- **Dynamic scaling** based on game progression
+
+### Scoring System
+
+The final score calculation includes:
+
+1. **Base Points**:
+   - Progression: 50 points per quarter survived
+   - Company metrics: Weighted sum of all company meters
+   - Environment metrics: Weighted environmental impact
+   - AI capabilities: Weighted capability development
+
+2. **Bonuses**:
+   - Win condition: +1000 points
+   - Specific ending achievements
+
+3. **Multipliers**:
+   - Ending rank (S/A/B): 2.0x/1.5x/1.2x
+   - Outcome type: Loss 0.5x, Draw 0.8x, Win 1.0x
+
+### Ending System
+
+Games can end through multiple conditions:
+- **Win**: Successfully navigating to beneficial AGI
+- **Loss**: Critical failure (bankruptcy, security breach, etc.)
+- **Draw**: Survival without decisive outcome
+- **Auto-triggers**: Running out of credits or time
 
 ## 🛠️ Development
 
@@ -191,77 +295,103 @@ npm run prepare         # Sync SvelteKit types
 src/
 ├── lib/
 │   ├── components/          # Reusable Svelte components
-│   │   ├── ResourceBars.svelte
-│   │   ├── TypewriterText.svelte
-│   │   └── DisplayNameModal.svelte
+│   │   ├── ResourceBars.svelte      # Meter visualization
+│   │   ├── TypewriterText.svelte    # Animated text display
+│   │   └── DisplayNameModal.svelte  # Player name input
 │   ├── content/            # Game content and data
-│   │   ├── events/         # Event definitions by year/quarter
-│   │   │   ├── 2025/
-│   │   │   ├── 2026/
-│   │   │   └── 2027/
-│   │   ├── endings.json    # Game ending definitions
-│   │   └── meters.json     # Meter configuration
+│   │   └── events/         # Event definitions by year/quarter
+│   │       ├── 2025/Q3/    # Starting events
+│   │       ├── 2025/Q4/
+│   │       ├── 2026/       # Mid-game progression
+│   │       └── 2027/       # End-game scenarios
 │   ├── db/                 # Database layer (Drizzle ORM)
 │   │   ├── schema.ts       # Database schema definitions
+│   │   ├── serverGame.ts   # Server-side game management
 │   │   └── index.ts        # Database client configuration
 │   ├── stores/             # Svelte stores
 │   │   └── game.ts         # Main game state store
-│   ├── db.ts              # Database operations (API layer)
 │   ├── engine.ts          # Game logic engine
+│   ├── secureGameClient.ts # Server-authoritative game client
+│   ├── gameClient.ts      # Legacy client-side game logic
+│   ├── gameStateManager.ts # State synchronization
 │   ├── player.ts          # Player management
-│   ├── supabaseClient.ts  # Legacy Supabase client (for auth)
+│   ├── rng.ts             # Seeded random number generation
+│   ├── impact.ts          # Meter impact calculations
 │   └── types.ts           # TypeScript type definitions
 ├── routes/
-│   ├── api/               # API endpoints (now using Drizzle)
-│   │   ├── get-leaderboard/
-│   │   ├── get-player-rank/
-│   │   └── submit-score/
-│   ├── play/              # Game page
+│   ├── api/               # Server API endpoints
+│   │   ├── game/          # Game management endpoints
+│   │   │   ├── start/     # Start new game session
+│   │   │   ├── choose/    # Process player choices
+│   │   │   └── status/    # Game state queries
+│   │   ├── get-leaderboard/    # Score leaderboards
+│   │   ├── get-player-rank/    # Individual rankings
+│   │   └── debug-*/       # Development debugging tools
+│   ├── play/              # Main game interface
+│   ├── secure-play/       # Server-authoritative game mode
 │   └── +page.svelte       # Landing page
 └── app.html               # HTML template
 ```
 
 ### Key Technologies
 
-- **SvelteKit**: Full-stack web framework
-- **TypeScript**: Type-safe JavaScript
+- **SvelteKit**: Full-stack web framework with server-side rendering
+- **TypeScript**: Type-safe JavaScript with full coverage
 - **Drizzle ORM**: Type-safe database ORM for PostgreSQL
 - **Supabase**: Backend-as-a-Service for database hosting
 - **Tailwind CSS**: Utility-first CSS framework
 - **Skeleton UI**: Component library for Svelte
-- **Chart.js**: Data visualization
-- **Vercel**: Deployment platform (configured)
+- **Chart.js**: Data visualization for score trends
+- **Vercel**: Deployment platform with SvelteKit adapter (pre-configured)
+- **Vercel Analytics**: Performance and usage tracking
 
 ## 🎯 Game Features
 
 ### Core Mechanics
-- **Event-driven narrative**: Quarterly events with meaningful choices
-- **Resource management**: Balance multiple competing metrics
-- **Procedural generation**: Seeded randomness for consistent experiences
-- **Multiple endings**: Different outcomes based on player decisions
-- **Score system**: Performance tracking with leaderboards
+- **Event-driven narrative**: Quarterly decision points with meaningful consequences
+- **Resource management**: Balance 16 competing metrics across 3 categories
+- **Procedural generation**: Seeded randomness for consistent yet varied experiences
+- **Multiple endings**: 20+ different outcomes based on player decisions and final state
+- **Score system**: Comprehensive performance tracking with global leaderboards
+- **Expert analysis**: Multiple perspectives on each choice (financial, ethical, technical)
 
 ### Technical Features
-- **Persistent game state**: Local storage with automatic save/load
-- **Real-time leaderboards**: Global score tracking (when in remote mode)
-- **Type-safe database operations**: Using Drizzle ORM with Supabase
-- **Responsive design**: Works on desktop and mobile devices
-- **Type safety**: Full TypeScript coverage
+- **Server-authoritative gameplay**: Anti-cheat protection with validated game states
+- **Real-time leaderboards**: Global score tracking with player rankings
+- **Persistent game sessions**: Resume games across browser sessions
+- **Type-safe database operations**: Full TypeScript coverage with Drizzle ORM
+- **Responsive design**: Optimized for desktop and mobile devices
 - **Performance optimized**: Efficient rendering and state management
+- **Development tools**: Debug endpoints for testing game mechanics
+
+### Accessibility Features
+- **Keyboard navigation**: Full game playable without mouse
+- **Screen reader support**: Semantic HTML and ARIA labels
+- **High contrast mode**: Support for accessibility preferences
+- **Scalable text**: Responsive design accommodates text scaling
 
 ## 🚀 Deployment
 
 ### Vercel (Recommended)
 
-The project is pre-configured for Vercel deployment:
+The project is designed for easy deployment on Vercel and comes pre-configured with the **SvelteKit Vercel adapter** (`@sveltejs/adapter-vercel`). This makes deployment seamless with zero additional configuration needed.
 
-1. **Connect your repository** to Vercel
+**Simple Deployment Steps:**
+
+1. **Connect your repository** to Vercel (GitHub/GitLab integration)
 2. **Set environment variables** in Vercel dashboard:
-   - `SUPABASE_URL`
-   - `SUPABASE_ANON_KEY` 
-   - `DATABASE_URL` (recommended)
+   - `POSTGRES_PRISMA_URL` (recommended)
+   - `POSTGRES_URL_NON_POOLING` (required for migrations)
+   - `SUPABASE_URL` (fallback)
+   - `SUPABASE_ANON_KEY` (fallback)
    - `VITE_DATABASE_MODE=remote`
-3. **Deploy** - Vercel will automatically build and deploy
+3. **Deploy** - Vercel automatically detects SvelteKit and deploys with optimal settings
+
+**Why Vercel?**
+- **Zero Configuration**: The SvelteKit Vercel adapter handles all build optimizations
+- **Edge Functions**: Server-side API routes deploy as optimized edge functions
+- **Automatic Scaling**: Handles traffic spikes automatically
+- **Preview Deployments**: Every commit gets a preview URL for testing
 
 ### Manual Deployment
 
@@ -272,6 +402,12 @@ npm run build
 # The built files will be in the .svelte-kit/output directory
 # Deploy these files to your hosting provider
 ```
+
+### Environment-Specific Configuration
+
+The game is designed for server-authoritative gameplay with persistent database connectivity. Set `VITE_DATABASE_MODE=remote` to enable full functionality including score tracking and leaderboards.
+
+**Deployment Note**: The project uses `@sveltejs/adapter-vercel` for seamless Vercel deployment, automatically optimizing the build for Vercel's edge network and serverless functions.
 
 ## 📝 Content Management
 
@@ -321,6 +457,26 @@ Events are stored in JSON files organized by year and quarter in `src/lib/conten
 }
 ```
 
+### Content Guidelines
+
+- **Narrative Consistency**: Events should feel like a cohesive story progression
+- **Balanced Choices**: Each choice should have meaningful trade-offs
+- **Expert Perspectives**: Include realistic analysis from different viewpoints
+- **Meter Balance**: Ensure events don't trivially break game balance
+- **Temporal Logic**: Events should make sense for their time period
+
+### Testing New Content
+
+```bash
+# Start development server with debug mode
+npm run dev
+
+# Use debug endpoints to test specific events
+curl -X POST http://localhost:5173/api/debug-game-state \
+  -H "Content-Type: application/json" \
+  -d '{"year": 2025, "quarter": 4}'
+```
+
 ## 🤝 Contributing
 
 1. Fork the repository
@@ -329,8 +485,27 @@ Events are stored in JSON files organized by year and quarter in `src/lib/conten
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
+### Development Workflow
+
+1. **Content Changes**: Modify JSON files in `src/lib/content/events/`
+2. **Game Logic**: Update TypeScript files in `src/lib/`
+3. **Database Changes**: Modify schema in `src/lib/db/schema.ts` and run migrations
+4. **UI Changes**: Update Svelte components and routes
+5. **Testing**: Use debug endpoints and local development environment
+
+### Code Standards
+
+- **TypeScript**: Full type coverage required
+- **ESLint**: Follow configured linting rules
+- **Prettier**: Automatic code formatting
+- **Svelte**: Follow Svelte best practices for components
+
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
+---
+
 **Ready to shape humanity's future?** Start the game and see if you can navigate the path to beneficial superintelligence! 🤖✨
+
+*Choose your path wisely - every decision echoes through time, and the future of human-AI collaboration rests in your hands.*
